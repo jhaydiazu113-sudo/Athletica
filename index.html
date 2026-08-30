@@ -1,0 +1,6451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Athletica</title>
+
+    <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Roboto Slab", serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    color: #555;
+}
+
+p {
+    color: #555;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.small-container {
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo img {
+    height: 68px;
+    width: auto;
+    max-width: 260px;
+    object-fit: contain;
+    display: block;
+}
+
+@media only screen and (max-width: 800px) {
+    .logo img {
+        height: 52px;
+    }
+}
+
+nav {
+    flex: 1;
+    text-align: right;
+}
+
+nav ul {
+    display: inline-block;
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ff523b;
+}
+
+.col-2 {
+    flex-basis: 50%;
+    min-width: 300px;
+}
+
+.col-2 img {
+    max-width: 100%;
+    padding: 50px 0;
+}
+
+.col-3 {
+    flex-basis: 30%;
+    min-width: 250px;
+    margin-bottom: 30px;
+}
+
+.col-3 img {
+    width: 100%;
+}
+
+.col-4 {
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+    transition: transform 0.5s;
+}
+
+.col-4 img {
+    width: 100%;
+}
+
+.col-4:hover {
+    transform: translateY(-5px);
+}
+
+.col-5 {
+    width: 160px;
+}
+
+.col-5 img {
+    width: 100%;
+    cursor: pointer;
+    filter: grayscale(100%);
+}
+
+.col-5 img:hover {
+    filter: grayscale(0);
+}
+
+.btn {
+    display: inline-block;
+    background: #ff523b;
+    color: #fff;
+    padding: 8px 30px;
+    margin: 30px 5px;
+    border-radius: 30px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #563434;
+}
+
+.header {
+    background: radial-gradient(#fff, #ffd6d6);
+}
+
+.header .row {
+    margin-top: 25px;
+}
+
+.site-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    z-index: 4000;
+}
+
+.site-navbar .navbar {
+    padding: 15px 20px;
+}
+
+#pagesWrapper {
+    padding-top: 100px;
+}
+
+@media only screen and (max-width: 800px) {
+    #pagesWrapper {
+        padding-top: 90px;
+    }
+}
+
+.site-page {
+    display: none;
+}
+
+.site-page.active {
+    display: block;
+}
+
+.categories {
+    margin: 70px 0;
+}
+
+.title {
+    text-align: center;
+    margin: 0 auto 80px;
+    position: relative;
+    line-height: 60px;
+    color: #555;
+}
+
+.title::after {
+    content: '';
+    background: #ff523b;
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+}
+
+h4 {
+    color: #555;
+    font-weight: normal;
+}
+
+.col-4 p {
+    font-size: 14px;
+}
+
+.ratings h2 {
+    color: #ff523b;
+}
+
+.offer {
+    background: radial-gradient(#fff, #ffd6d6);
+    margin-top: auto;
+    padding: 30px 0;
+}
+
+.col-2 .offer-img {
+    padding: 60px;
+}
+
+small {
+    color: #555;
+}
+
+.investors {
+    padding-top: 100px;
+}
+
+.investors .col-3 {
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.5s;
+}
+
+.investors .col-3 img {
+    width: 50px;
+    margin-top: 20px;
+    border-radius: 50%;
+}
+
+.investors .col-3:hover {
+    transform: translateY(-10px);
+}
+
+.investors h1 {
+    font-size: 34px;
+    color: #ff523b;
+}
+
+.col-3 p {
+    font-size: 12px;
+    margin: 12px 0;
+    color: #777;
+}
+
+.investors .col-3 h3 {
+    font-weight: 600;
+    color: #555;
+    font-size: 16px;
+}
+
+.brands {
+    margin: 100px auto;
+}
+
+.info-section {
+    padding: 100px 0;
+    background: #fafafa;
+}
+
+.info-content {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+.info-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.account-box {
+    max-width: 500px;
+    margin: auto;
+    padding: 40px;
+    text-align: center;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.account-box h3 {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.account-box p {
+    line-height: 1.6;
+}
+
+.footer {
+    background: #000;
+    color: #8a8a8a;
+    font-size: 14px;
+    padding: 60px 0 20px;
+}
+
+.footer p {
+    color: #8a8a8a;
+}
+
+.footer h3 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.footer-col-1,
+.footer-col-2,
+.footer-col-3,
+.footer-col-4 {
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-col-1 {
+    flex-basis: 30%;
+}
+
+.footer-col-2 {
+    flex: 1;
+    text-align: center;
+}
+
+.footer-col-2 img {
+    width: 180px;
+    margin-bottom: 20px;
+}
+
+.footer-col-3,
+.footer-col-4 {
+    flex-basis: 12%;
+    text-align: center;
+}
+
+.app-logo {
+    margin-top: 20px;
+}
+
+.app-logo img {
+    width: 140px;
+}
+
+.footer hr {
+    border: none;
+    background: #b5b5b5;
+    height: 1px;
+    margin: 20px 0;
+}
+
+.Copyright {
+    text-align: center;
+}
+
+.menu-icon {
+    width: 28px;
+    margin-left: 20px;
+    display: none;
+}
+
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff523b, #ff8a65);
+    z-index: 3000;
+    pointer-events: none;
+    transform: translate3d(-100%, 0, 0);
+    clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+    will-change: transform;
+}
+
+@media only screen and (max-width: 800px) {
+
+    nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: #333;
+        width: 100%;
+        overflow: hidden;
+        transition: max-height 0.5s;
+        z-index: 1000;
+    }
+
+    nav ul li {
+        display: block;
+        margin-right: 50px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    nav ul li a {
+        color: #fff;
+    }
+
+    nav ul li a:hover {
+        color: #ff523b;
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .row {
+        text-align: center;
+    }
+
+    .col-2,
+    .col-3,
+    .col-4 {
+        flex-basis: 100%;
+    }
+
+    .info-section {
+        padding: 70px 0;
+    }
+
+    .account-box {
+        padding: 30px 20px;
+    }
+
+}
+
+.auth-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 6000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-overlay.show {
+    display: flex;
+}
+
+.auth-box {
+    background: #fff;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 15px;
+    padding: 35px 30px 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.auth-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px 0;
+    font-family: inherit;
+    font-size: 15px;
+    color: #999;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.auth-tab.active {
+    color: #ff523b;
+    border-bottom-color: #ff523b;
+}
+
+.auth-subtitle {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.auth-social {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.social-btn:hover {
+    background: #f5f5f5;
+}
+
+.google-btn i {
+    color: #ea4335;
+}
+
+.facebook-btn i {
+    color: #1877f2;
+}
+
+.google-signin-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.google-signin-wrap > div {
+    width: 100% !important;
+}
+
+.google-signin-wrap iframe {
+    width: 100% !important;
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    color: #aaa;
+    font-size: 12px;
+    margin-bottom: 18px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.auth-divider span {
+    padding: 0 10px;
+}
+
+.auth-form {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+}
+
+.auth-form.active {
+    display: flex;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.auth-form select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #555;
+    background: #fff;
+}
+
+.auth-form select:focus {
+    outline: none;
+    border-color: #ff523b;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #ff523b;
+}
+
+.auth-error {
+    color: #e63946;
+    font-size: 12px;
+    min-height: 14px;
+    margin: 0;
+}
+
+.auth-link {
+    display: inline-block;
+    font-size: 12px;
+    color: #ff523b;
+    text-decoration: underline;
+    margin-top: -4px;
+}
+
+.auth-note {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 4px;
+}
+
+.auth-demo-code {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 8px 10px;
+    background: #fff4f0;
+    border: 1px dashed #ff523b;
+    border-radius: 8px;
+    color: #c0392b;
+    font-size: 12px;
+}
+
+.resend-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.resend-spinner {
+    display: none;
+    width: 13px;
+    height: 13px;
+    border: 2px solid #ffd0c8;
+    border-top-color: #ff523b;
+    border-radius: 50%;
+    animation: resend-spin 0.7s linear infinite;
+}
+
+.resend-spinner.show {
+    display: inline-block;
+}
+
+@keyframes resend-spin {
+    to { transform: rotate(360deg); }
+}
+
+.resend-check {
+    display: none;
+    align-items: center;
+    font-size: 12px;
+    color: #2e8b57;
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.resend-check.show {
+    display: inline-flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.resend-wrap .auth-link.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.auth-submit {
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    margin: 5px 0 0;
+}
+
+.auth-skip {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 12px;
+    color: #999;
+    text-decoration: underline;
+}
+
+.profile-box {
+    padding-top: 30px;
+}
+
+.profile-avatar-wrap {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 15px;
+}
+
+.profile-avatar-initials {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #ff523b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+}
+
+.profile-avatar-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-upload-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: #ff523b;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+    border: 2px solid #fff;
+}
+
+.profile-email {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 20px;
+}
+
+.profile-role {
+    display: inline-block;
+    font-size: 12px;
+    color: #ff523b;
+    border: 1px solid #ff523b;
+    border-radius: 20px;
+    padding: 3px 14px;
+    margin: -12px auto 20px;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-outline {
+    background: none;
+    color: #ff523b;
+    border: 1px solid #ff523b;
+}
+
+.btn-outline:hover {
+    background: #ff523b;
+    color: #fff;
+}
+
+.dev-reset-link {
+    display: block;
+    margin-top: 18px;
+    font-size: 11px;
+    color: #bbb;
+    text-decoration: underline;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 6000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-box {
+    position: relative;
+    background: #fff;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 15px;
+    padding: 35px 25px 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.product-box {
+    max-width: 640px;
+    text-align: left;
+}
+
+.edit-name-box {
+    max-width: 380px;
+    text-align: center;
+}
+
+.edit-name-box h3 {
+    color: #555;
+    margin-bottom: 18px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    color: #999;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: #ff523b;
+}
+
+.product-detail-top {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.product-detail-img {
+    width: 220px;
+    max-width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.product-detail-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.product-detail-info h3 {
+    font-weight: normal;
+    margin-bottom: 6px;
+}
+
+.product-detail-price {
+    font-size: 20px;
+    color: #ff523b;
+    margin-bottom: 6px;
+}
+
+.product-detail-ratingcount {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 12px;
+}
+
+.product-detail-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.qty-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.qty-btn:hover {
+    background: #f5f5f5;
+}
+
+#pdQty {
+    width: 40px;
+    text-align: center;
+    border: none;
+    font-size: 15px;
+}
+
+.product-detail-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.reviews-section {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.reviews-section h4 {
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.comments-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    color: #555;
+    padding: 6px 0;
+    cursor: pointer;
+    text-align: left;
+}
+
+.comments-toggle-arrow {
+    display: inline-block;
+    font-size: 13px;
+    color: #777;
+    transition: transform 0.25s ease;
+}
+
+.comments-toggle.open .comments-toggle-arrow {
+    transform: rotate(180deg);
+}
+
+.comments-body {
+    display: none;
+    margin-top: 12px;
+}
+
+.comments-body.show {
+    display: block;
+}
+
+.review-form {
+    background: #fafafa;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.review-form-label {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 6px;
+}
+
+.star-input {
+    font-size: 24px;
+    color: #ddd;
+    cursor: pointer;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.star-input span {
+    transition: color 0.15s ease;
+}
+
+.star-input span.filled {
+    color: #ff523b;
+}
+
+.review-form input,
+.review-form textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    margin-bottom: 8px;
+    resize: vertical;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.review-item {
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 12px;
+}
+
+.review-item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.review-item-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.review-item-avatar-img,
+.review-item-avatar-initials {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.review-item-avatar-img {
+    object-fit: cover;
+}
+
+.review-item-avatar-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff523b;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.review-item-name {
+    font-weight: bold;
+    font-size: 13px;
+    color: #555;
+}
+
+.review-as-who {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #777;
+}
+
+.review-as-avatar-img,
+.review-as-avatar-initials {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.review-as-avatar-img {
+    object-fit: cover;
+}
+
+.review-as-avatar-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff523b;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.review-as-who strong {
+    color: #555;
+}
+
+.btn:disabled,
+.btn[disabled] {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover,
+.btn[disabled]:hover {
+    background: #ccc;
+}
+
+.pd-login-notice {
+    font-size: 12px;
+    color: #ff523b;
+    margin-top: -20px;
+    margin-bottom: 15px;
+}
+
+.chat-box {
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 14px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.chat-header img {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.chat-header-info h4 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.chat-header-sub {
+    font-size: 11px;
+    color: #ff523b;
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 4px 2px 10px;
+}
+
+.chat-bubble {
+    max-width: 80%;
+    padding: 9px 13px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.chat-bubble-ai {
+    align-self: flex-start;
+    background: #f5f5f5;
+    color: #555;
+    border-bottom-left-radius: 4px;
+}
+
+.chat-bubble-user {
+    align-self: flex-end;
+    background: #ff523b;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 4px;
+    margin-bottom: 10px;
+}
+
+.chat-choice-btn {
+    background: #fff;
+    border: 1px solid #ff523b;
+    color: #ff523b;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.chat-choice-btn:hover {
+    background: #ff523b;
+    color: #fff;
+}
+
+.chat-continue-btn {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0 0;
+}
+
+.orders-panel-box {
+    max-width: 460px;
+    text-align: left;
+}
+
+.orders-panel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.order-row {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+}
+
+.order-row:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.order-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.order-row-top strong {
+    color: #333;
+}
+
+.order-row-items {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.order-row-buyer {
+    font-size: 12px;
+    color: #999;
+}
+
+.order-row-seller-note {
+    font-size: 12px;
+    color: #1c8a53;
+    margin-bottom: 6px;
+}
+
+.order-row-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.orders-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.orders-panel-clear-btn {
+    background: none;
+    border: 1px solid #ddd;
+    font-family: inherit;
+    font-size: 12px;
+    color: #777;
+    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 16px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.orders-panel-clear-btn:hover {
+    color: #ff523b;
+    border-color: #ff523b;
+}
+
+.orders-panel-manual-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: #fafafa;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-top: 6px;
+}
+
+.orders-panel-manual-count {
+    font-size: 12px;
+    color: #777;
+}
+
+.orders-panel-manual-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.orders-panel-manual-actions .order-cancel-btn {
+    margin: 0;
+    padding: 6px 16px;
+}
+
+.orders-panel-manual-actions .order-cancel-btn:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.order-row-checkbox-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    flex-shrink: 0;
+}
+
+.order-row-checkbox-wrap input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    accent-color: #ff523b;
+}
+
+.order-row-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.order-row-manual {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.order-row.order-row-locked {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.order-row.order-row-selectable {
+    cursor: pointer;
+}
+
+.notif-choice-box {
+    max-width: 360px;
+    text-align: left;
+}
+
+.notif-choice-box h4 {
+    margin-bottom: 8px;
+}
+
+.notif-choice-desc {
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.notif-choice-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notif-choice-actions .btn {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.order-status {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.order-status-pending {
+    background: #fff3cd;
+    color: #9a7d0a;
+}
+
+.order-status-confirmed {
+    background: #d9f7e5;
+    color: #1a7f4b;
+}
+
+.order-status-cancelled {
+    background: #fbdada;
+    color: #c0392b;
+}
+
+.orders-panel-empty {
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.order-action-box {
+    max-width: 420px;
+    text-align: left;
+}
+
+.order-action-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.order-action-avatar-img,
+.order-action-avatar-initials {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.order-action-avatar-img {
+    object-fit: cover;
+}
+
+.order-action-avatar-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff523b;
+    color: #fff;
+    font-weight: bold;
+}
+
+.order-action-header h4 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.order-action-sub {
+    font-size: 12px;
+    color: #999;
+}
+
+.order-action-details {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+}
+
+.order-action-details strong {
+    color: #333;
+}
+
+.order-action-proof-img {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    margin-top: 4px;
+}
+
+.order-action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.order-action-buttons .btn {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+}
+
+.order-cancel-btn {
+    background: #aaa;
+}
+
+.order-cancel-btn:hover {
+    background: #777;
+}
+
+.order-chat {
+    margin-top: 6px;
+}
+
+.order-chat-input-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.order-chat-input-row input {
+    flex: 1;
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.order-chat-input-row .btn {
+    margin: 0;
+    padding: 8px 20px;
+}
+
+.chat-head-dock {
+    position: fixed;
+    top: 130px;
+    right: 16px;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 5000;
+}
+
+.chat-head {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+    border: 2px solid #fff;
+    transition: transform 0.2s ease;
+}
+
+.chat-head:hover {
+    transform: scale(1.06);
+}
+
+.chat-head img,
+.chat-head-initials {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff523b;
+    color: #fff;
+    font-weight: bold;
+}
+
+.chat-head-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #ff523b;
+    color: #fff;
+    font-size: 10px;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 2px solid #fff;
+}
+
+.presence-avatar-wrap {
+    position: relative;
+}
+
+.presence-dot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #bbb;
+    border: 2px solid #fff;
+    box-sizing: content-box;
+}
+
+.presence-dot.online {
+    background: #2ecc71;
+}
+
+.presence-dot-lg {
+    width: 14px;
+    height: 14px;
+}
+
+.presence-dot-left {
+    right: auto;
+    left: 0;
+}
+
+.chat-with-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 2px 2px 14px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.chat-with-avatar-wrap {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+}
+
+.chat-with-avatar-wrap img,
+.chat-with-avatar-initials {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff523b;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.chat-with-name {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.4;
+}
+
+.chat-with-status {
+    font-size: 11px;
+    color: #999;
+    line-height: 1.4;
+}
+
+.chat-with-status.is-typing {
+    color: #ff523b;
+    font-style: italic;
+}
+
+.chat-status-label {
+    align-self: flex-end;
+    font-size: 10px;
+    color: #aaa;
+    margin-top: -4px;
+    padding-right: 4px;
+}
+
+.review-item-stars {
+    color: #ff523b;
+    font-size: 13px;
+}
+
+.review-item-date {
+    font-size: 11px;
+    color: #aaa;
+}
+
+.review-item-comment {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.review-empty {
+    font-size: 13px;
+    color: #999;
+}
+
+.cart-icon-wrap {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff523b;
+    color: #fff;
+    font-size: 10px;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+}
+
+.notif-icon-wrap {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+    margin-right: 18px;
+    transition: opacity 0.3s ease;
+}
+
+.notif-icon-wrap:hover {
+    opacity: 0.7;
+}
+
+.notif-icon-wrap svg {
+    display: block;
+}
+
+.cart-box h3 {
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 15px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 12px;
+}
+
+.cart-item img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-size: 13px;
+    color: #555;
+}
+
+.cart-item-size {
+    color: #999;
+    font-size: 12px;
+}
+
+.cart-item-price {
+    font-size: 12px;
+    color: #ff523b;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cart-item-remove {
+    background: none;
+    border: none;
+    color: #bbb;
+    cursor: pointer;
+    font-size: 13px;
+    margin-left: 8px;
+}
+
+.cart-item-remove:hover {
+    color: #e63946;
+}
+
+.cart-empty {
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    font-weight: bold;
+    color: #555;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    margin-bottom: 15px;
+}
+
+.payment-box h3 {
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.payment-order-summary {
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 18px;
+}
+
+.payment-step {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-step.active {
+    display: flex;
+}
+
+.payment-subtitle {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 4px;
+}
+
+.payment-methods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.payment-method-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.payment-method-btn:hover {
+    border-color: #ff523b;
+    background: #fff4f0;
+}
+
+.payment-method-logo {
+    height: 20px;
+    width: auto;
+    max-width: 60px;
+    object-fit: contain;
+}
+
+.gcash-amount-box {
+    text-align: center;
+    background: #fff4f0;
+    border: 1px solid #ffd6c9;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.gcash-amount-box p {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.gcash-amount-box h2 {
+    color: #ff523b;
+    font-weight: normal;
+}
+
+.gcash-owner-info {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+}
+
+.gcash-owner-info p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #555;
+    padding: 4px 0;
+}
+
+.gcash-owner-info p strong {
+    color: #333;
+}
+
+.gcash-note {
+    font-size: 12px;
+    color: #ff523b;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.chat-proof-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 4px;
+    margin-bottom: 10px;
+}
+
+.chat-upload-label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.chat-proof-preview img {
+    max-width: 160px;
+    max-height: 160px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    object-fit: cover;
+}
+
+.chat-measure-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 4px;
+    margin-bottom: 10px;
+}
+
+.chat-measure-row {
+    display: flex;
+    gap: 8px;
+}
+
+.chat-measure-row input {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.chat-measure-input .chat-choice-btn {
+    align-self: center;
+}
+
+.payment-step input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.order-confirm {
+    text-align: center;
+    padding: 10px 0 20px;
+}
+
+.payment-loading {
+    text-align: center;
+    padding: 40px 0 30px;
+}
+
+.payment-spinner {
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 18px;
+    border: 4px solid #ffe0d8;
+    border-top-color: #ff523b;
+    border-radius: 50%;
+    animation: payment-spin 0.8s linear infinite;
+}
+
+@keyframes payment-spin {
+    to { transform: rotate(360deg); }
+}
+
+.payment-loading p {
+    font-size: 13px;
+    color: #777;
+}
+
+.order-confirm-check {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 6px;
+}
+
+.order-confirm-check-circle {
+    stroke: #2e8b57;
+    stroke-width: 3;
+    stroke-dasharray: 152;
+    stroke-dashoffset: 152;
+}
+
+.order-confirm-check-mark {
+    stroke: #2e8b57;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 34;
+    stroke-dashoffset: 34;
+}
+
+.order-confirm-check.animate .order-confirm-check-circle {
+    animation: order-confirm-circle 0.5s ease-out forwards;
+}
+
+.order-confirm-check.animate .order-confirm-check-mark {
+    animation: order-confirm-mark 0.4s 0.45s ease-out forwards;
+}
+
+@keyframes order-confirm-circle {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes order-confirm-mark {
+    to { stroke-dashoffset: 0; }
+}
+
+.order-confirm h4 {
+    font-weight: normal;
+    margin-bottom: 8px;
+}
+
+.order-confirm p {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.6;
+}
+
+.auth-form textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.auth-form textarea:focus {
+    outline: none;
+    border-color: #ff523b;
+}
+
+.product-search-wrap {
+    position: relative;
+    max-width: 420px;
+    margin: 0 auto 30px;
+}
+
+.product-search-input {
+    width: 100%;
+    padding: 12px 18px 12px 42px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #555;
+    background: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.product-search-input:focus {
+    outline: none;
+    border-color: #ff523b;
+}
+
+.product-search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    color: #999;
+    pointer-events: none;
+}
+
+.product-search-empty {
+    width: 100%;
+    text-align: center;
+    color: #999;
+    padding: 30px 0;
+}
+
+.product-section-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 0 auto 80px;
+    position: relative;
+}
+
+.product-section-head .title {
+    margin: 0;
+}
+
+.add-product-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ff523b;
+    color: #fff;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    white-space: nowrap;
+}
+
+.add-product-btn:hover {
+    background: #563434;
+}
+
+.product-card {
+    position: relative;
+}
+
+.product-card img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+.product-edit-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-edit-btn:hover {
+    background: #ff523b;
+}
+
+.add-product-box {
+    max-width: 420px;
+}
+
+.remove-product-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #e63946;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: underline;
+}
+
+.review-item-user-clickable,
+.profile-link-clickable,
+.buyer-name-link {
+    cursor: pointer;
+}
+
+.review-item-user-clickable:hover .review-item-name,
+.buyer-name-link:hover {
+    color: #ff523b;
+    text-decoration: underline;
+}
+
+.profile-link-clickable:hover {
+    opacity: 0.85;
+}
+
+.user-profile-view-box {
+    max-width: 320px;
+    text-align: center;
+}
+
+.user-profile-view-avatar {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin: 10px auto 16px;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffd6d6;
+    color: #ff523b;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.user-profile-view-avatar img {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user-profile-view-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-profile-view-name {
+    margin: 0 0 6px;
+    color: #555;
+}
+
+.user-profile-view-role {
+    display: inline-block;
+    background: #ffd6d6;
+    color: #ff523b;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 4px 16px;
+    border-radius: 20px;
+}
+
+.user-profile-view-empty {
+    font-size: 13px;
+    color: #999;
+    margin-top: 10px;
+}
+
+.user-profile-view-role + .user-profile-view-role {
+    margin-left: 6px;
+}
+
+.user-profile-view-role.role-seller {
+    background: #d6f5e3;
+    color: #1c8a53;
+}
+
+.seller-toggle-btn-wrap {
+    margin-top: 16px;
+}
+
+.seller-toggle-btn {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.seller-toggle-btn.is-seller {
+    background: #b91c1c;
+}
+
+.seller-toggle-btn.is-seller:hover {
+    background: #7a1212;
+}
+
+.image-upload-preview {
+    width: 100%;
+    max-height: 160px;
+    object-fit: contain;
+    border: 1px dashed #ddd;
+    border-radius: 8px;
+    padding: 6px;
+    display: none;
+}
+
+.image-upload-preview.show {
+    display: block;
+}
+
+.form-hint {
+    font-size: 12px;
+    color: #999;
+    margin-top: -6px;
+}
+
+.stock-badge {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: -10px;
+}
+
+.stock-badge.stock-out {
+    color: #e63946;
+}
+
+.stock-badge.stock-low {
+    color: #d98c00;
+}
+
+.product-out-of-stock img {
+    filter: grayscale(60%);
+    opacity: 0.6;
+}
+
+.product-detail-stock {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 4px 0 0;
+}
+
+.product-detail-stock.stock-out {
+    color: #e63946;
+}
+
+.product-detail-stock.stock-low {
+    color: #d98c00;
+}
+
+.product-detail-stock.stock-ok {
+    color: #2a9d5c;
+}
+
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("uCUgeMkWdkIM9TNB-");
+        })();
+    </script>
+
+    <script src="https://accounts.google.com/gsi/client"></script>
+</head>
+
+<body id="home">
+
+<div class="page-transition-overlay" id="pageTransitionOverlay"></div>
+
+<div class="auth-overlay" id="authOverlay">
+
+    <div class="auth-box">
+
+        <div class="auth-tabs" id="authTabs">
+            <button class="auth-tab active" id="tabSignin" onclick="switchAuthTab('signin')">Sign In</button>
+            <button class="auth-tab" id="tabSignup" onclick="switchAuthTab('signup')">Sign Up</button>
+        </div>
+
+        <p class="auth-subtitle" id="authSubtitle">Sign in or create an account to continue to Athletica.</p>
+
+        <div class="auth-social" id="authSocial">
+            <div id="googleSignInDiv" class="google-signin-wrap"></div>
+            <button type="button" class="social-btn facebook-btn" onclick="socialLogin('facebook')">
+                <i class="fa-brands fa-facebook-f"></i> Continue with Facebook
+            </button>
+        </div>
+
+        <div class="auth-divider" id="authDivider"><span>or use your email</span></div>
+
+        <form id="signinForm" class="auth-form active" onsubmit="return handleSignIn(event)">
+            <input type="email" id="signinEmail" placeholder="Email" required>
+            <input type="password" id="signinPassword" placeholder="Password" required>
+            <a href="#" class="auth-link" onclick="switchAuthTab('forgotEmail'); return false;">Forgot password?</a>
+            <p class="auth-error" id="signinError"></p>
+            <button type="submit" class="btn auth-submit">Sign In</button>
+        </form>
+
+        <form id="signupForm" class="auth-form" onsubmit="return handleSignUp(event)">
+            <input type="text" id="signupName" placeholder="Full Name" required>
+            <input type="email" id="signupEmail" placeholder="Email" required>
+            <input type="password" id="signupPassword" placeholder="Password (min 6 characters)" required>
+            <select id="signupRole" required>
+                <option value="" disabled selected>I am a...</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Student">Student</option>
+            </select>
+            <p class="auth-error" id="signupError"></p>
+            <button type="submit" class="btn auth-submit">Send Verification Code</button>
+        </form>
+
+        <form id="signupVerifyForm" class="auth-form" onsubmit="return handleVerifySignup(event)">
+            <p class="auth-note" id="signupVerifyNote"></p>
+            <input type="text" id="signupVerifyCode" placeholder="6-digit code" maxlength="6" inputmode="numeric" required>
+            <p class="auth-error" id="signupVerifyError"></p>
+            <button type="submit" class="btn auth-submit">Verify &amp; Create Account</button>
+            <span class="resend-wrap">
+                <a href="#" class="auth-link" id="signupResendLink" onclick="resendSignupCode(); return false;">Resend code</a>
+                <span class="resend-spinner" id="signupResendSpinner"></span>
+                <span class="resend-check" id="signupResendCheck">&#10003; Sent</span>
+            </span>
+            <a href="#" class="auth-link" onclick="switchAuthTab('signup'); return false;">Back</a>
+        </form>
+
+        <form id="signupGoogleNameForm" class="auth-form" onsubmit="return handleGoogleSignupName(event)">
+            <p class="auth-note" id="signupGoogleNameNote"></p>
+            <input type="text" id="signupGoogleFullName" placeholder="Full Name" required>
+            <select id="signupGoogleRole" required>
+                <option value="" disabled selected>I am a...</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Student">Student</option>
+            </select>
+            <p class="auth-error" id="signupGoogleNameError"></p>
+            <button type="submit" class="btn auth-submit">Finish Sign Up</button>
+            <a href="#" class="auth-link" onclick="switchAuthTab('signup'); return false;">Cancel</a>
+        </form>
+
+        <form id="forgotEmailForm" class="auth-form" onsubmit="return handleForgotEmail(event)">
+            <p class="auth-note">Enter the email on your account and we'll send you a reset code.</p>
+            <input type="email" id="forgotEmail" placeholder="Email" required>
+            <p class="auth-error" id="forgotEmailError"></p>
+            <button type="submit" class="btn auth-submit">Send Reset Code</button>
+            <a href="#" class="auth-link" onclick="switchAuthTab('signin'); return false;">Back to Sign In</a>
+        </form>
+
+        <form id="forgotResetForm" class="auth-form" onsubmit="return handleForgotReset(event)">
+            <p class="auth-note" id="forgotResetNote"></p>
+            <input type="text" id="forgotCode" placeholder="6-digit code" maxlength="6" inputmode="numeric" required>
+            <input type="password" id="forgotNewPassword" placeholder="New password (min 6 characters)" required>
+            <p class="auth-error" id="forgotResetError"></p>
+            <button type="submit" class="btn auth-submit">Reset Password</button>
+            <span class="resend-wrap">
+                <a href="#" class="auth-link" id="forgotResendLink" onclick="resendResetCode(); return false;">Resend code</a>
+                <span class="resend-spinner" id="forgotResendSpinner"></span>
+                <span class="resend-check" id="forgotResendCheck">&#10003; Sent</span>
+            </span>
+            <a href="#" class="auth-link" onclick="switchAuthTab('signin'); return false;">Back to Sign In</a>
+        </form>
+
+        <a href="#" class="auth-skip" id="authSkip" onclick="closeAuthModal(event)">Continue browsing without an account</a>
+        <a href="#" class="dev-reset-link" id="authOwnerSkip" onclick="continueAsOwner(event)">Continue as Owner (dev only)</a>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="productOverlay">
+
+    <div class="modal-box product-box">
+
+        <button type="button" class="modal-close" onclick="closeProductDetail()">&times;</button>
+
+        <div class="product-detail-top">
+
+            <img id="pdImage" src="" alt="" class="product-detail-img">
+
+            <div class="product-detail-info">
+                <h3 id="pdName"></h3>
+                <p class="product-detail-price" id="pdPrice"></p>
+                <div class="ratings" id="pdStars"><h2>☆☆☆☆☆</h2></div>
+                <p class="product-detail-ratingcount" id="pdRatingCount"></p>
+                <p class="product-detail-desc" id="pdDescription"></p>
+                <p class="product-detail-stock" id="pdStock"></p>
+
+                <div class="qty-row">
+                    <label for="pdQty">Qty:</label>
+                    <button type="button" class="qty-btn" onclick="changePdQty(-1)">-</button>
+                    <input type="number" id="pdQty" value="1" min="1" readonly>
+                    <button type="button" class="qty-btn" onclick="changePdQty(1)">+</button>
+                </div>
+
+                <div class="product-detail-actions">
+                    <button type="button" class="btn btn-outline" id="pdAddToCartBtn" onclick="addToCartFromDetail()">Add to Cart</button>
+                    <button type="button" class="btn" id="pdBuyNowBtn" onclick="openBuyChat()">Buy</button>
+                </div>
+                <p class="pd-login-notice" id="pdLoginNotice" style="display:none;">Sign in to add items to your cart or check out.</p>
+
+            </div>
+
+        </div>
+
+        <div class="reviews-section">
+
+            <button type="button" class="comments-toggle" id="commentsToggle" onclick="toggleCommentsSection()">
+                <span id="commentsToggleLabel">Comments</span>
+                <span class="comments-toggle-arrow" id="commentsToggleArrow">&#9662;</span>
+            </button>
+
+            <div class="comments-body" id="commentsBody">
+
+                <div class="review-form">
+                    <p class="review-form-label">Leave a rating:</p>
+                    <div class="star-input" id="reviewStarInput">
+                        <span data-star="1">☆</span><span data-star="2">☆</span><span data-star="3">☆</span><span data-star="4">☆</span><span data-star="5">☆</span>
+                    </div>
+                    <div class="review-as-who" id="reviewAsWho" style="display:none;">
+                        <span id="reviewAsAvatar"></span>
+                        <span>Posting as <strong id="reviewAsName"></strong></span>
+                    </div>
+                    <textarea id="reviewComment" placeholder="Write a comment (optional)" rows="2"></textarea>
+                    <p class="auth-error" id="reviewError"></p>
+                    <button type="button" class="btn auth-submit" onclick="submitReview()">Submit Review</button>
+                </div>
+
+                <div class="reviews-list" id="reviewsList"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="cartOverlay">
+
+    <div class="modal-box cart-box">
+
+        <button type="button" class="modal-close" onclick="closeCart()">&times;</button>
+
+        <h3>Your Cart</h3>
+
+        <div class="cart-items" id="cartItemsList"></div>
+
+        <div class="cart-total-row" id="cartTotalRow">
+            <span>Total:</span>
+            <span id="cartTotalAmount">₱0.00</span>
+        </div>
+
+        <button type="button" class="btn auth-submit" id="cartCheckoutBtn" onclick="openCheckoutFromCart()">Proceed to Payment</button>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="paymentOverlay">
+
+    <div class="modal-box payment-box">
+
+        <button type="button" class="modal-close" onclick="closePayment()">&times;</button>
+
+        <h3 id="paymentTitle">Checkout</h3>
+
+        <div class="payment-order-summary" id="paymentOrderSummary"></div>
+
+        <div class="payment-step active" id="paymentStepMethod">
+            <p class="payment-subtitle">Choose a payment method</p>
+
+            <div class="payment-methods">
+                <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('GCash')">
+                    <img src="images/gcash-logo.png" alt="GCash" class="payment-method-logo"> GCash
+                </button>
+                <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('Maya')">
+                    <img src="images/maya.png" alt="Maya" class="payment-method-logo"> Maya
+                </button>
+                <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('PayPal')">
+                    <img src="images/logo-paypal.png" alt="PayPal" class="payment-method-logo"> PayPal
+                </button>
+                <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('COD')">
+                    <img src="images/cod.png" alt="Cash on Delivery" class="payment-method-logo"> Cash on Delivery
+                </button>
+            </div>
+        </div>
+
+        <div class="payment-step" id="paymentStepWalletInfo">
+            <p class="payment-subtitle" id="walletInfoTitle">Pay with GCash</p>
+            <div class="gcash-amount-box">
+                <p>Amount to pay</p>
+                <h2 id="walletInfoAmount">₱0.00</h2>
+            </div>
+            <div class="gcash-owner-info" id="walletInfoDetails"></div>
+            <p class="gcash-note">Note: after you send payment, take a screenshot.</p>
+            <button type="button" class="btn auth-submit" onclick="goToPaymentProofChat()">Next Process</button>
+            <a href="#" class="auth-link" onclick="backToPaymentMethod(); return false;">Back</a>
+        </div>
+
+        <form class="payment-step" id="paymentStepCod" onsubmit="return submitCodPayment(event)">
+            <p class="payment-subtitle">Cash on Delivery details</p>
+            <input type="text" id="codAddress" placeholder="Address" required>
+            <input type="text" id="codYearLevel" placeholder="Year Level" required>
+            <input type="text" id="codSection" placeholder="Section" required>
+            <input type="text" id="codPhone" placeholder="Phone Number" required>
+            <p class="auth-error" id="codError"></p>
+            <button type="submit" class="btn auth-submit">Place Order</button>
+            <a href="#" class="auth-link" onclick="backToPaymentMethod(); return false;">Back</a>
+        </form>
+
+        <div class="payment-step" id="paymentStepLoading">
+            <div class="payment-loading">
+                <div class="payment-spinner"></div>
+                <p>Processing your order…</p>
+            </div>
+        </div>
+
+        <div class="payment-step" id="paymentStepConfirm">
+            <div class="order-confirm">
+                <svg class="order-confirm-check" id="orderConfirmCheck" viewBox="0 0 52 52">
+                    <circle class="order-confirm-check-circle" cx="26" cy="26" r="24" fill="none"/>
+                    <path class="order-confirm-check-mark" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+                <h4>Order Placed!</h4>
+                <p id="paymentConfirmText"></p>
+            </div>
+            <button type="button" class="btn auth-submit" onclick="closePayment()">Done</button>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="chatOverlay">
+
+    <div class="modal-box chat-box">
+
+        <button type="button" class="modal-close" onclick="closeBuyChat()">&times;</button>
+
+        <div class="chat-header">
+            <img id="chatProductImg" src="" alt="">
+            <div class="chat-header-info">
+                <h4 id="chatProductName"></h4>
+                <p class="chat-header-sub">Athletica Assistant</p>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages"></div>
+
+        <div class="chat-choices" id="chatChoices"></div>
+
+        <div class="chat-measure-input" id="chatMeasureInput" style="display:none;">
+            <div class="chat-measure-row">
+                <input type="number" id="chatWeightInput" placeholder="Weight (kg)" min="1">
+                <input type="number" id="chatHeightInput" placeholder="Height (cm)" min="1">
+            </div>
+            <button type="button" class="chat-choice-btn" onclick="chatSubmitMeasurements()">Get My Size</button>
+        </div>
+
+        <div class="chat-proof-upload" id="chatProofUpload" style="display:none;">
+            <input type="file" id="paymentProofInput" accept="image/*" style="display:none;" onchange="handlePaymentProofSelected(event)">
+            <label for="paymentProofInput" class="chat-choice-btn chat-upload-label">Upload Screenshot</label>
+            <div class="chat-proof-preview" id="chatProofPreview" style="display:none;">
+                <img id="chatProofPreviewImg" src="" alt="Payment proof">
+            </div>
+        </div>
+
+        <button type="button" class="btn chat-continue-btn" id="chatContinueBtn" disabled onclick="handleChatContinueClick()">Continue with Payment</button>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="ordersPanelOverlay">
+
+    <div class="modal-box orders-panel-box">
+
+        <button type="button" class="modal-close" onclick="closeOrdersPanel()">&times;</button>
+
+        <div class="orders-panel-header" id="ordersPanelHeader">
+            <h3 id="ordersPanelTitle">My Orders</h3>
+            <button type="button" class="orders-panel-clear-btn" id="ordersPanelClearBtn" onclick="openClearNotificationChoice()">Clear Notification</button>
+        </div>
+
+        <div class="orders-panel-manual-toolbar" id="ordersPanelManualToolbar" style="display:none;">
+            <span class="orders-panel-manual-count" id="manualSelectedCount">0 selected</span>
+            <div class="orders-panel-manual-actions">
+                <button type="button" class="orders-panel-clear-btn" onclick="cancelManualDeleteMode()">Cancel</button>
+                <button type="button" class="btn order-cancel-btn" id="manualDeleteBtn" onclick="confirmManualDelete()" disabled>Delete Selected</button>
+            </div>
+        </div>
+
+        <div class="orders-panel-list" id="ordersPanelList"></div>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="notifClearChoiceOverlay">
+
+    <div class="modal-box notif-choice-box">
+
+        <button type="button" class="modal-close" onclick="closeClearNotificationChoice()">&times;</button>
+
+        <h4>Clear Notification</h4>
+        <p class="notif-choice-desc">Only notifications you've already read or opened can be removed.</p>
+
+        <div class="notif-choice-actions">
+            <button type="button" class="btn btn-outline" onclick="chooseDeleteManually()">Delete Manually</button>
+            <button type="button" class="btn" onclick="chooseClearReadFromPopup()">Clear Read</button>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="orderActionOverlay">
+
+    <div class="modal-box order-action-box">
+
+        <button type="button" class="modal-close" onclick="closeOrderAction()">&times;</button>
+
+        <div class="order-action-header">
+            <div id="orderActionAvatar"></div>
+            <div>
+                <h4 id="orderActionTitle"></h4>
+                <p class="order-action-sub" id="orderActionSub"></p>
+            </div>
+        </div>
+
+        <div class="order-action-details" id="orderActionDetails"></div>
+
+        <div class="order-action-buttons" id="orderActionButtons"></div>
+
+        <div class="order-chat" id="orderChatSection" style="display:none;">
+            <div class="chat-with-header" id="orderChatWithHeader"></div>
+            <div class="chat-messages" id="orderChatMessages"></div>
+            <div class="order-chat-input-row">
+                <input type="text" id="orderChatInput" placeholder="Type a message...">
+                <button type="button" class="btn" onclick="sendOrderChatMessage()">Send</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="chat-head-dock" id="chatHeadDock" style="display:none;"></div>
+
+<div class="modal-overlay" id="editNameOverlay">
+
+    <div class="modal-box edit-name-box">
+
+        <button type="button" class="modal-close" onclick="closeEditName()">&times;</button>
+
+        <h3>Edit your name</h3>
+
+        <form class="auth-form active" onsubmit="return submitEditName(event)">
+            <input type="text" id="editNameInput" placeholder="Full Name" required>
+            <p class="auth-error" id="editNameError"></p>
+            <button type="submit" class="btn auth-submit">Save</button>
+        </form>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="addProductOverlay">
+
+    <div class="modal-box add-product-box">
+
+        <button type="button" class="modal-close" onclick="closeAddProductModal()">&times;</button>
+
+        <h3>Add a Product</h3>
+
+        <form class="auth-form active" onsubmit="return submitAddProduct(event)">
+            <input type="text" id="newProductName" placeholder="Product name" required>
+            <input type="number" id="newProductPrice" placeholder="Price (₱)" min="0" step="0.01" required>
+
+            <input type="file" id="newProductImageInput" accept="image/*" onchange="handleNewProductImageSelected(event)">
+            <img id="newProductImagePreview" class="image-upload-preview" alt="Preview">
+
+            <textarea id="newProductDescription" placeholder="Description" rows="3" required></textarea>
+
+            <input type="text" id="newProductSizes" placeholder="Sizes, comma separated (e.g. Small, Medium, Large)" required>
+            <p class="form-hint">For footwear, list numeric sizes instead, e.g. 38, 39, 40.</p>
+
+            <input type="number" id="newProductStock" placeholder="Stock quantity (e.g. 50)" min="0" step="1" required>
+
+            <p class="auth-error" id="addProductError"></p>
+            <button type="submit" class="btn auth-submit">Add Product</button>
+        </form>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="editProductOverlay">
+
+    <div class="modal-box add-product-box">
+
+        <button type="button" class="modal-close" onclick="closeEditProductModal()">&times;</button>
+
+        <h3>Edit Product</h3>
+
+        <form class="auth-form active" onsubmit="return submitEditProduct(event)">
+            <input type="text" id="editProductName" placeholder="Product name" required>
+            <input type="number" id="editProductPrice" placeholder="Price (₱)" min="0" step="0.01" required>
+
+            <input type="file" id="editProductImageInput" accept="image/*" onchange="handleEditProductImageSelected(event)">
+            <img id="editProductImagePreview" class="image-upload-preview show" alt="Preview">
+            <p class="form-hint">Leave the image field empty to keep the current photo.</p>
+
+            <textarea id="editProductDescription" placeholder="Description" rows="3" required></textarea>
+
+            <input type="text" id="editProductSizes" placeholder="Sizes, comma separated (e.g. Small, Medium, Large)" required>
+            <p class="form-hint">For footwear, list numeric sizes instead, e.g. 38, 39, 40.</p>
+
+            <input type="number" id="editProductStock" placeholder="Stock quantity" min="0" step="1" required>
+            <p class="form-hint">Update this to restock the item.</p>
+
+            <p class="auth-error" id="editProductError"></p>
+            <button type="submit" class="btn auth-submit">Save Changes</button>
+            <button type="button" class="remove-product-link" onclick="removeProductFromEdit()">Remove this product</button>
+        </form>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="userProfileViewOverlay">
+
+    <div class="modal-box user-profile-view-box">
+
+        <button type="button" class="modal-close" onclick="closeUserProfileView()">&times;</button>
+
+        <div class="user-profile-view-avatar" id="userProfileViewAvatar"></div>
+        <h3 class="user-profile-view-name" id="userProfileViewName"></h3>
+        <div id="userProfileViewRoleWrap"></div>
+        <div id="userProfileViewSellerToggleWrap"></div>
+
+    </div>
+
+</div>
+
+<header class="site-navbar">
+
+    <div class="container">
+
+        <div class="navbar">
+
+            <div class="logo">
+                <img src="images/logo.png" alt="Athletica">
+            </div>
+
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#product">Product</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#account">Account</a></li>
+                </ul>
+            </nav>
+
+            <div class="notif-icon-wrap" onclick="openOrdersPanel()">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Notifications">
+                    <path d="M12 3c-.7 0-1.3.57-1.3 1.28v.55C8.1 5.4 6.4 7.6 6.4 10.2v3.55c0 .5-.2 1-.55 1.35l-.75.75c-.6.6-.17 1.65.68 1.65h13.44c.85 0 1.28-1.05.68-1.65l-.75-.75a1.9 1.9 0 0 1-.55-1.35V10.2c0-2.6-1.7-4.8-4.3-5.37v-.55C14.3 3.57 13.7 3 13 3h-1z"/>
+                    <path d="M9.6 18.7a2.4 2.4 0 0 0 4.8 0"/>
+                </svg>
+                <span class="cart-badge" id="notifBadge">0</span>
+            </div>
+
+            <div class="cart-icon-wrap" onclick="openCart()">
+                <img src="images/cart.png" width="30px" height="30">
+                <span class="cart-badge" id="cartBadge">0</span>
+            </div>
+
+            <img
+                src="images/menu.png"
+                class="menu-icon"
+                onclick="menutoggle()"
+            >
+
+        </div>
+
+    </div>
+
+</header>
+
+<main id="pagesWrapper">
+
+<div class="site-page active" data-page="home">
+
+<div class="header">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-2">
+
+                <h1>
+                    What's Up, Welcome to Athletica
+                </h1>
+
+                <p>
+                    where performance meets style. Our activewear is designed
+                    for movement, comfort, and confidence, whether you're
+                    training hard or living boldly. Elevate your routine
+                    with gear that works as hard as you do.
+                </p>
+
+            </div>
+
+            <div class="col-2">
+
+                <img src="images/image1.png">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="categories">
+
+    <div class="small-container">
+
+        <div class="row">
+
+            <div class="col-3">
+
+                <img src="images/cat-1.png">
+
+                <a href="https://shopping.yahoo.com/style/shoes/article/best-slip-on-sneakers-223352804.html">
+                    The 14 best slip-on sneakers for women in 2025,
+                    according to podiatrists
+                </a>
+
+            </div>
+
+            <div class="col-3">
+
+                <img src="images/cat-2.png">
+
+                <a href="https://shopping.yahoo.com/beauty/skincare/article/best-eye-creams-151709175.html">
+                    These are the best eye creams of 2025,
+                    tested and reviewed
+                </a>
+
+            </div>
+
+            <div class="col-3">
+
+                <img src="images/cat-3.png">
+
+                <a href="https://shopping.yahoo.com/gift-ideas/article/mothers-day-gift-got-you-stumped-try-one-of-these-universally-appealing-perfumes-161517477.html">
+                    Mother's Day gift got you stumped?
+                    Try one of these universally-appealing perfumes
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="site-page" data-page="product">
+
+<div class="small-container" id="product">
+
+    <div class="product-search-wrap">
+        <span class="product-search-icon">&#128269;</span>
+        <input type="text" id="productSearchInput" class="product-search-input" placeholder="Search products..." oninput="renderProductGrid()">
+    </div>
+
+    <div class="product-section-head">
+        <h2 class="title">
+            Featured Product
+        </h2>
+        <button type="button" class="add-product-btn" id="addProductBtn" style="display:none;" onclick="openAddProductModal()">+ Add Product</button>
+    </div>
+
+    <div class="row" id="productGrid"></div>
+
+</div>
+
+<div class="offer">
+
+    <div class="small-container">
+
+        <div class="row">
+
+            <div class="col-2">
+
+                <img
+                    src="images/relo.png"
+                    class="offer-img"
+                >
+
+            </div>
+
+            <div class="col-2">
+
+                <p>
+                    Exclusive Available on Athletica
+                </p>
+
+                <br>
+
+                <h1>
+                    PACE 3 COROS
+                </h1>
+
+                <br>
+
+                <small>
+                    The COROS PACE 3 is a lightweight GPS watch
+                    with dual-frequency tracking, 24-day battery life,
+                    and over 30 sport modes. It offers heart rate and
+                    sleep monitoring, music storage with Bluetooth
+                    playback, and offline maps for navigation -
+                    perfect for serious athletes and outdoor workouts.
+                </small>
+
+                <br>
+
+                <a
+                    href="https://kenshinue.github.io/PACE-3-COROS/"
+                    class="btn"
+                >
+                    Buy Now &#8594;
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="investors">
+
+    <div class="small-container">
+
+        <div class="row">
+
+            <div class="col-3">
+
+                <h1>❝</h1>
+
+                <p>
+                    Austine is an investor in Athletica,
+                    backing its mission to enhance athletic
+                    performance through smart, data-driven
+                    training tools. With a keen interest in
+                    sports technology, Austine supports the
+                    company’s growth and innovation in athlete
+                    development.
+                </p>
+
+                <div class="ratings">
+                    <h2>★★★★☆</h2>
+                </div>
+
+                <img src="images/austine.png">
+
+                <h3>
+                    Austine Occidental
+                </h3>
+
+            </div>
+
+            <div class="col-3">
+
+                <h1>❝</h1>
+
+                <p>
+                    Christian Josh Coele is an investor in
+                    Athletica, supporting its vision to empower
+                    athletes through intelligent training solutions.
+                    With a strong interest in performance technology
+                    and innovation, he contributes to the company’s
+                    mission of redefining modern athletic development.
+                </p>
+
+                <div class="ratings">
+                    <h2>★★★★★</h2>
+                </div>
+
+                <img src="images/josh.png">
+
+                <h3>
+                    Christian Josh Coele
+                </h3>
+
+            </div>
+
+            <div class="col-3">
+
+                <h1>❝</h1>
+
+                <p>
+                    Justine Paul Villamor is an investor in Athletica,
+                    backing the company’s commitment to innovation
+                    in athletic performance. Her support reflects
+                    a belief in the power of data-driven training
+                    solutions to shape the future of sports and
+                    athlete development.
+                </p>
+
+                <div class="ratings">
+                    <h2>★★★★☆</h2>
+                </div>
+
+                <img src="images/justine.png">
+
+                <h3>
+                    Justine Paul Villamor
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="brands">
+
+    <div class="small-container">
+
+        <div class="row">
+
+            <div class="col-5">
+                <img src="images/maya.png">
+            </div>
+
+            <div class="col-5">
+                <img src="images/logo-oppo.png">
+            </div>
+
+            <div class="col-5">
+                <img src="images/logo-coca-cola.png">
+            </div>
+
+            <div class="col-5">
+                <img src="images/logo-paypal.png">
+            </div>
+
+            <div class="col-5">
+                <img src="images/gcash-logo.png">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="site-page" data-page="about">
+
+<section id="about" class="info-section">
+
+    <div class="small-container">
+
+        <h2 class="title">
+            About Athletica
+        </h2>
+
+        <div class="info-content">
+
+            <p>
+                Athletica is a sports and activewear brand dedicated
+                to providing comfortable, stylish, and performance-focused
+                products for athletes and fitness enthusiasts.
+            </p>
+
+            <p>
+                Our goal is to help people stay active and confident
+                by providing products designed for training, exercise,
+                and everyday movement.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+<div class="site-page" data-page="contact">
+
+<section id="contact" class="info-section">
+
+    <div class="small-container">
+
+        <h2 class="title">
+            Contact Us
+        </h2>
+
+        <div class="info-content">
+
+            <p>
+                Have questions about our products?
+                Feel free to contact the Athletica team.
+            </p>
+
+            <p>
+                📘 Facebook: Athletica Shop
+            </p>
+
+            <p>
+                📸 Instagram: Athletica_Shop
+            </p>
+
+            <p>
+                📧 Email: AthleticaCVSU@gmail.com
+            </p>
+
+            <p>
+                📱 Number: +63 992 988 3855
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+<div class="site-page" data-page="account">
+
+<section id="account" class="info-section">
+
+    <div class="small-container">
+
+        <h2 class="title">
+            Account
+        </h2>
+
+        <div id="accountContent">
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+</main>
+
+<div class="footer">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="footer-col-1">
+
+                <h3>
+                    Download Our App
+                </h3>
+
+                <p>
+                    Download App for Android and ios mobile phone.
+                </p>
+
+                <div class="app-logo">
+
+                    <img src="images/play-store.png">
+
+                    <img src="images/app-store.png">
+
+                </div>
+
+            </div>
+
+            <div class="footer-col-2">
+
+                <img
+                    src="images/logo-white.PNG"
+                    width="125px"
+                >
+
+                <p>
+                    Our Purpose Is To Sustainably Make the Pleasure
+                    and Benefits of Sports Accessible to the Many.
+                </p>
+
+            </div>
+
+            <div class="footer-col-3">
+
+                <h3>
+                    Useful Links
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Coupons
+                    </li>
+
+                    <li>
+                        Blog Post
+                    </li>
+
+                    <li>
+                        Return Policy
+                    </li>
+
+                    <li>
+                        Join Affiliate
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-col-4">
+
+                <h3>
+                    GROUP MEMBERS
+                </h3>
+
+                <ul>
+
+                    <li>Aiona Granada</li>
+                    <li>Austine Occidental</li>
+                    <li>Christian Josh Coele</li>
+                    <li>Jhalo Pantaleon</li>
+                    <li>Arjhay Diaz</li>
+                    <li>Justine Villamor</li>
+                    <li>Kristoff Corillo</li>
+                    <li>Marc Laurence Villa</li>
+                    <li>Youri Acosta</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p class="Copyright">
+            © 2025 Athletica. All rights reserved.
+        </p>
+
+    </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyBudHLjPx4XMaJuh1LgZdT0-9EP9HFm9Zw",
+        authDomain: "athletica-b3989.firebaseapp.com",
+        projectId: "athletica-b3989",
+        storageBucket: "athletica-b3989.firebasestorage.app",
+        messagingSenderId: "877654285464",
+        appId: "1:877654285464:web:2e6f3ddb69cb5beac204ed"
+    };
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+
+    db.enablePersistence().catch(function (err) {
+        console.warn("Firestore offline persistence not enabled:", err.code);
+    });
+</script>
+
+<script>
+
+    var MenuItems = document.getElementById("MenuItems");
+
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle() {
+
+        if (MenuItems.style.maxHeight == "0px") {
+
+            MenuItems.style.maxHeight = "200px";
+
+        }
+
+        else {
+
+            MenuItems.style.maxHeight = "0px";
+
+        }
+
+    }
+
+    var PAGE_ORDER = ["home", "product", "about", "contact", "account"];
+    var transitionOverlay = document.getElementById("pageTransitionOverlay");
+    var TRANSITION_MS = 320;
+    var currentPageKey = "home";
+
+    function goToPage(pageKey, direction) {
+        var targetPage = document.querySelector('.site-page[data-page="' + pageKey + '"]');
+        if (!targetPage || !transitionOverlay) return;
+
+        var enterX = direction === "right" ? "-100%" : "100%";
+        var exitX = direction === "right" ? "100%" : "-100%";
+
+        transitionOverlay.style.transition = "none";
+        transitionOverlay.style.transform = "translate3d(" + enterX + ", 0, 0)";
+
+        void transitionOverlay.offsetHeight;
+
+        transitionOverlay.style.transition = "transform " + TRANSITION_MS + "ms cubic-bezier(0.65, 0, 0.35, 1)";
+        transitionOverlay.style.transform = "translate3d(0, 0, 0)";
+
+        setTimeout(function () {
+            document.querySelectorAll(".site-page").forEach(function (p) {
+                p.classList.remove("active");
+            });
+            targetPage.classList.add("active");
+            currentPageKey = pageKey;
+            window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
+            requestAnimationFrame(function () {
+                transitionOverlay.style.transform = "translate3d(" + exitX + ", 0, 0)";
+            });
+        }, TRANSITION_MS);
+    }
+
+    function handleNavLinkClick(e) {
+        var href = this.getAttribute("href");
+        if (!href || href.charAt(0) !== "#" || href.length < 2) return;
+
+        var pageKey = href.substring(1);
+        if (PAGE_ORDER.indexOf(pageKey) === -1) return;
+
+        e.preventDefault();
+
+        MenuItems.style.maxHeight = "0px";
+
+        if (pageKey === currentPageKey) return;
+
+        var direction = PAGE_ORDER.indexOf(pageKey) > PAGE_ORDER.indexOf(currentPageKey) ? "right" : "left";
+        goToPage(pageKey, direction);
+    }
+
+    document.querySelectorAll('#MenuItems a[href^="#"]').forEach(function (link) {
+        link.addEventListener("click", handleNavLinkClick);
+    });
+
+    var authOverlay = document.getElementById("authOverlay");
+
+    var _cloud = {
+        users: [],
+        orders: [],
+        reviews: {},
+        products: {},
+        ready: { users: false, orders: false, reviews: false, products: false }
+    };
+    var _ownerSeeded = false;
+
+    function _onCloudChange(kind) {
+        if (kind === "orders" && typeof refreshOrderUI === "function") {
+            refreshOrderUI();
+        }
+        if (kind === "reviews") {
+            if (typeof renderAllProductRatings === "function") renderAllProductRatings();
+            if (typeof renderProductReviews === "function" && currentProductId) renderProductReviews(currentProductId);
+        }
+        if (kind === "users" && typeof renderAccount === "function") {
+            renderAccount();
+        }
+        if (kind === "products") {
+            applyCloudProducts();
+            if (typeof renderProductGrid === "function") renderProductGrid();
+            if (typeof renderAllProductRatings === "function") renderAllProductRatings();
+        }
+    }
+
+    db.collection("athletica").doc("users").onSnapshot(function (doc) {
+        _cloud.users = (doc.exists && doc.data().list) ? doc.data().list : [];
+        _cloud.ready.users = true;
+        seedOwnerAccountIfNeeded();
+        _onCloudChange("users");
+    }, function (err) { console.error("users sync error", err); });
+
+    db.collection("athletica").doc("products").onSnapshot(function (doc) {
+        _cloud.products = (doc.exists && doc.data().map) ? doc.data().map : {};
+        _cloud.ready.products = true;
+        seedDefaultProductsIfNeeded();
+        _onCloudChange("products");
+    }, function (err) { console.error("products sync error", err); });
+
+    db.collection("athletica").doc("orders").onSnapshot(function (doc) {
+        _cloud.orders = (doc.exists && doc.data().list) ? doc.data().list : [];
+        _cloud.ready.orders = true;
+        _onCloudChange("orders");
+    }, function (err) { console.error("orders sync error", err); });
+
+    db.collection("athletica").doc("reviews").onSnapshot(function (doc) {
+        _cloud.reviews = (doc.exists && doc.data().map) ? doc.data().map : {};
+        _cloud.ready.reviews = true;
+        _onCloudChange("reviews");
+    }, function (err) { console.error("reviews sync error", err); });
+
+    // Presence (online/offline) and typing indicators live in their own small
+    // cloud docs so heartbeats/keystrokes don't trigger heavy re-syncs of the
+    // full users/orders lists.
+    var _presence = {};
+    var PRESENCE_HEARTBEAT_MS = 12000;
+    var ONLINE_THRESHOLD_MS = 30000;
+
+    db.collection("athletica").doc("presence").onSnapshot(function (doc) {
+        _presence = (doc.exists && doc.data().map) ? doc.data().map : {};
+    }, function (err) { console.error("presence sync error", err); });
+
+    function isUserOnline(email) {
+        if (!email || !_presence[email]) return false;
+        return (Date.now() - _presence[email]) < ONLINE_THRESHOLD_MS;
+    }
+
+    function sendPresenceHeartbeat() {
+        var user = getCurrentUser();
+        if (!user) return;
+        var patch = {};
+        patch[user.email] = Date.now();
+        db.collection("athletica").doc("presence").set({ map: patch }, { merge: true })
+            .catch(function (err) { console.error("presence heartbeat error", err); });
+    }
+
+    setInterval(sendPresenceHeartbeat, PRESENCE_HEARTBEAT_MS);
+
+    var _typing = {};
+    var TYPING_ACTIVE_MS = 2500;
+    var TYPING_WRITE_THROTTLE_MS = 1200;
+    var _lastTypingWriteAt = 0;
+
+    db.collection("athletica").doc("typing").onSnapshot(function (doc) {
+        _typing = (doc.exists && doc.data().map) ? doc.data().map : {};
+    }, function (err) { console.error("typing sync error", err); });
+
+    function isOtherTyping(orderId, otherRole) {
+        if (!orderId || !otherRole || !_typing[orderId]) return false;
+        var ts = _typing[orderId][otherRole];
+        if (!ts) return false;
+        return (Date.now() - ts) < TYPING_ACTIVE_MS;
+    }
+
+    function notifyTyping(orderId, myRole) {
+        if (!orderId || !myRole) return;
+        var now = Date.now();
+        if (now - _lastTypingWriteAt < TYPING_WRITE_THROTTLE_MS) return;
+        _lastTypingWriteAt = now;
+
+        var patch = {};
+        patch[orderId] = {};
+        patch[orderId][myRole] = now;
+        db.collection("athletica").doc("typing").set({ map: patch }, { merge: true })
+            .catch(function (err) { console.error("typing write error", err); });
+    }
+
+    function getUsers() {
+        return _cloud.users;
+    }
+
+    function saveUsers(users) {
+        _cloud.users = users;
+        db.collection("athletica").doc("users").set({ list: users })
+            .catch(function (err) {
+                console.error("saveUsers error", err);
+                alert("Sorry, we couldn't save that change. Please check your connection and try again.");
+            });
+    }
+
+    // Looks up a user's *current* avatar/name by email instead of relying on
+    // a snapshot taken when an order was placed, so profile changes show up
+    // everywhere (chat heads, order chat, profile popups) right away.
+    function liveAvatarFor(email, fallbackAvatar) {
+        if (email) {
+            var users = getUsers();
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].email === email) return users[i].avatar || fallbackAvatar || "";
+            }
+        }
+        return fallbackAvatar || "";
+    }
+
+    function liveNameFor(email, fallbackName) {
+        if (email) {
+            var users = getUsers();
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].email === email) return users[i].name || fallbackName || "";
+            }
+        }
+        return fallbackName || "";
+    }
+
+    var OWNER_EMAIL = "owner@athletica.com";
+    var OWNER_PASSWORD = "owner123";
+
+    function seedOwnerAccountIfNeeded() {
+        if (_ownerSeeded || !_cloud.ready.users) return;
+        _ownerSeeded = true;
+        var exists = _cloud.users.some(function (u) { return u.email === OWNER_EMAIL; });
+        if (!exists) {
+            var updated = _cloud.users.concat([{ name: "Athletica Owner", email: OWNER_EMAIL, password: OWNER_PASSWORD, avatar: "", isOwner: true }]);
+            saveUsers(updated);
+        }
+    }
+
+    function continueAsOwner(e) {
+        if (e) e.preventDefault();
+        setCurrentUser(OWNER_EMAIL);
+        closeAuthModal();
+        renderAccount();
+    }
+
+    function getCurrentUser() {
+        var email = localStorage.getItem("athletica_current_user");
+        if (!email) return null;
+        var users = getUsers();
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === email) return users[i];
+        }
+        return null;
+    }
+
+    function setCurrentUser(email) {
+        localStorage.setItem("athletica_current_user", email);
+        migrateLegacyCart();
+        sendPresenceHeartbeat();
+    }
+
+    var authSubtitles = {
+        signin: "Sign in or create an account to continue to Athletica.",
+        signup: "Sign in or create an account to continue to Athletica.",
+        signupVerify: "Verify your email to finish creating your account.",
+        signupGoogleName: "Almost done! Enter your full name to finish creating your account.",
+        forgotEmail: "Reset your password.",
+        forgotReset: "Enter the code we sent and choose a new password."
+    };
+
+    var currentAuthMode = "signin";
+
+    function switchAuthTab(tab) {
+        if (tab === "signin" || tab === "signup") {
+            currentAuthMode = tab;
+        }
+
+        document.getElementById("tabSignin").classList.toggle("active", tab === "signin");
+        document.getElementById("tabSignup").classList.toggle("active", tab === "signup");
+
+        document.getElementById("signinForm").classList.toggle("active", tab === "signin");
+        document.getElementById("signupForm").classList.toggle("active", tab === "signup");
+        document.getElementById("signupVerifyForm").classList.toggle("active", tab === "signupVerify");
+        document.getElementById("signupGoogleNameForm").classList.toggle("active", tab === "signupGoogleName");
+        document.getElementById("forgotEmailForm").classList.toggle("active", tab === "forgotEmail");
+        document.getElementById("forgotResetForm").classList.toggle("active", tab === "forgotReset");
+
+        var isBaseStep = (tab === "signin" || tab === "signup");
+        document.getElementById("authTabs").style.display = isBaseStep ? "flex" : "none";
+        document.getElementById("authSocial").style.display = isBaseStep ? "flex" : "none";
+        document.getElementById("authDivider").style.display = isBaseStep ? "flex" : "none";
+        document.getElementById("authSkip").style.display = isBaseStep ? "inline-block" : "none";
+        document.getElementById("authOwnerSkip").style.display = isBaseStep ? "inline-block" : "none";
+
+        document.getElementById("authSubtitle").textContent = authSubtitles[tab] || "";
+    }
+
+    function generateCode() {
+        return String(Math.floor(100000 + Math.random() * 900000));
+    }
+
+    function openAuthModal() {
+        authOverlay.classList.add("show");
+    }
+
+    function closeAuthModal(e) {
+        if (e) e.preventDefault();
+        authOverlay.classList.remove("show");
+    }
+
+    function handleSignUp(e) {
+        e.preventDefault();
+
+        var name = document.getElementById("signupName").value.trim();
+        var email = document.getElementById("signupEmail").value.trim().toLowerCase();
+        var password = document.getElementById("signupPassword").value;
+        var role = document.getElementById("signupRole").value;
+        var errorEl = document.getElementById("signupError");
+
+        if (password.length < 6) {
+            errorEl.textContent = "Password must be at least 6 characters.";
+            return false;
+        }
+
+        if (!role) {
+            errorEl.textContent = "Please select whether you are a Teacher or Student.";
+            return false;
+        }
+
+        var users = getUsers();
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === email) {
+                errorEl.textContent = "An account with this email already exists.";
+                return false;
+            }
+        }
+
+        errorEl.textContent = "";
+        sendSignupCode(name, email, password, role);
+
+        return false;
+    }
+
+    var EMAILJS_SERVICE_ID = "service_p9aglpb";
+    var EMAILJS_TEMPLATE_ID = "template_s94kdvl";
+
+    function sendCodeEmail(email, code, onSuccess, onError) {
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            to_email: email,
+            code: code
+        }).then(function () {
+            onSuccess();
+        }, function (err) {
+            onError(err);
+        });
+    }
+
+    function sendSignupCode(name, email, password, role) {
+        var code = generateCode();
+
+        localStorage.setItem("athletica_pending_signup", JSON.stringify({
+            name: name, email: email, password: password, role: role, code: code
+        }));
+
+        document.getElementById("signupVerifyNote").innerHTML =
+            "Sending a 6-digit code to <strong>" + email + "</strong>...";
+        document.getElementById("signupVerifyCode").value = "";
+        document.getElementById("signupVerifyError").textContent = "";
+
+        switchAuthTab("signupVerify");
+
+        sendCodeEmail(email, code, function () {
+            document.getElementById("signupVerifyNote").innerHTML =
+                "We sent a 6-digit code to <strong>" + email + "</strong>. Check your inbox (and spam folder).";
+        }, function () {
+            document.getElementById("signupVerifyNote").innerHTML =
+                "We sent a 6-digit code to <strong>" + email + "</strong>.";
+            document.getElementById("signupVerifyError").textContent =
+                "Couldn't send the email right now. Tap \"Resend code\" to try again.";
+        });
+    }
+
+    function setResendState(prefix, state) {
+        var link = document.getElementById(prefix + "ResendLink");
+        var spinner = document.getElementById(prefix + "ResendSpinner");
+        var check = document.getElementById(prefix + "ResendCheck");
+
+        link.classList.toggle("disabled", state === "loading");
+        spinner.classList.toggle("show", state === "loading");
+        check.classList.remove("show");
+
+        if (state === "sent") {
+            check.classList.add("show");
+            setTimeout(function () {
+                check.classList.remove("show");
+            }, 2000);
+        }
+    }
+
+    function resendSignupCode() {
+        var pending = JSON.parse(localStorage.getItem("athletica_pending_signup") || "null");
+        if (!pending) return;
+
+        var newCode = generateCode();
+        pending.code = newCode;
+        localStorage.setItem("athletica_pending_signup", JSON.stringify(pending));
+
+        setResendState("signup", "loading");
+        document.getElementById("signupVerifyError").textContent = "";
+
+        sendCodeEmail(pending.email, newCode, function () {
+            setResendState("signup", "sent");
+            document.getElementById("signupVerifyNote").innerHTML =
+                "We sent a new 6-digit code to <strong>" + pending.email + "</strong>. Check your inbox (and spam folder).";
+        }, function () {
+            setResendState("signup", "idle");
+            document.getElementById("signupVerifyError").textContent =
+                "Couldn't resend the email right now. Please try again.";
+        });
+    }
+
+    function handleVerifySignup(e) {
+        e.preventDefault();
+
+        var entered = document.getElementById("signupVerifyCode").value.trim();
+        var errorEl = document.getElementById("signupVerifyError");
+        var pending = JSON.parse(localStorage.getItem("athletica_pending_signup") || "null");
+
+        if (!pending) {
+            errorEl.textContent = "Your sign-up session expired. Please start again.";
+            switchAuthTab("signup");
+            return false;
+        }
+
+        if (entered !== pending.code) {
+            errorEl.textContent = "That code doesn't match. Please try again.";
+            return false;
+        }
+
+        var users = getUsers();
+        users.push({ name: pending.name, email: pending.email, password: pending.password, role: pending.role, avatar: "" });
+        saveUsers(users);
+        setCurrentUser(pending.email);
+        localStorage.removeItem("athletica_pending_signup");
+
+        errorEl.textContent = "";
+        closeAuthModal();
+        renderAccount();
+
+        return false;
+    }
+
+    function handleForgotEmail(e) {
+        e.preventDefault();
+
+        var email = document.getElementById("forgotEmail").value.trim().toLowerCase();
+        var errorEl = document.getElementById("forgotEmailError");
+        var users = getUsers();
+        var found = null;
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === email) { found = users[i]; break; }
+        }
+
+        if (!found) {
+            errorEl.textContent = "No account found with this email.";
+            return false;
+        }
+
+        errorEl.textContent = "";
+        sendResetCode(email);
+
+        return false;
+    }
+
+    function sendResetCode(email) {
+        var code = generateCode();
+
+        localStorage.setItem("athletica_reset_request", JSON.stringify({ email: email, code: code }));
+
+        document.getElementById("forgotResetNote").innerHTML =
+            "Sending a reset code to <strong>" + email + "</strong>...";
+        document.getElementById("forgotCode").value = "";
+        document.getElementById("forgotNewPassword").value = "";
+        document.getElementById("forgotResetError").textContent = "";
+
+        switchAuthTab("forgotReset");
+
+        sendCodeEmail(email, code, function () {
+            document.getElementById("forgotResetNote").innerHTML =
+                "We sent a reset code to <strong>" + email + "</strong>. Check your inbox (and spam folder).";
+        }, function () {
+            document.getElementById("forgotResetNote").innerHTML =
+                "We sent a reset code to <strong>" + email + "</strong>.";
+            document.getElementById("forgotResetError").textContent =
+                "Couldn't send the email right now. Tap \"Resend code\" to try again.";
+        });
+    }
+
+    function resendResetCode() {
+        var reset = JSON.parse(localStorage.getItem("athletica_reset_request") || "null");
+        if (!reset) return;
+
+        var newCode = generateCode();
+        reset.code = newCode;
+        localStorage.setItem("athletica_reset_request", JSON.stringify(reset));
+
+        setResendState("forgot", "loading");
+        document.getElementById("forgotResetError").textContent = "";
+
+        sendCodeEmail(reset.email, newCode, function () {
+            setResendState("forgot", "sent");
+            document.getElementById("forgotResetNote").innerHTML =
+                "We sent a new reset code to <strong>" + reset.email + "</strong>. Check your inbox (and spam folder).";
+        }, function () {
+            setResendState("forgot", "idle");
+            document.getElementById("forgotResetError").textContent =
+                "Couldn't resend the email right now. Please try again.";
+        });
+    }
+
+    function handleForgotReset(e) {
+        e.preventDefault();
+
+        var entered = document.getElementById("forgotCode").value.trim();
+        var newPassword = document.getElementById("forgotNewPassword").value;
+        var errorEl = document.getElementById("forgotResetError");
+        var reset = JSON.parse(localStorage.getItem("athletica_reset_request") || "null");
+
+        if (!reset) {
+            errorEl.textContent = "Your reset session expired. Please start again.";
+            switchAuthTab("forgotEmail");
+            return false;
+        }
+
+        if (entered !== reset.code) {
+            errorEl.textContent = "That code doesn't match. Please try again.";
+            return false;
+        }
+
+        if (newPassword.length < 6) {
+            errorEl.textContent = "Password must be at least 6 characters.";
+            return false;
+        }
+
+        var users = getUsers();
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === reset.email) {
+                users[i].password = newPassword;
+                break;
+            }
+        }
+        saveUsers(users);
+        localStorage.removeItem("athletica_reset_request");
+
+        errorEl.textContent = "";
+        document.getElementById("signinEmail").value = reset.email;
+        document.getElementById("signinPassword").value = "";
+        document.getElementById("signinError").textContent = "Password reset! Please sign in with your new password.";
+        switchAuthTab("signin");
+
+        return false;
+    }
+
+    function handleSignIn(e) {
+        e.preventDefault();
+
+        var email = document.getElementById("signinEmail").value.trim().toLowerCase();
+        var password = document.getElementById("signinPassword").value;
+        var errorEl = document.getElementById("signinError");
+
+        var users = getUsers();
+        var found = null;
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === email) { found = users[i]; break; }
+        }
+
+        if (!found) {
+            errorEl.textContent = "No account found with this email. Try signing up.";
+            return false;
+        }
+
+        if (found.password !== password) {
+            errorEl.textContent = "Incorrect password.";
+            return false;
+        }
+
+        setCurrentUser(email);
+        errorEl.textContent = "";
+        closeAuthModal();
+        renderAccount();
+
+        return false;
+    }
+
+    var GOOGLE_CLIENT_ID = "564848019049-htke8huue71l4vos7qgg20ou81d9dnfq.apps.googleusercontent.com";
+
+    function parseJwt(token) {
+        var base64Url = token.split(".")[1];
+        var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        var jsonPayload = decodeURIComponent(
+            atob(base64)
+                .split("")
+                .map(function (c) {
+                    return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                })
+                .join("")
+        );
+        return JSON.parse(jsonPayload);
+    }
+
+    function handleGoogleCredentialResponse(response) {
+        var payload = parseJwt(response.credential);
+        var email = (payload.email || "").toLowerCase();
+        var picture = payload.picture || "";
+
+        if (!email) return;
+
+        var users = getUsers();
+        var found = null;
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === email) { found = users[i]; break; }
+        }
+
+        if (currentAuthMode === "signup") {
+            if (found) {
+                document.getElementById("signupError").textContent =
+                    "An account already exists for this Google account. Please sign in instead.";
+                return;
+            }
+
+            localStorage.setItem("athletica_pending_google_signup", JSON.stringify({
+                email: email, picture: picture
+            }));
+
+            document.getElementById("signupGoogleNameNote").textContent =
+                "Connected to Google as " + email + ".";
+            document.getElementById("signupGoogleFullName").value = "";
+            document.getElementById("signupGoogleNameError").textContent = "";
+
+            switchAuthTab("signupGoogleName");
+            return;
+        }
+
+        if (!found) {
+            document.getElementById("signinError").textContent =
+                "No Athletica account is linked to this Google account yet. Please sign up first.";
+            return;
+        }
+
+        if (!found.avatar && picture) {
+            found.avatar = picture;
+            saveUsers(users);
+        }
+
+        setCurrentUser(email);
+        closeAuthModal();
+        renderAccount();
+    }
+
+    function handleGoogleSignupName(e) {
+        e.preventDefault();
+
+        var name = document.getElementById("signupGoogleFullName").value.trim();
+        var role = document.getElementById("signupGoogleRole").value;
+        var errorEl = document.getElementById("signupGoogleNameError");
+        var pending = JSON.parse(localStorage.getItem("athletica_pending_google_signup") || "null");
+
+        if (!pending) {
+            errorEl.textContent = "Your sign-up session expired. Please try again.";
+            switchAuthTab("signup");
+            return false;
+        }
+
+        if (!name) {
+            errorEl.textContent = "Please enter your full name.";
+            return false;
+        }
+
+        if (!role) {
+            errorEl.textContent = "Please select whether you are a Teacher or Student.";
+            return false;
+        }
+
+        var users = getUsers();
+        var alreadyExists = false;
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === pending.email) { alreadyExists = true; break; }
+        }
+
+        if (!alreadyExists) {
+            users.push({ name: name, email: pending.email, password: "", role: role, avatar: pending.picture || "" });
+            saveUsers(users);
+        }
+
+        localStorage.removeItem("athletica_pending_google_signup");
+        errorEl.textContent = "";
+        setCurrentUser(pending.email);
+        closeAuthModal();
+        renderAccount();
+
+        return false;
+    }
+
+    if (window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+            callback: handleGoogleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+            document.getElementById("googleSignInDiv"),
+            { theme: "outline", size: "large", shape: "pill", text: "continue_with", width: 300 }
+        );
+    }
+
+    function socialLogin(provider) {
+        var email = provider + "user@" + provider + ".com";
+        var users = getUsers();
+        var found = null;
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === email) { found = users[i]; break; }
+        }
+
+        if (!found) {
+            found = {
+                name: provider.charAt(0).toUpperCase() + provider.slice(1) + " User",
+                email: email,
+                password: "",
+                avatar: ""
+            };
+            users.push(found);
+            saveUsers(users);
+        }
+
+        setCurrentUser(email);
+        closeAuthModal();
+        renderAccount();
+    }
+
+    function logout() {
+        localStorage.removeItem("athletica_current_user");
+        updateCartBadge();
+        renderAccount();
+        openAuthModal();
+    }
+
+    function editName() {
+        var user = getCurrentUser();
+        if (!user) return;
+
+        document.getElementById("editNameInput").value = user.name;
+        document.getElementById("editNameError").textContent = "";
+        document.getElementById("editNameOverlay").classList.add("show");
+        document.getElementById("editNameInput").focus();
+    }
+
+    function closeEditName() {
+        document.getElementById("editNameOverlay").classList.remove("show");
+    }
+
+    function submitEditName(e) {
+        e.preventDefault();
+
+        var user = getCurrentUser();
+        if (!user) return false;
+
+        var newName = document.getElementById("editNameInput").value.trim();
+        if (!newName) {
+            document.getElementById("editNameError").textContent = "Please enter your name.";
+            return false;
+        }
+
+        var users = getUsers();
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === user.email) {
+                users[i].name = newName;
+                break;
+            }
+        }
+        saveUsers(users);
+        closeEditName();
+        renderAccount();
+
+        return false;
+    }
+
+    function changeAvatar(input) {
+        var user = getCurrentUser();
+        if (!user || !input.files || !input.files[0]) return;
+
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var img = new Image();
+            img.onload = function () {
+                // Shrink to a small square-ish thumbnail before storing. All
+                // user avatars live together in one shared cloud document, so
+                // full-size photos can blow past its size limit and cause the
+                // whole save to silently fail — which is why the picture
+                // looked like it "wasn't changing".
+                var maxDim = 200;
+                var w = img.width, h = img.height;
+                if (w > h && w > maxDim) { h = Math.round(h * (maxDim / w)); w = maxDim; }
+                else if (h >= w && h > maxDim) { w = Math.round(w * (maxDim / h)); h = maxDim; }
+
+                var canvas = document.createElement("canvas");
+                canvas.width = w;
+                canvas.height = h;
+                canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+
+                var dataUrl = canvas.toDataURL("image/jpeg", 0.72);
+
+                var users = getUsers();
+                for (var i = 0; i < users.length; i++) {
+                    if (users[i].email === user.email) {
+                        users[i].avatar = dataUrl;
+                        break;
+                    }
+                }
+                saveUsers(users);
+                renderAccount();
+            };
+            img.onerror = function () {
+                alert("Couldn't read that image. Please try a different photo.");
+            };
+            img.src = e.target.result;
+        };
+        reader.onerror = function () {
+            alert("Couldn't read that image. Please try a different photo.");
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    function resetTestData() {
+        var sure = confirm("This will delete ALL accounts and orders for EVERYONE (shared cloud data). Continue?");
+        if (!sure) return;
+
+        db.collection("athletica").doc("users").delete();
+        db.collection("athletica").doc("orders").delete();
+
+        localStorage.removeItem("athletica_current_user");
+        localStorage.removeItem("athletica_pending_signup");
+        localStorage.removeItem("athletica_reset_request");
+
+        location.reload();
+    }
+
+    function renderAccount() {
+        var container = document.getElementById("accountContent");
+        var storedEmail = localStorage.getItem("athletica_current_user");
+
+        updateAddProductButtonVisibility();
+
+        if (storedEmail && !_cloud.ready.users) {
+            container.innerHTML =
+                '<div class="account-box">' +
+                    '<h3>Loading your account…</h3>' +
+                '</div>';
+            return;
+        }
+
+        var user = getCurrentUser();
+
+        if (!user) {
+
+            if (storedEmail) localStorage.removeItem("athletica_current_user");
+
+            updateCartBadge();
+
+            container.innerHTML =
+                '<div class="account-box">' +
+                    '<h3>Welcome to Athletica</h3>' +
+                    '<p>Sign in or create an account to manage your Athletica orders and profile.</p>' +
+                    '<a href="#" class="btn" onclick="openAuthModal(); return false;">Sign In / Sign Up</a>' +
+                '</div>';
+            refreshOrderUI();
+            return;
+        }
+
+        migrateLegacyCart();
+        updateCartBadge();
+
+        var initials = user.name.trim().charAt(0).toUpperCase() || "?";
+
+        var avatarHtml = user.avatar
+            ? '<img src="' + user.avatar + '" class="profile-avatar-img" alt="Profile picture">'
+            : '<div class="profile-avatar-initials">' + initials + '</div>';
+
+        container.innerHTML =
+            '<div class="account-box profile-box">' +
+                '<div class="profile-avatar-wrap">' +
+                    avatarHtml +
+                    '<span class="presence-dot presence-dot-lg presence-dot-left online" title="Online"></span>' +
+                    '<label class="avatar-upload-btn">' +
+                        '<i class="fa-solid fa-camera"></i>' +
+                        '<input type="file" accept="image/*" onchange="changeAvatar(this)" hidden>' +
+                    '</label>' +
+                '</div>' +
+                '<h3>' + user.name + '</h3>' +
+                '<p class="profile-email">' + user.email + '</p>' +
+                (user.role ? '<p class="profile-role">' + escapeHtml(user.role) + '</p>' : '') +
+                (user.isOwner ? '<p class="profile-email">Signed in as site owner</p>' : '') +
+                (!user.isOwner && user.isSeller ? '<p class="profile-email">Seller account</p>' : '') +
+                '<div class="profile-actions">' +
+                    (user.isOwner ? '<button class="btn" onclick="openOrdersPanel()">Open Owner Dashboard</button>' : '') +
+                    (user.isOwner ? '<button class="btn" onclick="openAddProductModal()">Add Product</button>' : '') +
+                    '<button class="btn" onclick="editName()">Edit Name</button>' +
+                    '<button class="btn btn-outline" onclick="logout()">Log Out</button>' +
+                '</div>' +
+            '</div>';
+
+        refreshOrderUI();
+    }
+
+    if (!localStorage.getItem("athletica_current_user")) {
+        openAuthModal();
+    }
+
+    document.querySelectorAll('a[href="#account"]').forEach(function (link) {
+        link.addEventListener("click", function () {
+            if (!getCurrentUser()) openAuthModal();
+        });
+    });
+
+    var DEFAULT_PRODUCTS = {
+        tracksuit: {
+            id: "tracksuit",
+            name: "Athletica Tracksuits",
+            price: 1119,
+            image: "images/product-1.png",
+            description: "A comfortable, breathable tracksuit built for warm-ups, travel, and everyday training. Soft fleece lining keeps you warm without weighing you down.",
+            sizes: ["Small", "Medium", "Large", "Extra Large"],
+            stock: 50
+        },
+        jersey: {
+            id: "jersey",
+            name: "Athletica Training Jersey",
+            price: 699,
+            image: "images/TJ.jpg",
+            description: "A lightweight, moisture-wicking jersey designed to keep you cool and dry through your toughest training sessions.",
+            sizes: ["Small", "Medium", "Large", "Extra Large"],
+            stock: 50
+        },
+        shorts: {
+            id: "shorts",
+            name: "Athletica Training Shorts",
+            price: 399,
+            image: "images/ATS.png",
+            description: "Flexible, quick-drying training shorts with a comfortable stretch fit — built for movement, not restriction.",
+            sizes: ["Small", "Medium", "Large", "Extra Large"],
+            stock: 50
+        },
+        shoes: {
+            id: "shoes",
+            name: "Athletica Jogging Shoes",
+            price: 999,
+            image: "images/AJS.jpg",
+            description: "Cushioned jogging shoes with responsive support, made for daily runs and long training days.",
+            sizes: ["38", "39", "40", "41", "42", "43", "44"],
+            stock: 50
+        }
+    };
+
+    // PRODUCTS starts as the built-in catalog, then owner-uploaded products
+    // (synced from Firestore) are merged in on top of it.
+    var PRODUCTS = {};
+    Object.keys(DEFAULT_PRODUCTS).forEach(function (id) {
+        PRODUCTS[id] = DEFAULT_PRODUCTS[id];
+    });
+
+    function applyCloudProducts() {
+        Object.keys(PRODUCTS).forEach(function (id) {
+            delete PRODUCTS[id];
+        });
+        var source = (_cloud.ready.products && Object.keys(_cloud.products).length > 0)
+            ? _cloud.products
+            : DEFAULT_PRODUCTS;
+        Object.keys(source).forEach(function (id) {
+            PRODUCTS[id] = source[id];
+        });
+    }
+
+    var _productsSeeded = false;
+
+    function seedDefaultProductsIfNeeded() {
+        if (_productsSeeded || !_cloud.ready.products) return;
+        _productsSeeded = true;
+
+        var merged = {};
+        Object.keys(_cloud.products).forEach(function (id) { merged[id] = _cloud.products[id]; });
+
+        var changed = false;
+        Object.keys(DEFAULT_PRODUCTS).forEach(function (id) {
+            if (!merged[id]) {
+                merged[id] = DEFAULT_PRODUCTS[id];
+                changed = true;
+            }
+        });
+
+        if (changed) {
+            _cloud.products = merged;
+            db.collection("athletica").doc("products").set({ map: _cloud.products });
+        }
+    }
+
+    function productCardHtml(product) {
+        var stock = (typeof product.stock === "number") ? product.stock : 0;
+        var outOfStock = stock <= 0;
+
+        return (
+            '<div class="col-4 product-card' + (outOfStock ? ' product-out-of-stock' : '') + '" data-product-id="' + product.id + '" onclick="openProductDetail(\'' + product.id + '\')">' +
+                (isOwnerLoggedIn() ? '<button type="button" class="product-edit-btn" onclick="openEditProductModal(\'' + product.id + '\', event)" title="Edit product">&#9998;</button>' : '') +
+                '<img src="' + product.image + '" alt="' + escapeHtml(product.name) + '">' +
+                '<h4>' + escapeHtml(product.name) + '</h4>' +
+                '<div class="ratings" id="rating-' + product.id + '"><h2>☆☆☆☆☆</h2></div>' +
+                '<p>₱' + Number(product.price).toFixed(2) + '</p>' +
+                (outOfStock
+                    ? '<p class="stock-badge stock-out">Out of Stock</p>'
+                    : (stock <= 10 ? '<p class="stock-badge stock-low">Only ' + stock + ' left</p>' : '')) +
+            '</div>'
+        );
+    }
+
+    function renderProductGrid() {
+        var grid = document.getElementById("productGrid");
+        if (!grid) return;
+
+        var searchInput = document.getElementById("productSearchInput");
+        var query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+
+        var ids = Object.keys(PRODUCTS).filter(function (id) {
+            return !query || PRODUCTS[id].name.toLowerCase().indexOf(query) !== -1;
+        });
+
+        if (ids.length === 0) {
+            grid.innerHTML = '<p class="product-search-empty">No products found for "' + escapeHtml(searchInput ? searchInput.value.trim() : "") + '".</p>';
+            return;
+        }
+
+        grid.innerHTML = ids.map(function (id) {
+            return productCardHtml(PRODUCTS[id]);
+        }).join("");
+        renderAllProductRatings();
+    }
+
+    // direction: -1 to deduct stock (order placed), +1 to restore it (order cancelled)
+    function adjustStockForItems(items, direction) {
+        if (!items || items.length === 0) return;
+
+        var changed = false;
+        items.forEach(function (item) {
+            var product = _cloud.products[item.id];
+            if (!product || typeof product.stock !== "number") return;
+            product.stock = Math.max(0, product.stock + (direction * item.qty));
+            if (PRODUCTS[item.id]) PRODUCTS[item.id].stock = product.stock;
+            changed = true;
+        });
+
+        if (changed) {
+            db.collection("athletica").doc("products").set({ map: _cloud.products });
+            renderProductGrid();
+        }
+    }
+
+    function isOwnerLoggedIn() {
+        var user = getCurrentUser();
+        return !!(user && user.isOwner);
+    }
+
+    function isSellerLoggedIn() {
+        var user = getCurrentUser();
+        return !!(user && !user.isOwner && user.isSeller);
+    }
+
+    // Determines what role the current user plays for a given order:
+    // "owner"          - the site owner, always full access
+    // "buyer"          - the person who placed the order
+    // "seller-pending" - a seller viewing a not-yet-claimed pending order
+    // "seller-assigned"- the seller who confirmed/claimed this order
+    // "none"           - no access (e.g. another seller after someone else claimed it)
+    function getOrderRoleFor(order, user) {
+        if (!order || !user) return "none";
+        if (user.isOwner) return "owner";
+        if (order.buyerEmail === user.email) return "buyer";
+        if (user.isSeller) {
+            if (order.sellerEmail === user.email) return "seller-assigned";
+            if (!order.sellerEmail && order.status === "pending") return "seller-pending";
+        }
+        return "none";
+    }
+
+    function updateAddProductButtonVisibility() {
+        var btn = document.getElementById("addProductBtn");
+        if (!btn) return;
+        btn.style.display = isOwnerLoggedIn() ? "inline-block" : "none";
+        renderProductGrid();
+    }
+
+    var newProductImageDataUrl = null;
+
+    function openAddProductModal() {
+        if (!isOwnerLoggedIn()) {
+            openAuthModal();
+            return;
+        }
+        newProductImageDataUrl = null;
+        document.getElementById("newProductName").value = "";
+        document.getElementById("newProductPrice").value = "";
+        document.getElementById("newProductDescription").value = "";
+        document.getElementById("newProductSizes").value = "";
+        document.getElementById("newProductStock").value = "";
+        document.getElementById("newProductImageInput").value = "";
+        var preview = document.getElementById("newProductImagePreview");
+        preview.src = "";
+        preview.classList.remove("show");
+        document.getElementById("addProductError").textContent = "";
+        document.getElementById("addProductOverlay").classList.add("show");
+    }
+
+    function closeAddProductModal() {
+        document.getElementById("addProductOverlay").classList.remove("show");
+    }
+
+    // Resizes/crops any uploaded image to an exact target size (default
+    // 1024x1536, portrait) so every product photo comes out the same dimensions,
+    // regardless of what the seller/owner uploads. Uses a "cover" style
+    // crop (fills the whole frame, trims any excess) rather than squashing
+    // the image, so proportions stay correct.
+    function resizeImageToDataUrl(file, targetW, targetH, callback) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var img = new Image();
+            img.onload = function () {
+                var srcW = img.width, srcH = img.height;
+                var srcRatio = srcW / srcH;
+                var targetRatio = targetW / targetH;
+
+                var sx, sy, sw, sh;
+                if (srcRatio > targetRatio) {
+                    // Source is wider than target: crop left/right.
+                    sh = srcH;
+                    sw = srcH * targetRatio;
+                    sx = (srcW - sw) / 2;
+                    sy = 0;
+                } else {
+                    // Source is taller than target: crop top/bottom.
+                    sw = srcW;
+                    sh = srcW / targetRatio;
+                    sx = 0;
+                    sy = (srcH - sh) / 2;
+                }
+
+                var canvas = document.createElement("canvas");
+                canvas.width = targetW;
+                canvas.height = targetH;
+                canvas.getContext("2d").drawImage(img, sx, sy, sw, sh, 0, 0, targetW, targetH);
+
+                callback(canvas.toDataURL("image/jpeg", 0.85));
+            };
+            img.onerror = function () {
+                alert("Couldn't read that image. Please try a different photo.");
+            };
+            img.src = e.target.result;
+        };
+        reader.onerror = function () {
+            alert("Couldn't read that image. Please try a different photo.");
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function handleNewProductImageSelected(event) {
+        var file = event.target.files && event.target.files[0];
+        if (!file) return;
+
+        resizeImageToDataUrl(file, 1024, 1536, function (dataUrl) {
+            newProductImageDataUrl = dataUrl;
+            var preview = document.getElementById("newProductImagePreview");
+            preview.src = newProductImageDataUrl;
+            preview.classList.add("show");
+        });
+    }
+
+    function slugify(text) {
+        var base = text.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+        if (!base) base = "product";
+        var id = base;
+        var suffix = 1;
+        while (PRODUCTS[id]) {
+            id = base + "-" + suffix;
+            suffix++;
+        }
+        return id;
+    }
+
+    function submitAddProduct(event) {
+        if (event) event.preventDefault();
+
+        if (!isOwnerLoggedIn()) {
+            closeAddProductModal();
+            openAuthModal();
+            return false;
+        }
+
+        var errorEl = document.getElementById("addProductError");
+
+        var name = document.getElementById("newProductName").value.trim();
+        var priceRaw = document.getElementById("newProductPrice").value;
+        var price = parseFloat(priceRaw);
+        var description = document.getElementById("newProductDescription").value.trim();
+        var sizesRaw = document.getElementById("newProductSizes").value.trim();
+        var sizes = sizesRaw.split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 0; });
+        var stockRaw = document.getElementById("newProductStock").value;
+        var stock = parseInt(stockRaw, 10);
+
+        if (!name) {
+            errorEl.textContent = "Please enter a product name.";
+            return false;
+        }
+        if (!priceRaw || isNaN(price) || price < 0) {
+            errorEl.textContent = "Please enter a valid price.";
+            return false;
+        }
+        if (!description) {
+            errorEl.textContent = "Please enter a description.";
+            return false;
+        }
+        if (sizes.length === 0) {
+            errorEl.textContent = "Please list at least one size.";
+            return false;
+        }
+        if (stockRaw === "" || isNaN(stock) || stock < 0) {
+            errorEl.textContent = "Please enter a valid stock quantity.";
+            return false;
+        }
+        if (!newProductImageDataUrl) {
+            errorEl.textContent = "Please upload a product image.";
+            return false;
+        }
+
+        var id = slugify(name);
+        var product = {
+            id: id,
+            name: name,
+            price: price,
+            image: newProductImageDataUrl,
+            description: description,
+            sizes: sizes,
+            stock: stock
+        };
+
+        _cloud.products[id] = product;
+        PRODUCTS[id] = product;
+        db.collection("athletica").doc("products").set({ map: _cloud.products });
+
+        errorEl.textContent = "";
+        closeAddProductModal();
+        renderProductGrid();
+
+        return false;
+    }
+
+    function deleteProduct(productId, event) {
+        if (event) event.stopPropagation();
+        if (!isOwnerLoggedIn()) return;
+
+        var sure = confirm("Remove this product from the shop?");
+        if (!sure) return;
+
+        delete _cloud.products[productId];
+        delete PRODUCTS[productId];
+        db.collection("athletica").doc("products").set({ map: _cloud.products });
+
+        renderProductGrid();
+    }
+
+    var currentEditProductId = null;
+    var editProductImageDataUrl = null;
+
+    function openEditProductModal(productId, event) {
+        if (event) event.stopPropagation();
+        if (!isOwnerLoggedIn()) {
+            openAuthModal();
+            return;
+        }
+
+        var product = PRODUCTS[productId];
+        if (!product) return;
+
+        currentEditProductId = productId;
+        editProductImageDataUrl = null;
+
+        document.getElementById("editProductName").value = product.name;
+        document.getElementById("editProductPrice").value = product.price;
+        document.getElementById("editProductDescription").value = product.description;
+        document.getElementById("editProductSizes").value = (product.sizes || []).join(", ");
+        document.getElementById("editProductStock").value = (typeof product.stock === "number") ? product.stock : 0;
+        document.getElementById("editProductImageInput").value = "";
+
+        var preview = document.getElementById("editProductImagePreview");
+        preview.src = product.image;
+        preview.classList.add("show");
+
+        document.getElementById("editProductError").textContent = "";
+        document.getElementById("editProductOverlay").classList.add("show");
+    }
+
+    function closeEditProductModal() {
+        document.getElementById("editProductOverlay").classList.remove("show");
+        currentEditProductId = null;
+    }
+
+    function handleEditProductImageSelected(event) {
+        var file = event.target.files && event.target.files[0];
+        if (!file) return;
+
+        resizeImageToDataUrl(file, 1024, 1536, function (dataUrl) {
+            editProductImageDataUrl = dataUrl;
+            var preview = document.getElementById("editProductImagePreview");
+            preview.src = editProductImageDataUrl;
+            preview.classList.add("show");
+        });
+    }
+
+    function submitEditProduct(event) {
+        if (event) event.preventDefault();
+
+        if (!isOwnerLoggedIn() || !currentEditProductId) {
+            closeEditProductModal();
+            openAuthModal();
+            return false;
+        }
+
+        var productId = currentEditProductId;
+        var existing = PRODUCTS[productId];
+        if (!existing) {
+            closeEditProductModal();
+            return false;
+        }
+
+        var errorEl = document.getElementById("editProductError");
+
+        var name = document.getElementById("editProductName").value.trim();
+        var priceRaw = document.getElementById("editProductPrice").value;
+        var price = parseFloat(priceRaw);
+        var description = document.getElementById("editProductDescription").value.trim();
+        var sizesRaw = document.getElementById("editProductSizes").value.trim();
+        var sizes = sizesRaw.split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 0; });
+        var stockRaw = document.getElementById("editProductStock").value;
+        var stock = parseInt(stockRaw, 10);
+
+        if (!name) {
+            errorEl.textContent = "Please enter a product name.";
+            return false;
+        }
+        if (!priceRaw || isNaN(price) || price < 0) {
+            errorEl.textContent = "Please enter a valid price.";
+            return false;
+        }
+        if (!description) {
+            errorEl.textContent = "Please enter a description.";
+            return false;
+        }
+        if (sizes.length === 0) {
+            errorEl.textContent = "Please list at least one size.";
+            return false;
+        }
+        if (stockRaw === "" || isNaN(stock) || stock < 0) {
+            errorEl.textContent = "Please enter a valid stock quantity.";
+            return false;
+        }
+
+        var updatedProduct = {
+            id: productId,
+            name: name,
+            price: price,
+            image: editProductImageDataUrl || existing.image,
+            description: description,
+            sizes: sizes,
+            stock: stock
+        };
+
+        _cloud.products[productId] = updatedProduct;
+        PRODUCTS[productId] = updatedProduct;
+        db.collection("athletica").doc("products").set({ map: _cloud.products });
+
+        errorEl.textContent = "";
+        closeEditProductModal();
+        renderProductGrid();
+
+        if (currentProductId === productId && document.getElementById("productOverlay").classList.contains("show")) {
+            openProductDetail(productId);
+        }
+
+        return false;
+    }
+
+    function removeProductFromEdit() {
+        if (!currentEditProductId) return;
+        var productId = currentEditProductId;
+
+        var sure = confirm("Remove this product from the shop?");
+        if (!sure) return;
+
+        delete _cloud.products[productId];
+        delete PRODUCTS[productId];
+        db.collection("athletica").doc("products").set({ map: _cloud.products });
+
+        closeEditProductModal();
+        renderProductGrid();
+    }
+
+    var currentProfileViewEmail = null;
+
+    function openUserProfileView(email, fallbackName, event) {
+        if (event) event.stopPropagation();
+        if (!isOwnerLoggedIn()) return;
+
+        currentProfileViewEmail = email || null;
+
+        var users = getUsers();
+        var found = email ? users.find(function (u) { return u.email === email; }) : null;
+
+        var name = found ? found.name : (fallbackName || "Unknown");
+        var initials = name.trim().charAt(0).toUpperCase() || "?";
+
+        var avatarEl = document.getElementById("userProfileViewAvatar");
+        var avatarInner = (found && found.avatar) ? ('<img src="' + found.avatar + '" alt="">') : escapeHtml(initials);
+        var dotHtml = found
+            ? ('<span class="presence-dot presence-dot-lg' + (isUserOnline(found.email) ? ' online' : '') + '"></span>')
+            : "";
+        avatarEl.innerHTML = avatarInner + dotHtml;
+
+        document.getElementById("userProfileViewName").textContent = name;
+
+        var roleWrap = document.getElementById("userProfileViewRoleWrap");
+        var roleHtml = "";
+        if (found && found.isOwner) {
+            roleHtml = '<span class="user-profile-view-role">Owner</span>';
+        } else if (found && found.isSeller) {
+            roleHtml = '<span class="user-profile-view-role role-seller">Seller</span>';
+        } else if (found && found.role) {
+            roleHtml = '<span class="user-profile-view-role">' + escapeHtml(found.role) + '</span>';
+        }
+        roleWrap.innerHTML = roleHtml || (found ? "" : '<p class="user-profile-view-empty">No account info available.</p>');
+
+        var toggleWrap = document.getElementById("userProfileViewSellerToggleWrap");
+        if (found && !found.isOwner) {
+            var isSeller = !!found.isSeller;
+            toggleWrap.innerHTML =
+                '<div class="seller-toggle-btn-wrap">' +
+                    '<button type="button" class="btn seller-toggle-btn' + (isSeller ? ' is-seller' : '') + '" onclick="toggleSellerStatus()">' +
+                        (isSeller ? "Remove to Seller" : "Add to Seller") +
+                    '</button>' +
+                '</div>';
+        } else {
+            toggleWrap.innerHTML = "";
+        }
+
+        document.getElementById("userProfileViewOverlay").classList.add("show");
+    }
+
+    function toggleSellerStatus() {
+        if (!isOwnerLoggedIn() || !currentProfileViewEmail) return;
+
+        var users = getUsers();
+        var target = users.find(function (u) { return u.email === currentProfileViewEmail; });
+        if (!target || target.isOwner) return;
+
+        target.isSeller = !target.isSeller;
+        saveUsers(users);
+
+        openUserProfileView(currentProfileViewEmail, target.name);
+        refreshOrderUI();
+    }
+
+    function closeUserProfileView() {
+        document.getElementById("userProfileViewOverlay").classList.remove("show");
+        currentProfileViewEmail = null;
+    }
+
+    renderAccount();
+
+    var currentProductId = null;
+    var currentReviewStars = 0;
+
+    function escapeHtml(str) {
+        var div = document.createElement("div");
+        div.textContent = str == null ? "" : str;
+        return div.innerHTML;
+    }
+
+    function getReviews(productId) {
+        return _cloud.reviews[productId] || [];
+    }
+
+    function saveReview(productId, review) {
+        if (!_cloud.reviews[productId]) _cloud.reviews[productId] = [];
+        _cloud.reviews[productId].push(review);
+        db.collection("athletica").doc("reviews").set({ map: _cloud.reviews });
+    }
+
+    function getAverageRating(productId) {
+        var reviews = getReviews(productId);
+        if (reviews.length === 0) return 0;
+        var sum = reviews.reduce(function (acc, r) { return acc + r.rating; }, 0);
+        return sum / reviews.length;
+    }
+
+    function starsHtml(avg) {
+        var rounded = Math.round(avg);
+        var html = "";
+        for (var i = 1; i <= 5; i++) {
+            html += i <= rounded ? "★" : "☆";
+        }
+        return html;
+    }
+
+    function renderAllProductRatings() {
+        Object.keys(PRODUCTS).forEach(function (id) {
+            var el = document.getElementById("rating-" + id);
+            if (!el) return;
+            el.innerHTML = "<h2>" + starsHtml(getAverageRating(id)) + "</h2>";
+        });
+    }
+
+    function openProductDetail(productId) {
+        var product = PRODUCTS[productId];
+        if (!product) return;
+
+        currentProductId = productId;
+
+        var stock = (typeof product.stock === "number") ? product.stock : 0;
+        var inStock = stock > 0;
+
+        document.getElementById("pdImage").src = product.image;
+        document.getElementById("pdImage").alt = product.name;
+        document.getElementById("pdName").textContent = product.name;
+        document.getElementById("pdPrice").textContent = "₱" + product.price.toFixed(2);
+        document.getElementById("pdDescription").textContent = product.description;
+        document.getElementById("pdQty").value = 1;
+        document.getElementById("pdQty").max = inStock ? stock : 1;
+
+        var stockEl = document.getElementById("pdStock");
+        if (!inStock) {
+            stockEl.textContent = "Out of Stock";
+            stockEl.className = "product-detail-stock stock-out";
+        } else if (stock <= 10) {
+            stockEl.textContent = "Only " + stock + " left in stock";
+            stockEl.className = "product-detail-stock stock-low";
+        } else {
+            stockEl.textContent = stock + " in stock";
+            stockEl.className = "product-detail-stock stock-ok";
+        }
+
+        var loggedIn = !!getCurrentUser();
+        document.getElementById("pdAddToCartBtn").disabled = !loggedIn || !inStock;
+        document.getElementById("pdBuyNowBtn").disabled = !loggedIn || !inStock;
+        document.getElementById("pdLoginNotice").style.display = (loggedIn || !inStock) ? "none" : "block";
+
+        renderProductReviews(productId);
+        resetReviewForm();
+        collapseCommentsSection();
+
+        document.getElementById("productOverlay").classList.add("show");
+    }
+
+    function collapseCommentsSection() {
+        document.getElementById("commentsBody").classList.remove("show");
+        document.getElementById("commentsToggle").classList.remove("open");
+    }
+
+    function toggleCommentsSection() {
+        document.getElementById("commentsBody").classList.toggle("show");
+        document.getElementById("commentsToggle").classList.toggle("open");
+    }
+
+    function closeProductDetail() {
+        document.getElementById("productOverlay").classList.remove("show");
+    }
+
+    function changePdQty(delta) {
+        var input = document.getElementById("pdQty");
+        var product = PRODUCTS[currentProductId];
+        var maxQty = (product && typeof product.stock === "number") ? product.stock : 999;
+        var val = (parseInt(input.value, 10) || 1) + delta;
+        input.value = Math.max(1, Math.min(val, Math.max(maxQty, 1)));
+    }
+
+    function renderProductReviews(productId) {
+        var reviews = getReviews(productId);
+        var avg = getAverageRating(productId);
+
+        document.getElementById("pdStars").innerHTML = "<h2>" + starsHtml(avg) + "</h2>";
+        document.getElementById("pdRatingCount").textContent = reviews.length === 0
+            ? "No ratings yet — be the first to review!"
+            : avg.toFixed(1) + " out of 5 (" + reviews.length + (reviews.length === 1 ? " review" : " reviews") + ")";
+
+        document.getElementById("commentsToggleLabel").textContent = "Comments " + reviews.length;
+
+        var listEl = document.getElementById("reviewsList");
+
+        if (reviews.length === 0) {
+            listEl.innerHTML = '<p class="review-empty">No comments yet.</p>';
+            return;
+        }
+
+        listEl.innerHTML = reviews.slice().reverse().map(function (r) {
+            var initials = (r.name || "?").trim().charAt(0).toUpperCase() || "?";
+            var avatarHtml = r.avatar
+                ? '<img src="' + r.avatar + '" class="review-item-avatar-img" alt="">'
+                : '<div class="review-item-avatar-initials">' + escapeHtml(initials) + '</div>';
+
+            var ownerCanView = isOwnerLoggedIn();
+            var userClickAttr = ownerCanView
+                ? ' onclick="openUserProfileView(\'' + escapeHtml(r.email || "") + '\', \'' + escapeHtml(r.name || "") + '\')"'
+                : '';
+
+            return (
+                '<div class="review-item">' +
+                    '<div class="review-item-head">' +
+                        '<div class="review-item-user' + (ownerCanView ? ' review-item-user-clickable' : '') + '"' + userClickAttr + '>' +
+                            avatarHtml +
+                            '<span class="review-item-name">' + escapeHtml(r.name) + '</span>' +
+                        '</div>' +
+                        '<span class="review-item-date">' + escapeHtml(r.date) + '</span>' +
+                    '</div>' +
+                    '<div class="review-item-stars">' + starsHtml(r.rating) + '</div>' +
+                    (r.comment ? '<p class="review-item-comment">' + escapeHtml(r.comment) + '</p>' : '') +
+                '</div>'
+            );
+        }).join("");
+    }
+
+    function resetReviewForm() {
+        currentReviewStars = 0;
+        updateStarInputDisplay();
+        document.getElementById("reviewComment").value = "";
+        document.getElementById("reviewError").textContent = "";
+
+        var user = getCurrentUser();
+        var whoEl = document.getElementById("reviewAsWho");
+        var commentEl = document.getElementById("reviewComment");
+        var submitBtn = document.querySelector(".review-form .auth-submit");
+
+        if (user) {
+            whoEl.style.display = "flex";
+            var initials = user.name.trim().charAt(0).toUpperCase() || "?";
+            document.getElementById("reviewAsAvatar").innerHTML = user.avatar
+                ? '<img src="' + user.avatar + '" class="review-as-avatar-img" alt="">'
+                : '<div class="review-as-avatar-initials">' + escapeHtml(initials) + '</div>';
+            document.getElementById("reviewAsName").textContent = user.name;
+            commentEl.disabled = false;
+            submitBtn.disabled = false;
+        } else {
+            whoEl.style.display = "none";
+            commentEl.disabled = true;
+            submitBtn.disabled = true;
+            document.getElementById("reviewError").textContent = "Sign in to leave a rating or comment.";
+        }
+    }
+
+    function updateStarInputDisplay() {
+        document.querySelectorAll("#reviewStarInput span").forEach(function (span) {
+            var starVal = parseInt(span.getAttribute("data-star"), 10);
+            span.classList.toggle("filled", starVal <= currentReviewStars);
+            span.textContent = starVal <= currentReviewStars ? "★" : "☆";
+        });
+    }
+
+    document.querySelectorAll("#reviewStarInput span").forEach(function (span) {
+        span.addEventListener("click", function () {
+            if (!getCurrentUser()) {
+                openAuthModal();
+                return;
+            }
+            currentReviewStars = parseInt(this.getAttribute("data-star"), 10);
+            updateStarInputDisplay();
+        });
+    });
+
+    function submitReview() {
+        var errorEl = document.getElementById("reviewError");
+        var user = getCurrentUser();
+
+        if (!user) {
+            errorEl.textContent = "Please sign in to leave a rating or comment.";
+            openAuthModal();
+            return;
+        }
+
+        var comment = document.getElementById("reviewComment").value.trim();
+
+        if (currentReviewStars === 0) {
+            errorEl.textContent = "Please select a star rating.";
+            return;
+        }
+
+        saveReview(currentProductId, {
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar || "",
+            rating: currentReviewStars,
+            comment: comment,
+            date: new Date().toLocaleDateString()
+        });
+
+        errorEl.textContent = "";
+        renderProductReviews(currentProductId);
+        renderAllProductRatings();
+        resetReviewForm();
+    }
+
+    // The cart used to live under one shared localStorage key for the whole
+    // browser, so it kept showing items after logout (and would even mix
+    // between different accounts on the same device). Keying it by the
+    // signed-in user's email fixes both: guests always see an empty cart,
+    // and each account gets its own.
+    function cartStorageKey() {
+        var user = getCurrentUser();
+        return user ? ("athletica_cart_" + user.email) : null;
+    }
+
+    // One-time migration so anyone who already had items in the old shared
+    // cart doesn't lose them — moves that data into their own per-account key
+    // the next time they're logged in.
+    function migrateLegacyCart() {
+        var legacy = localStorage.getItem("athletica_cart");
+        if (legacy === null) return;
+
+        var key = cartStorageKey();
+        if (key && localStorage.getItem(key) === null) {
+            localStorage.setItem(key, legacy);
+        }
+        localStorage.removeItem("athletica_cart");
+    }
+
+    function getCart() {
+        var key = cartStorageKey();
+        if (!key) return [];
+        return JSON.parse(localStorage.getItem(key) || "[]");
+    }
+
+    function saveCart(cart) {
+        var key = cartStorageKey();
+        if (!key) return;
+        localStorage.setItem(key, JSON.stringify(cart));
+        updateCartBadge();
+    }
+
+    function updateCartBadge() {
+        var cart = getCart();
+        var count = cart.reduce(function (sum, item) { return sum + item.qty; }, 0);
+        var badge = document.getElementById("cartBadge");
+        if (!badge) return;
+        badge.textContent = count;
+        badge.style.display = "flex";
+    }
+
+    function addToCart(productId, qty, size) {
+        var product = PRODUCTS[productId];
+        if (!product) return;
+
+        var maxQty = (typeof product.stock === "number") ? product.stock : 999;
+        if (maxQty <= 0) return;
+
+        var cart = getCart();
+        var existing = null;
+        for (var i = 0; i < cart.length; i++) {
+            if (cart[i].id === productId && (cart[i].size || null) === (size || null)) { existing = cart[i]; break; }
+        }
+
+        if (existing) {
+            existing.qty = Math.min(maxQty, existing.qty + qty);
+        } else {
+            cart.push({ id: productId, name: product.name, price: product.price, image: product.image, qty: Math.min(maxQty, qty), size: size || null });
+        }
+
+        saveCart(cart);
+    }
+
+    // "Add to Cart" now walks through the same size-picking assistant as
+    // "Buy" (see openProductChat) so we always know which size is going into
+    // the cart; the chat's continue button just adds the item instead of
+    // moving on to payment.
+    function addToCartFromDetail() {
+        openProductChat("cart");
+    }
+
+    function addSelectedItemToCartFromChat() {
+        if (!chatState.size) return;
+
+        addToCart(chatState.productId, chatState.qty, chatState.size);
+        closeBuyChat();
+        openCart();
+    }
+
+    function removeFromCart(productId, size) {
+        saveCart(getCart().filter(function (item) {
+            return !(item.id === productId && (item.size || null) === (size || null));
+        }));
+        renderCart();
+    }
+
+    function changeCartQty(productId, size, delta) {
+        var cart = getCart();
+        for (var i = 0; i < cart.length; i++) {
+            if (cart[i].id === productId && (cart[i].size || null) === (size || null)) {
+                var product = PRODUCTS[productId];
+                var maxQty = (product && typeof product.stock === "number") ? product.stock : 999;
+                cart[i].qty = Math.max(1, Math.min(maxQty, cart[i].qty + delta));
+                break;
+            }
+        }
+        saveCart(cart);
+        renderCart();
+    }
+
+    function openCart() {
+        if (!getCurrentUser()) {
+            openAuthModal();
+            return;
+        }
+        renderCart();
+        document.getElementById("cartOverlay").classList.add("show");
+    }
+
+    function closeCart() {
+        document.getElementById("cartOverlay").classList.remove("show");
+    }
+
+    function renderCart() {
+        var cart = getCart();
+        var listEl = document.getElementById("cartItemsList");
+        var totalEl = document.getElementById("cartTotalAmount");
+        var checkoutBtn = document.getElementById("cartCheckoutBtn");
+
+        if (cart.length === 0) {
+            listEl.innerHTML = '<p class="cart-empty">Your cart is empty.</p>';
+            totalEl.textContent = "₱0.00";
+            checkoutBtn.style.display = "none";
+            return;
+        }
+
+        checkoutBtn.style.display = "block";
+
+        var total = 0;
+        listEl.innerHTML = cart.map(function (item) {
+            total += item.price * item.qty;
+            var sizeAttr = escapeHtml(item.size || "");
+            return (
+                '<div class="cart-item">' +
+                    '<img src="' + item.image + '" alt="' + escapeHtml(item.name) + '">' +
+                    '<div class="cart-item-info">' +
+                        '<div class="cart-item-name">' + escapeHtml(item.name) + (item.size ? ' <span class="cart-item-size">(' + escapeHtml(item.size) + ')</span>' : '') + '</div>' +
+                        '<div class="cart-item-price">₱' + item.price.toFixed(2) + ' x ' + item.qty + '</div>' +
+                    '</div>' +
+                    '<div class="cart-item-controls">' +
+                        '<button type="button" class="qty-btn" onclick="changeCartQty(\'' + item.id + '\', \'' + sizeAttr + '\', -1)">-</button>' +
+                        '<span>' + item.qty + '</span>' +
+                        '<button type="button" class="qty-btn" onclick="changeCartQty(\'' + item.id + '\', \'' + sizeAttr + '\', 1)">+</button>' +
+                    '</div>' +
+                    '<button type="button" class="cart-item-remove" onclick="removeFromCart(\'' + item.id + '\', \'' + sizeAttr + '\')"><i class="fa-solid fa-trash"></i></button>' +
+                '</div>'
+            );
+        }).join("");
+
+        totalEl.textContent = "₱" + total.toFixed(2);
+    }
+
+    var checkoutOrder = null;
+    var selectedPaymentMethod = null;
+
+    var WALLET_ACCOUNTS = {
+        GCash: [
+            { label: "Name", value: "JENELYN DIAZ" },
+            { label: "GCash Number", value: "09929883855" }
+        ],
+        Maya: [
+            { label: "Name", value: "JENELYN DIAZ" },
+            { label: "Maya Number", value: "09929883855" }
+        ],
+        PayPal: [
+            { label: "Name", value: "JENELYN DIAZ" },
+            { label: "Email", value: "AthleticaCVSU@gmail.com" },
+            { label: "Number", value: "09929883855" }
+        ]
+    };
+
+    var chatState = { productId: null, qty: 1, size: null };
+    var chatMode = "buy";
+    var chatFlowSource = "buy"; // "buy" (Buy Now -> payment) or "cart" (Add to Cart -> cart)
+    var paymentProofDataUrl = null;
+
+    function openBuyChat() {
+        openProductChat("buy");
+    }
+
+    // Shared entry point for the size-picking assistant used by both
+    // "Buy" and "Add to Cart". `intent` is "buy" or "cart" and controls the
+    // wording and what happens when the continue button is tapped.
+    function openProductChat(intent) {
+        if (!getCurrentUser()) {
+            closeProductDetail();
+            openAuthModal();
+            return;
+        }
+
+        var product = PRODUCTS[currentProductId];
+        if (!product) return;
+
+        chatState = {
+            productId: currentProductId,
+            qty: parseInt(document.getElementById("pdQty").value, 10) || 1,
+            size: null
+        };
+        chatMode = "buy";
+        chatFlowSource = intent === "cart" ? "cart" : "buy";
+        paymentProofDataUrl = null;
+
+        document.getElementById("chatProductImg").src = product.image;
+        document.getElementById("chatProductImg").alt = product.name;
+        document.getElementById("chatProductName").textContent = product.name;
+
+        document.getElementById("chatMessages").innerHTML = "";
+        document.getElementById("chatChoices").innerHTML = "";
+        document.getElementById("chatMeasureInput").style.display = "none";
+        document.getElementById("chatProofUpload").style.display = "none";
+        document.getElementById("chatProofPreview").style.display = "none";
+        document.getElementById("paymentProofInput").value = "";
+
+        var continueBtn = document.getElementById("chatContinueBtn");
+        continueBtn.textContent = chatFlowSource === "cart" ? "Add to Cart" : "Continue with Payment";
+        continueBtn.disabled = true;
+
+        closeProductDetail();
+        document.getElementById("chatOverlay").classList.add("show");
+
+        var greeting = chatFlowSource === "cart"
+            ? "Hi! Let's get " + product.name + " ready for your cart. What would you like to know, or are you ready to pick a size?"
+            : "Hi! I can help you order " + product.name + ". What would you like to know, or are you ready to buy?";
+        addChatMessage("ai", greeting);
+        showChatMenu();
+    }
+
+    function closeBuyChat() {
+        document.getElementById("chatOverlay").classList.remove("show");
+    }
+
+    function addChatMessage(sender, text) {
+        var messagesEl = document.getElementById("chatMessages");
+        var bubble = document.createElement("div");
+        bubble.className = "chat-bubble " + (sender === "ai" ? "chat-bubble-ai" : "chat-bubble-user");
+        bubble.textContent = text;
+        messagesEl.appendChild(bubble);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function renderChatChoices(options) {
+        var choicesEl = document.getElementById("chatChoices");
+        choicesEl.innerHTML = "";
+
+        options.forEach(function (opt) {
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "chat-choice-btn";
+            btn.textContent = opt.label;
+            btn.addEventListener("click", opt.onSelect);
+            choicesEl.appendChild(btn);
+        });
+    }
+
+    function showChatMenu() {
+        renderChatChoices([
+            { label: "Price", onSelect: chatShowPrice },
+            { label: "Description", onSelect: chatShowDescription },
+            { label: "Available Sizes", onSelect: chatShowSizes },
+            { label: chatFlowSource === "cart" ? "I'm ready to add to cart" : "I'm ready to buy", onSelect: chatAskSize }
+        ]);
+    }
+
+    function chatShowPrice() {
+        var product = PRODUCTS[chatState.productId];
+        addChatMessage("user", "How much is it?");
+        addChatMessage("ai", "The " + product.name + " is ₱" + product.price.toFixed(2) + ".");
+        showChatMenu();
+    }
+
+    function chatShowDescription() {
+        var product = PRODUCTS[chatState.productId];
+        addChatMessage("user", "What are the details of this item?");
+        addChatMessage("ai", product.description);
+        showChatMenu();
+    }
+
+    var APPAREL_SIZES = ["Small", "Medium", "Large", "Extra Large"];
+
+    function isApparelSizes(sizes) {
+        return sizes.every(function (s) { return APPAREL_SIZES.indexOf(s) !== -1; });
+    }
+
+    function chatShowSizes() {
+        var product = PRODUCTS[chatState.productId];
+        addChatMessage("user", "What sizes are available?");
+        addChatMessage("ai", "Available sizes: " + product.sizes.join(", ") + ".");
+        showChatMenu();
+    }
+
+    function chatAskSize() {
+        var product = PRODUCTS[chatState.productId];
+        addChatMessage("user", chatFlowSource === "cart" ? "I'm ready to add to cart." : "I'm ready to buy.");
+
+        if (isApparelSizes(product.sizes)) {
+            addChatMessage("ai", "Would you like me to recommend a size based on your weight and height, or would you rather pick it yourself?");
+            renderChatChoices([
+                { label: "Recommend a size for me", onSelect: chatAskMeasurements },
+                { label: "I'll choose my own size", onSelect: chatShowSizeChoices }
+            ]);
+        } else {
+            addChatMessage("ai", "What size would you like?");
+            chatShowSizeChoices();
+        }
+    }
+
+    function chatShowSizeChoices() {
+        var product = PRODUCTS[chatState.productId];
+        renderChatChoices(product.sizes.map(function (size) {
+            return { label: size, onSelect: function () { chatSelectSize(size); } };
+        }));
+    }
+
+    function chatAskMeasurements() {
+        addChatMessage("user", "Recommend a size for me.");
+        addChatMessage("ai", "Sure! Please enter your weight and height below.");
+
+        document.getElementById("chatChoices").innerHTML = "";
+        document.getElementById("chatWeightInput").value = "";
+        document.getElementById("chatHeightInput").value = "";
+        document.getElementById("chatMeasureInput").style.display = "flex";
+    }
+
+    function recommendSizeFromMeasurements(weightKg, heightCm) {
+        var heightM = heightCm / 100;
+        var bmi = weightKg / (heightM * heightM);
+
+        if (bmi < 18.5) return "Small";
+        if (bmi < 25) return "Medium";
+        if (bmi < 30) return "Large";
+        return "Extra Large";
+    }
+
+    function chatSubmitMeasurements() {
+        var weight = parseFloat(document.getElementById("chatWeightInput").value);
+        var height = parseFloat(document.getElementById("chatHeightInput").value);
+
+        if (!weight || !height || weight <= 0 || height <= 0) return;
+
+        document.getElementById("chatMeasureInput").style.display = "none";
+        addChatMessage("user", "Weight: " + weight + "kg, Height: " + height + "cm");
+
+        var recommendedSize = recommendSizeFromMeasurements(weight, height);
+        addChatMessage("ai", "Based on your height and weight, I'd recommend size " + recommendedSize + ". You can go with this or pick a different size.");
+
+        renderChatChoices([
+            { label: "Use " + recommendedSize, onSelect: function () { chatSelectSize(recommendedSize); } },
+            { label: "Choose a Different Size", onSelect: chatShowSizeChoices }
+        ]);
+    }
+
+    function chatSelectSize(size) {
+        chatState.size = size;
+        addChatMessage("user", size);
+        var actionLabel = chatFlowSource === "cart" ? "\"Add to Cart\"" : "\"Continue with Payment\"";
+        addChatMessage("ai", "Got it — size " + size + " noted. When you're ready, just tap " + actionLabel + " below.");
+
+        renderChatChoices([
+            { label: "Change Size", onSelect: chatAskSize },
+            { label: "Back to Menu", onSelect: showChatMenu }
+        ]);
+
+        document.getElementById("chatContinueBtn").disabled = false;
+    }
+
+    function continueToPaymentFromChat() {
+        if (!chatState.size) return;
+
+        var product = PRODUCTS[chatState.productId];
+        if (!product) return;
+
+        checkoutOrder = {
+            items: [{
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                qty: chatState.qty,
+                size: chatState.size
+            }],
+            total: product.price * chatState.qty,
+            source: "buynow"
+        };
+
+        closeBuyChat();
+        openPayment();
+    }
+
+    function openCheckoutFromCart() {
+        if (!getCurrentUser()) {
+            closeCart();
+            openAuthModal();
+            return;
+        }
+
+        var cart = getCart();
+        if (cart.length === 0) return;
+
+        checkoutOrder = {
+            items: cart,
+            total: cart.reduce(function (sum, item) { return sum + item.price * item.qty; }, 0),
+            source: "cart"
+        };
+
+        closeCart();
+        openPayment();
+    }
+
+    function openPayment() {
+        if (!checkoutOrder) return;
+
+        document.getElementById("paymentOrderSummary").innerHTML =
+            checkoutOrder.items.map(function (item) {
+                return escapeHtml(item.name) + (item.size ? " (" + escapeHtml(item.size) + ")" : "") + " x" + item.qty;
+            }).join("<br>") +
+            "<br><strong>Total: ₱" + checkoutOrder.total.toFixed(2) + "</strong>";
+
+        goToPaymentStep("paymentStepMethod");
+        document.getElementById("paymentOverlay").classList.add("show");
+    }
+
+    function closePayment() {
+        document.getElementById("paymentOverlay").classList.remove("show");
+        checkoutOrder = null;
+        selectedPaymentMethod = null;
+    }
+
+    function goToPaymentStep(stepId) {
+        document.querySelectorAll(".payment-step").forEach(function (step) {
+            step.classList.toggle("active", step.id === stepId);
+        });
+    }
+
+    function selectPaymentMethod(method) {
+        selectedPaymentMethod = method;
+
+        if (method === "COD") {
+            document.getElementById("codError").textContent = "";
+            goToPaymentStep("paymentStepCod");
+        } else {
+            goToWalletInfoStep(method);
+        }
+    }
+
+    function goToWalletInfoStep(method) {
+        document.getElementById("walletInfoTitle").textContent = "Pay with " + method;
+        document.getElementById("walletInfoAmount").textContent =
+            "₱" + (checkoutOrder ? checkoutOrder.total.toFixed(2) : "0.00");
+
+        var accountFields = WALLET_ACCOUNTS[method] || [];
+        document.getElementById("walletInfoDetails").innerHTML = accountFields.map(function (f) {
+            return "<p><span>" + escapeHtml(f.label) + "</span><strong>" + escapeHtml(f.value) + "</strong></p>";
+        }).join("");
+
+        goToPaymentStep("paymentStepWalletInfo");
+    }
+
+    function goToPaymentProofChat() {
+        if (!checkoutOrder) return;
+
+        chatMode = "paymentProof";
+        paymentProofDataUrl = null;
+
+        var firstItem = checkoutOrder.items[0];
+        var chatImgEl = document.getElementById("chatProductImg");
+        chatImgEl.src = firstItem ? firstItem.image : "";
+        chatImgEl.alt = firstItem ? firstItem.name : "";
+        document.getElementById("chatProductName").textContent = firstItem
+            ? (firstItem.name + (checkoutOrder.items.length > 1 ? " +" + (checkoutOrder.items.length - 1) + " more" : ""))
+            : "Your Order";
+
+        document.getElementById("chatMessages").innerHTML = "";
+        document.getElementById("chatChoices").innerHTML = "";
+        document.getElementById("chatMeasureInput").style.display = "none";
+
+        document.getElementById("paymentProofInput").value = "";
+        document.getElementById("chatProofPreview").style.display = "none";
+        document.getElementById("chatProofUpload").style.display = "flex";
+
+        var continueBtn = document.getElementById("chatContinueBtn");
+        continueBtn.textContent = "Done Payment";
+        continueBtn.disabled = true;
+
+        document.getElementById("paymentOverlay").classList.remove("show");
+        document.getElementById("chatOverlay").classList.add("show");
+
+        addChatMessage("ai", "Thank you! Please upload a screenshot of your payment here so we can confirm your order.");
+    }
+
+    function handlePaymentProofSelected(e) {
+        var file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        var reader = new FileReader();
+        reader.onload = function () {
+            paymentProofDataUrl = reader.result;
+
+            var previewImg = document.getElementById("chatProofPreviewImg");
+            previewImg.src = paymentProofDataUrl;
+            document.getElementById("chatProofPreview").style.display = "flex";
+
+            document.getElementById("chatContinueBtn").disabled = false;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function handleChatContinueClick() {
+        if (chatMode === "paymentProof") {
+            finalizePaymentProofOrder();
+        } else if (chatFlowSource === "cart") {
+            addSelectedItemToCartFromChat();
+        } else {
+            continueToPaymentFromChat();
+        }
+    }
+
+    function finalizePaymentProofOrder() {
+        if (!paymentProofDataUrl) return;
+
+        closeBuyChat();
+        document.getElementById("paymentOverlay").classList.add("show");
+        finalizeOrder({ paymentProof: paymentProofDataUrl });
+    }
+
+    function backToPaymentMethod() {
+        goToPaymentStep("paymentStepMethod");
+    }
+
+    function playOrderConfirmAnimation() {
+        var svg = document.getElementById("orderConfirmCheck");
+        svg.classList.remove("animate");
+        void svg.offsetWidth;
+        svg.classList.add("animate");
+    }
+
+    function finalizeOrder(extraDetails) {
+        var user = getCurrentUser();
+        if (!user) {
+            closePayment();
+            closeBuyChat();
+            openAuthModal();
+            return;
+        }
+
+        goToPaymentStep("paymentStepLoading");
+
+        setTimeout(function () {
+            var orders = getOrders();
+            orders.push({
+                id: generateOrderId(),
+                buyerEmail: user.email,
+                buyerName: user.name,
+                buyerAvatar: user.avatar || "",
+                items: checkoutOrder.items,
+                total: checkoutOrder.total,
+                method: selectedPaymentMethod,
+                details: extraDetails,
+                date: new Date().toLocaleString(),
+                status: "pending",
+                messages: [],
+                ownerUnread: 0,
+                buyerUnread: 1,
+                sellerEmail: null,
+                sellerName: "",
+                sellerUnread: 0
+            });
+            saveOrdersList(orders);
+            adjustStockForItems(checkoutOrder.items, -1);
+
+            if (checkoutOrder.source === "cart") {
+                saveCart([]);
+            }
+
+            document.getElementById("paymentConfirmText").textContent =
+                "Paid via " + selectedPaymentMethod + " — total ₱" + checkoutOrder.total.toFixed(2) + ". Thank you for shopping with Athletica! We'll notify you once the owner approves your order.";
+
+            goToPaymentStep("paymentStepConfirm");
+            playOrderConfirmAnimation();
+
+            refreshOrderUI();
+        }, 1200);
+    }
+
+    function submitCodPayment(e) {
+        e.preventDefault();
+
+        var address = document.getElementById("codAddress").value.trim();
+        var yearLevel = document.getElementById("codYearLevel").value.trim();
+        var section = document.getElementById("codSection").value.trim();
+        var phone = document.getElementById("codPhone").value.trim();
+        var errorEl = document.getElementById("codError");
+
+        if (!address || !yearLevel || !section || !phone) {
+            errorEl.textContent = "Please fill in all fields.";
+            return false;
+        }
+
+        errorEl.textContent = "";
+        finalizeOrder({ address: address, yearLevel: yearLevel, section: section, phone: phone });
+        return false;
+    }
+
+    var currentOrderActionId = null;
+
+    function getOrders() {
+        return _cloud.orders;
+    }
+
+    function saveOrdersList(orders) {
+        _cloud.orders = orders;
+        db.collection("athletica").doc("orders").set({ list: orders });
+    }
+
+    function generateOrderId() {
+        return "ord_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
+    }
+
+    function orderSummaryText(order) {
+        return order.items.map(function (it) {
+            return it.name + (it.size ? " (" + it.size + ")" : "") + " x" + it.qty;
+        }).join(", ");
+    }
+
+    var notifManualMode = false;
+    var notifSelectedIds = [];
+
+    function openOrdersPanel() {
+        var user = getCurrentUser();
+        if (!user) {
+            openAuthModal();
+            return;
+        }
+
+        notifManualMode = false;
+        notifSelectedIds = [];
+
+        renderOrdersPanel();
+        document.getElementById("ordersPanelOverlay").classList.add("show");
+    }
+
+    function closeOrdersPanel() {
+        document.getElementById("ordersPanelOverlay").classList.remove("show");
+        notifManualMode = false;
+        notifSelectedIds = [];
+    }
+
+    function isOrderUnreadFor(order, user) {
+        var role = getOrderRoleFor(order, user);
+
+        if (role === "owner") {
+            return order.status === "pending" || !!(order.ownerUnread && order.ownerUnread > 0);
+        }
+        if (role === "seller-pending") {
+            return true;
+        }
+        if (role === "seller-assigned") {
+            return !!(order.sellerUnread && order.sellerUnread > 0);
+        }
+        if (role === "buyer") {
+            return order.status === "pending" || !!(order.buyerUnread && order.buyerUnread > 0);
+        }
+        return false;
+    }
+
+    function openClearNotificationChoice() {
+        document.getElementById("notifClearChoiceOverlay").classList.add("show");
+    }
+
+    function closeClearNotificationChoice() {
+        document.getElementById("notifClearChoiceOverlay").classList.remove("show");
+    }
+
+    function chooseDeleteManually() {
+        closeClearNotificationChoice();
+        notifManualMode = true;
+        notifSelectedIds = [];
+        renderOrdersPanel();
+    }
+
+    function chooseClearReadFromPopup() {
+        closeClearNotificationChoice();
+        clearReadOrders();
+    }
+
+    function cancelManualDeleteMode() {
+        notifManualMode = false;
+        notifSelectedIds = [];
+        renderOrdersPanel();
+    }
+
+    function toggleNotifSelect(orderId, event) {
+        if (event) event.stopPropagation();
+
+        var idx = notifSelectedIds.indexOf(orderId);
+        if (idx === -1) notifSelectedIds.push(orderId);
+        else notifSelectedIds.splice(idx, 1);
+
+        renderOrdersPanel();
+    }
+
+    function confirmManualDelete() {
+        if (notifSelectedIds.length === 0) return;
+
+        var user = getCurrentUser();
+        if (!user) return;
+
+        if (!confirm("Delete " + notifSelectedIds.length + " selected notification(s)? This can't be undone.")) return;
+
+        var orders = getOrders();
+        var idsToDelete = notifSelectedIds.filter(function (id) {
+            var o = orders.find(function (x) { return x.id === id; });
+            return o && !isOrderUnreadFor(o, user);
+        });
+
+        saveOrdersList(orders.filter(function (o) { return idsToDelete.indexOf(o.id) === -1; }));
+
+        notifManualMode = false;
+        notifSelectedIds = [];
+        renderOrdersPanel();
+        refreshOrderUI();
+    }
+
+    function renderOrdersPanel() {
+        var user = getCurrentUser();
+        if (!user) return;
+
+        var titleEl = document.getElementById("ordersPanelTitle");
+        var listEl = document.getElementById("ordersPanelList");
+        var headerEl = document.getElementById("ordersPanelHeader");
+        var toolbarEl = document.getElementById("ordersPanelManualToolbar");
+        var orders = getOrders();
+
+        if (user.isOwner) {
+            titleEl.textContent = "All Orders";
+        } else if (user.isSeller) {
+            titleEl.textContent = "Order Notifications";
+            orders = orders.filter(function (o) { return getOrderRoleFor(o, user) !== "none"; });
+        } else {
+            titleEl.textContent = "My Orders";
+            orders = orders.filter(function (o) { return o.buyerEmail === user.email; });
+        }
+
+        orders = orders.slice().reverse();
+
+        // Unread/new notifications always float to the top; opened ones sink to the bottom.
+        orders.sort(function (a, b) {
+            var aUnread = isOrderUnreadFor(a, user) ? 0 : 1;
+            var bUnread = isOrderUnreadFor(b, user) ? 0 : 1;
+            return aUnread - bUnread;
+        });
+
+        var hasReadOrders = orders.some(function (o) { return !isOrderUnreadFor(o, user); });
+
+        if (notifManualMode) {
+            headerEl.style.display = "none";
+            toolbarEl.style.display = "flex";
+
+            var readIds = orders.filter(function (o) { return !isOrderUnreadFor(o, user); }).map(function (o) { return o.id; });
+            notifSelectedIds = notifSelectedIds.filter(function (id) { return readIds.indexOf(id) !== -1; });
+
+            document.getElementById("manualSelectedCount").textContent = notifSelectedIds.length + " selected";
+            var deleteBtn = document.getElementById("manualDeleteBtn");
+            deleteBtn.disabled = notifSelectedIds.length === 0;
+        } else {
+            headerEl.style.display = "flex";
+            toolbarEl.style.display = "none";
+
+            var clearBtn = document.getElementById("ordersPanelClearBtn");
+            clearBtn.style.display = hasReadOrders ? "inline-block" : "none";
+        }
+
+        if (orders.length === 0) {
+            var emptyText = user.isOwner
+                ? "No orders yet."
+                : (user.isSeller ? "No order notifications right now." : "You haven't placed any orders yet.");
+            listEl.innerHTML = '<p class="orders-panel-empty">' + emptyText + '</p>';
+            return;
+        }
+
+        listEl.innerHTML = orders.map(function (o) {
+            var role = getOrderRoleFor(o, user);
+            var statusLabel = o.status === "pending" ? "Pending Approval" : (o.status === "confirmed" ? "Confirmed" : "Cancelled");
+            var unread = role === "owner" ? o.ownerUnread : (role === "seller-assigned" ? o.sellerUnread : o.buyerUnread);
+            var isRead = !isOrderUnreadFor(o, user);
+
+            var sellerNote = "";
+            if (o.sellerEmail && (role === "owner" || role === "seller-assigned")) {
+                sellerNote = '<div class="order-row-seller-note">Handled by: ' + escapeHtml(o.sellerName || "Seller") + '</div>';
+            }
+
+            var innerHtml =
+                '<div class="order-row-top">' +
+                    '<strong>₱' + o.total.toFixed(2) + '</strong>' +
+                    '<span class="order-status order-status-' + o.status + '">' + statusLabel + (unread ? " (" + unread + " new)" : "") + '</span>' +
+                '</div>' +
+                '<div class="order-row-items">' + escapeHtml(orderSummaryText(o)) + '</div>' +
+                sellerNote +
+                '<div class="order-row-footer">' +
+                    '<div class="order-row-buyer">' +
+                        (user.isOwner
+                            ? '<span class="buyer-name-link" onclick="openUserProfileView(\'' + escapeHtml(o.buyerEmail || "") + '\', \'' + escapeHtml(o.buyerName || "") + '\', event)">' + escapeHtml(o.buyerName) + '</span> — '
+                            : (role === "seller-pending" || role === "seller-assigned"
+                                ? escapeHtml(o.buyerName || "") + ' — '
+                                : '')) +
+                        escapeHtml(o.date) +
+                    '</div>' +
+                '</div>';
+
+            if (notifManualMode) {
+                var checked = notifSelectedIds.indexOf(o.id) !== -1;
+                var checkboxHtml = isRead
+                    ? '<div class="order-row-checkbox-wrap"><input type="checkbox" ' + (checked ? "checked" : "") + ' onclick="toggleNotifSelect(\'' + o.id + '\', event)"></div>'
+                    : '<div class="order-row-checkbox-wrap"></div>';
+
+                var rowClass = "order-row order-row-manual" + (isRead ? " order-row-selectable" : " order-row-locked");
+                var rowClick = isRead ? ' onclick="toggleNotifSelect(\'' + o.id + '\', event)"' : '';
+
+                return (
+                    '<div class="' + rowClass + '"' + rowClick + '>' +
+                        checkboxHtml +
+                        '<div class="order-row-main">' + innerHtml + '</div>' +
+                    '</div>'
+                );
+            }
+
+            return '<div class="order-row" onclick="openOrderAction(\'' + o.id + '\')">' + innerHtml + '</div>';
+        }).join("");
+    }
+
+    function clearReadOrders() {
+        var user = getCurrentUser();
+        if (!user) return;
+
+        if (!confirm("Clear all notifications you've already read?")) return;
+
+        var orders = getOrders();
+        var scoped = orders.filter(function (o) { return getOrderRoleFor(o, user) !== "none"; });
+        var idsToRemove = scoped.filter(function (o) { return !isOrderUnreadFor(o, user); })
+            .map(function (o) { return o.id; });
+
+        saveOrdersList(orders.filter(function (o) { return idsToRemove.indexOf(o.id) === -1; }));
+        renderOrdersPanel();
+        refreshOrderUI();
+    }
+
+    function openOrderAction(orderId) {
+        var order = getOrders().find(function (o) { return o.id === orderId; });
+        var user = getCurrentUser();
+        if (!order || !user) return;
+
+        var role = getOrderRoleFor(order, user);
+        if (role === "none") return;
+
+        currentOrderActionId = orderId;
+
+        var orders = getOrders();
+        var target = orders.find(function (o) { return o.id === orderId; });
+        if (target) {
+            if (role === "owner") target.ownerUnread = 0;
+            else if (role === "seller-assigned") target.sellerUnread = 0;
+            else if (role === "buyer") target.buyerUnread = 0;
+            saveOrdersList(orders);
+        }
+
+        document.getElementById("ordersPanelOverlay").classList.remove("show");
+        document.getElementById("orderActionOverlay").classList.add("show");
+
+        renderOrderAction();
+        refreshOrderUI();
+    }
+
+    function closeOrderAction() {
+        document.getElementById("orderActionOverlay").classList.remove("show");
+        currentOrderActionId = null;
+    }
+
+    function renderOrderAction() {
+        var order = getOrders().find(function (o) { return o.id === currentOrderActionId; });
+        var user = getCurrentUser();
+        if (!order || !user) return;
+
+        var role = getOrderRoleFor(order, user);
+        if (role === "none") {
+            closeOrderAction();
+            return;
+        }
+
+        var isOwnerView = role === "owner";
+        var isSellerView = role === "seller-pending" || role === "seller-assigned";
+        var isStaffView = isOwnerView || isSellerView;
+        var itemsText = orderSummaryText(order);
+
+        var avatarEl = document.getElementById("orderActionAvatar");
+        avatarEl.classList.add("presence-avatar-wrap");
+        if (isStaffView) {
+            var initials = (order.buyerName || "?").trim().charAt(0).toUpperCase() || "?";
+            var liveBuyerAvatar = liveAvatarFor(order.buyerEmail, order.buyerAvatar);
+            avatarEl.innerHTML =
+                (liveBuyerAvatar
+                    ? '<img src="' + liveBuyerAvatar + '" class="order-action-avatar-img" alt="">'
+                    : '<div class="order-action-avatar-initials">' + escapeHtml(initials) + '</div>') +
+                '<span class="presence-dot' + (isUserOnline(order.buyerEmail) ? ' online' : '') + '"></span>';
+            if (isOwnerView) {
+                avatarEl.classList.add("profile-link-clickable");
+                avatarEl.onclick = function () { openUserProfileView(order.buyerEmail, order.buyerName); };
+            } else {
+                avatarEl.classList.remove("profile-link-clickable");
+                avatarEl.onclick = null;
+            }
+        } else {
+            var shopOnline = isUserOnline(OWNER_EMAIL) || (order.sellerEmail && isUserOnline(order.sellerEmail));
+            avatarEl.innerHTML =
+                '<div class="order-action-avatar-initials">A</div>' +
+                '<span class="presence-dot' + (shopOnline ? ' online' : '') + '"></span>';
+            avatarEl.classList.remove("profile-link-clickable");
+            avatarEl.onclick = null;
+        }
+
+        var titleEl = document.getElementById("orderActionTitle");
+        if (isOwnerView) {
+            titleEl.innerHTML = '<span class="profile-link-clickable" onclick="openUserProfileView(\'' + escapeHtml(order.buyerEmail || "") + '\', \'' + escapeHtml(order.buyerName || "") + '\')">' + escapeHtml(order.buyerName) + '</span> — Order';
+        } else if (isSellerView) {
+            titleEl.textContent = escapeHtml(order.buyerName) + " — Order";
+        } else {
+            titleEl.textContent = "Athletica — Your Order";
+        }
+        document.getElementById("orderActionSub").textContent = itemsText;
+
+        var detailsHtml =
+            '<strong>Items:</strong> ' + escapeHtml(itemsText) + '<br>' +
+            '<strong>Total:</strong> ₱' + order.total.toFixed(2) + '<br>' +
+            '<strong>Payment Method:</strong> ' + escapeHtml(order.method) + '<br>';
+
+        if (order.method === "COD") {
+            detailsHtml +=
+                '<strong>Address:</strong> ' + escapeHtml(order.details.address) + '<br>' +
+                '<strong>Year Level:</strong> ' + escapeHtml(order.details.yearLevel) + '<br>' +
+                '<strong>Section:</strong> ' + escapeHtml(order.details.section) + '<br>' +
+                '<strong>Phone:</strong> ' + escapeHtml(order.details.phone) + '<br>';
+        } else {
+            detailsHtml +=
+                '<strong>Payment Proof:</strong><br>' +
+                '<img src="' + order.details.paymentProof + '" class="order-action-proof-img" alt="Payment proof"><br>';
+        }
+
+        if (isOwnerView) {
+            detailsHtml += '<strong>Buyer:</strong> ' + escapeHtml(order.buyerName) + ' (' + escapeHtml(order.buyerEmail) + ')<br>';
+        } else if (isSellerView) {
+            detailsHtml += '<strong>Buyer:</strong> ' + escapeHtml(order.buyerName) + '<br>';
+        }
+
+        if (order.sellerEmail && isStaffView) {
+            detailsHtml += '<strong>Seller:</strong> ' + escapeHtml(order.sellerName || "") + '<br>';
+        }
+
+        detailsHtml += '<strong>Date:</strong> ' + escapeHtml(order.date);
+
+        document.getElementById("orderActionDetails").innerHTML = detailsHtml;
+
+        var buttonsEl = document.getElementById("orderActionButtons");
+        var chatSection = document.getElementById("orderChatSection");
+
+        if (order.status === "pending") {
+            chatSection.style.display = "none";
+            if (isOwnerView) {
+                buttonsEl.style.display = "flex";
+                buttonsEl.innerHTML =
+                    '<button type="button" class="btn order-cancel-btn" onclick="ownerDecideOrder(\'cancelled\')">Cancel</button>' +
+                    '<button type="button" class="btn" onclick="ownerDecideOrder(\'confirmed\')">Confirm</button>';
+            } else if (isSellerView) {
+                buttonsEl.style.display = "flex";
+                buttonsEl.innerHTML =
+                    '<button type="button" class="btn" onclick="sellerConfirmOrder()">Confirm</button>';
+            } else {
+                buttonsEl.style.display = "block";
+                buttonsEl.innerHTML = '<p class="orders-panel-empty">Waiting for approval.</p>';
+            }
+        } else if (order.status === "cancelled") {
+            buttonsEl.style.display = "block";
+            buttonsEl.innerHTML = '<p class="orders-panel-empty">This order was cancelled.</p>';
+            chatSection.style.display = "none";
+        } else {
+            buttonsEl.style.display = "none";
+            buttonsEl.innerHTML = "";
+            chatSection.style.display = "block";
+            renderOrderChatMessages(order);
+        }
+    }
+
+    function ownerDecideOrder(newStatus) {
+        var user = getCurrentUser();
+        if (!user || !user.isOwner) return;
+
+        var orders = getOrders();
+        var order = orders.find(function (o) { return o.id === currentOrderActionId; });
+        if (!order) return;
+
+        order.status = newStatus;
+        order.buyerUnread = (order.buyerUnread || 0) + 1;
+        saveOrdersList(orders);
+
+        if (newStatus === "cancelled") {
+            adjustStockForItems(order.items, 1);
+        }
+
+        renderOrderAction();
+        refreshOrderUI();
+    }
+
+    // Called when a seller taps "Confirm" on a still-unclaimed pending order.
+    // Claims the order for that seller: the order becomes confirmed, and from
+    // then on only the buyer, this seller, and the owner can see/chat on it —
+    // every other seller loses the notification and chat head for it.
+    function sellerConfirmOrder() {
+        var user = getCurrentUser();
+        if (!user || !user.isSeller || user.isOwner) return;
+
+        var orders = getOrders();
+        var order = orders.find(function (o) { return o.id === currentOrderActionId; });
+        if (!order || order.status !== "pending" || order.sellerEmail) return;
+
+        order.status = "confirmed";
+        order.sellerEmail = user.email;
+        order.sellerName = user.name;
+        order.sellerUnread = 0;
+        order.buyerUnread = (order.buyerUnread || 0) + 1;
+        saveOrdersList(orders);
+
+        renderOrderAction();
+        refreshOrderUI();
+    }
+
+    function chatSenderRoleFor(order, user) {
+        if (!user) return "buyer";
+        if (user.isOwner) return "owner";
+        if (order.sellerEmail === user.email) return "seller";
+        return "buyer";
+    }
+
+    // Figures out who "the other side" of this chat is from myRole's point of
+    // view: a buyer chats with the assigned seller (or the owner if no seller
+    // has claimed the order yet); staff always chat with the buyer.
+    function otherChatPartyRole(order, myRole) {
+        return myRole === "buyer" ? (order.sellerEmail ? "seller" : "owner") : "buyer";
+    }
+
+    function otherChatPartyEmail(order, otherRole) {
+        if (otherRole === "buyer") return order.buyerEmail;
+        if (otherRole === "seller") return order.sellerEmail;
+        return OWNER_EMAIL;
+    }
+
+    function renderOrderChatWithHeader(order, user) {
+        var headerEl = document.getElementById("orderChatWithHeader");
+        if (!headerEl) return;
+
+        var myRole = chatSenderRoleFor(order, user);
+        var otherRole = otherChatPartyRole(order, myRole);
+        var otherEmail = otherChatPartyEmail(order, otherRole);
+        var fallbackName = otherRole === "buyer" ? order.buyerName : (otherRole === "seller" ? (order.sellerName || "Seller") : "Athletica");
+        var fallbackAvatar = otherRole === "buyer" ? order.buyerAvatar : "";
+
+        var name = liveNameFor(otherEmail, fallbackName) || fallbackName;
+        var avatar = liveAvatarFor(otherEmail, fallbackAvatar);
+        var initials = name.trim().charAt(0).toUpperCase() || "?";
+
+        var avatarHtml = avatar
+            ? '<img src="' + avatar + '" alt="">'
+            : '<div class="chat-with-avatar-initials">' + escapeHtml(initials) + '</div>';
+
+        var online = isUserOnline(otherEmail);
+        var typing = isOtherTyping(order.id, otherRole);
+
+        headerEl.innerHTML =
+            '<div class="chat-with-avatar-wrap">' +
+                avatarHtml +
+                '<span class="presence-dot' + (online ? ' online' : '') + '"></span>' +
+            '</div>' +
+            '<div>' +
+                '<div class="chat-with-name">' + escapeHtml(name) + '</div>' +
+                '<div class="chat-with-status' + (typing ? ' is-typing' : '') + '">' +
+                    (typing ? "Typing..." : (online ? "Online" : "Offline")) +
+                '</div>' +
+            '</div>';
+    }
+
+    function renderOrderChatMessages(order) {
+        var messagesEl = document.getElementById("orderChatMessages");
+        var user = getCurrentUser();
+        if (!user) return;
+
+        var myRole = chatSenderRoleFor(order, user);
+
+        renderOrderChatWithHeader(order, user);
+
+        if (!order.messages || order.messages.length === 0) {
+            messagesEl.innerHTML = '<p class="review-empty">Order confirmed! Say hi to start the conversation.</p>';
+            return;
+        }
+
+        // Mark this order as "seen" by me if the other side sent something
+        // since I last looked. Only writes to the cloud when there's actually
+        // something new, so this doesn't spam saves on every re-render.
+        order.seenAt = order.seenAt || { buyer: 0, seller: 0, owner: 0 };
+        var mySeenAt = order.seenAt[myRole] || 0;
+        var hasUnseenFromOther = order.messages.some(function (m) {
+            return m.sender !== myRole && (m.ts || 0) > mySeenAt;
+        });
+        if (hasUnseenFromOther) {
+            order.seenAt[myRole] = Date.now();
+            saveOrdersList(getOrders());
+        }
+
+        var otherRole = otherChatPartyRole(order, myRole);
+        var otherEmail = otherChatPartyEmail(order, otherRole);
+
+        var lastMineIndex = -1;
+        for (var i = order.messages.length - 1; i >= 0; i--) {
+            if (order.messages[i].sender === myRole) { lastMineIndex = i; break; }
+        }
+
+        messagesEl.innerHTML = order.messages.map(function (m, idx) {
+            var isFromOther = m.sender !== myRole;
+            var html = '<div class="chat-bubble ' + (isFromOther ? "chat-bubble-ai" : "chat-bubble-user") + '">' + escapeHtml(m.text) + '</div>';
+
+            if (!isFromOther && idx === lastMineIndex) {
+                var otherSeenAt = (order.seenAt && order.seenAt[otherRole]) || 0;
+                var status = "Sent";
+                if (otherSeenAt >= (m.ts || 0)) status = "Seen";
+                else if (isUserOnline(otherEmail)) status = "Delivered";
+                html += '<div class="chat-status-label">' + status + '</div>';
+            }
+            return html;
+        }).join("");
+
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function sendOrderChatMessage() {
+        var input = document.getElementById("orderChatInput");
+        var text = input.value.trim();
+        var user = getCurrentUser();
+        if (!text || !currentOrderActionId || !user) return;
+
+        var orders = getOrders();
+        var order = orders.find(function (o) { return o.id === currentOrderActionId; });
+        if (!order) return;
+
+        var role = getOrderRoleFor(order, user);
+        if (role !== "owner" && role !== "buyer" && role !== "seller-assigned") return;
+
+        var sender = chatSenderRoleFor(order, user);
+
+        order.messages = order.messages || [];
+        order.messages.push({ sender: sender, text: text, time: new Date().toLocaleTimeString(), ts: Date.now() });
+
+        // Notify everyone on this order EXCEPT whoever just sent the message —
+        // buyer, owner, and the assigned seller should all stay in the loop
+        // regardless of which one of them is chatting.
+        if (sender === "buyer") {
+            order.ownerUnread = (order.ownerUnread || 0) + 1;
+            if (order.sellerEmail) order.sellerUnread = (order.sellerUnread || 0) + 1;
+        } else if (sender === "owner") {
+            order.buyerUnread = (order.buyerUnread || 0) + 1;
+            if (order.sellerEmail) order.sellerUnread = (order.sellerUnread || 0) + 1;
+        } else if (sender === "seller") {
+            order.buyerUnread = (order.buyerUnread || 0) + 1;
+            order.ownerUnread = (order.ownerUnread || 0) + 1;
+        }
+
+        saveOrdersList(orders);
+        input.value = "";
+
+        renderOrderChatMessages(order);
+        refreshOrderUI();
+    }
+
+    document.getElementById("orderChatInput").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            sendOrderChatMessage();
+        }
+    });
+
+    document.getElementById("orderChatInput").addEventListener("input", function () {
+        if (!currentOrderActionId) return;
+        var user = getCurrentUser();
+        if (!user) return;
+
+        var order = getOrders().find(function (o) { return o.id === currentOrderActionId; });
+        if (!order) return;
+
+        var role = getOrderRoleFor(order, user);
+        if (role !== "owner" && role !== "buyer" && role !== "seller-assigned") return;
+
+        notifyTyping(currentOrderActionId, chatSenderRoleFor(order, user));
+    });
+
+    function renderChatHeadDock() {
+        var dockEl = document.getElementById("chatHeadDock");
+        var user = getCurrentUser();
+
+        // Chat heads are the owner's + sellers' notification tray: any staff
+        // account (owner, or a seller promoted via a buyer's profile) gets one
+        // for still-open pending orders, plus their own claimed conversations.
+        if (!user || (!user.isOwner && !user.isSeller)) {
+            dockEl.innerHTML = "";
+            dockEl.style.display = "none";
+            return;
+        }
+
+        var orders = getOrders().filter(function (o) {
+            return isOrderUnreadFor(o, user);
+        });
+
+        if (orders.length === 0) {
+            dockEl.innerHTML = "";
+            dockEl.style.display = "none";
+            return;
+        }
+
+        dockEl.style.display = "flex";
+        dockEl.innerHTML = orders.map(function (o) {
+            var role = getOrderRoleFor(o, user);
+            var initials = (o.buyerName || "?").trim().charAt(0).toUpperCase() || "?";
+            var liveAvatar = liveAvatarFor(o.buyerEmail, o.buyerAvatar);
+            var avatarHtml = liveAvatar
+                ? '<img src="' + liveAvatar + '" alt="">'
+                : '<div class="chat-head-initials">' + escapeHtml(initials) + '</div>';
+            var unread = role === "owner" ? o.ownerUnread : o.sellerUnread;
+            var badgeText = o.status === "pending" ? "!" : String(unread);
+
+            return (
+                '<div class="chat-head" title="' + escapeHtml(o.buyerName) + ' — ' + escapeHtml(orderSummaryText(o)) + '" onclick="openOrderAction(\'' + o.id + '\')">' +
+                    avatarHtml +
+                    '<span class="presence-dot' + (isUserOnline(o.buyerEmail) ? ' online' : '') + '"></span>' +
+                    '<span class="chat-head-badge">' + badgeText + '</span>' +
+                '</div>'
+            );
+        }).join("");
+    }
+
+    function updateNotifBadge() {
+        var badgeEl = document.getElementById("notifBadge");
+        var user = getCurrentUser();
+
+        if (!user) {
+            badgeEl.textContent = "0";
+            return;
+        }
+
+        var orders = getOrders();
+        var count = orders.filter(function (o) { return isOrderUnreadFor(o, user); }).length;
+
+        badgeEl.textContent = count;
+    }
+
+    function refreshOrderUI() {
+        updateNotifBadge();
+        renderChatHeadDock();
+
+        if (document.getElementById("ordersPanelOverlay").classList.contains("show")) {
+            renderOrdersPanel();
+        }
+        if (document.getElementById("orderActionOverlay").classList.contains("show") && currentOrderActionId) {
+            renderOrderAction();
+        }
+    }
+
+    setInterval(refreshOrderUI, 3000);
+
+    // Keeps the "Online"/"Typing..." line in an open chat fresh without
+    // touching the message list or the input (which would steal focus).
+    setInterval(function () {
+        if (!currentOrderActionId) return;
+        if (!document.getElementById("orderActionOverlay").classList.contains("show")) return;
+
+        var chatSection = document.getElementById("orderChatSection");
+        if (!chatSection || chatSection.style.display === "none") return;
+
+        var order = getOrders().find(function (o) { return o.id === currentOrderActionId; });
+        var user = getCurrentUser();
+        if (!order || !user) return;
+
+        renderOrderChatWithHeader(order, user);
+    }, 1200);
+
+    renderAllProductRatings();
+    updateCartBadge();
+    refreshOrderUI();
+    sendPresenceHeartbeat();
+
+</script>
+
+</body>
+</html>
