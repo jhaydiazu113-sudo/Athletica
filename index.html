@@ -5776,7 +5776,7 @@ small {
     // for. chatHistory holds the running back-and-forth so the backend can
     // keep context across turns; it's reset every time openProductChat runs.
     var chatHistory = [];
-    var PRODUCT_CHAT_ENDPOINT = "/api/product-chat"; // point this at your backend proxy
+    var PRODUCT_CHAT_ENDPOINT = "https://athletica-uvuq.onrender.com/api/product-chat"; // point this at your backend proxy
 
     function sendProductChatMessage() {
         if (chatMode !== "buy") return;
