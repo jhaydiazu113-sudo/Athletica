@@ -6,9 +6,7 @@
 
     <title>Athletica</title>
 
-    <!-- Link preview / social share card: make sure the Athletica logo
-         (not some unrelated image found elsewhere on the page) is what
-         shows up when this link is shared on Messenger, Facebook, etc. -->
+    
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Athletica">
     <meta property="og:title" content="Athletica - Athlete's Choice">
@@ -2333,8 +2331,7 @@ small {
 }
 
 @media only screen and (max-width: 600px) {
-    /* 2 columns on mobile instead of the 1-column default that .col-4
-       normally gets at this breakpoint (see the earlier col-4 rule). */
+    
     .product-card {
         flex-basis: 50%;
         min-width: 0;
@@ -2598,6 +2595,23 @@ small {
     font-size: 12px;
     color: #999;
     margin-top: -6px;
+}
+
+.no-size-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+    margin-top: -6px;
+}
+
+.no-size-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    cursor: pointer;
 }
 
 .stock-badge {
@@ -2939,7 +2953,7 @@ small {
         <div class="chat-choices" id="chatChoices"></div>
 
         <div class="chat-text-input-row" id="chatTextInputRow" style="display:none;">
-            <input type="text" id="chatFreeInput" placeholder="Magtanong tungkol sa produkto..." autocomplete="off">
+            <input type="text" id="chatFreeInput" placeholder="Ask about the product..." autocomplete="off">
             <button type="button" class="chat-send-btn" id="chatSendBtn" onclick="sendProductChatMessage()">Send</button>
         </div>
 
@@ -3068,8 +3082,13 @@ small {
 
             <textarea id="newProductDescription" placeholder="Description" rows="3" required></textarea>
 
+            <label class="no-size-toggle">
+                <input type="checkbox" id="newProductNoSize" onchange="toggleNoSizeFields('new')">
+                Item / Accessory &mdash; no size needed (e.g. earrings, necklace, bracelet)
+            </label>
+
             <input type="text" id="newProductSizes" placeholder="Sizes, comma separated (e.g. Small, Medium, Large)" required>
-            <p class="form-hint">For footwear, list numeric sizes instead, e.g. 38, 39, 40.</p>
+            <p class="form-hint" id="newProductSizesHint">For footwear, list numeric sizes instead, e.g. 38, 39, 40.</p>
 
             <input type="number" id="newProductStock" placeholder="Stock quantity (e.g. 50)" min="0" step="1" required>
 
@@ -3099,8 +3118,13 @@ small {
 
             <textarea id="editProductDescription" placeholder="Description" rows="3" required></textarea>
 
+            <label class="no-size-toggle">
+                <input type="checkbox" id="editProductNoSize" onchange="toggleNoSizeFields('edit')">
+                Item / Accessory &mdash; no size needed (e.g. earrings, necklace, bracelet)
+            </label>
+
             <input type="text" id="editProductSizes" placeholder="Sizes, comma separated (e.g. Small, Medium, Large)" required>
-            <p class="form-hint">For footwear, list numeric sizes instead, e.g. 38, 39, 40.</p>
+            <p class="form-hint" id="editProductSizesHint">For footwear, list numeric sizes instead, e.g. 38, 39, 40.</p>
 
             <input type="number" id="editProductStock" placeholder="Stock quantity" min="0" step="1" required>
             <p class="form-hint">Update this to restock the item.</p>
@@ -3807,9 +3831,9 @@ small {
         _onCloudChange("reviews");
     }, function (err) { console.error("reviews sync error", err); });
 
-    // Presence (online/offline) and typing indicators live in their own small
-    // cloud docs so heartbeats/keystrokes don't trigger heavy re-syncs of the
-    // full users/orders lists.
+    
+    
+    
     var _presence = {};
     var PRESENCE_HEARTBEAT_MS = 12000;
     var ONLINE_THRESHOLD_MS = 30000;
@@ -3876,9 +3900,9 @@ small {
             });
     }
 
-    // Looks up a user's *current* avatar/name by email instead of relying on
-    // a snapshot taken when an order was placed, so profile changes show up
-    // everywhere (chat heads, order chat, profile popups) right away.
+    
+    
+    
     function liveAvatarFor(email, fallbackAvatar) {
         if (email) {
             var users = getUsers();
@@ -4472,11 +4496,11 @@ small {
         reader.onload = function (e) {
             var img = new Image();
             img.onload = function () {
-                // Shrink to a small square-ish thumbnail before storing. All
-                // user avatars live together in one shared cloud document, so
-                // full-size photos can blow past its size limit and cause the
-                // whole save to silently fail — which is why the picture
-                // looked like it "wasn't changing".
+                
+                
+                
+                
+                
                 var maxDim = 200;
                 var w = img.width, h = img.height;
                 if (w > h && w > maxDim) { h = Math.round(h * (maxDim / w)); w = maxDim; }
@@ -4638,8 +4662,8 @@ small {
         }
     };
 
-    // PRODUCTS starts as the built-in catalog, then owner-uploaded products
-    // (synced from Firestore) are merged in on top of it.
+    
+    
     var PRODUCTS = {};
     Object.keys(DEFAULT_PRODUCTS).forEach(function (id) {
         PRODUCTS[id] = DEFAULT_PRODUCTS[id];
@@ -4698,8 +4722,8 @@ small {
         );
     }
 
-    // Desktop/tablet: 4 columns x 3 rows = 12 per page.
-    // Mobile (<=600px): 2 columns x 8 rows = 16 per page.
+    
+    
     var MOBILE_BREAKPOINT_QUERY = "(max-width: 600px)";
     function getProductsPerPage() {
         return window.matchMedia(MOBILE_BREAKPOINT_QUERY).matches ? 16 : 12;
@@ -4708,9 +4732,9 @@ small {
     var currentProductPage = 1;
     var _lastProductsPerPage = getProductsPerPage();
 
-    // Re-render if the device crosses the mobile/desktop breakpoint (e.g.
-    // rotating the phone, or resizing a desktop window), so the page size
-    // (12 vs 16) always matches the current column layout.
+    
+    
+    
     var _productsPerPageResizeTimer = null;
     window.addEventListener("resize", function () {
         clearTimeout(_productsPerPageResizeTimer);
@@ -4733,8 +4757,8 @@ small {
         var grid = document.getElementById("productGrid");
         if (!grid || page === currentProductPage) return;
 
-        // Swipe left when moving forward (higher page number), swipe right
-        // when moving back — mirrors the direction the content is heading.
+        
+        
         var goingForward = page > currentProductPage;
         var exitClass = goingForward ? "product-grid-slide-out-left" : "product-grid-slide-out-right";
         var enterClass = goingForward ? "product-grid-slide-in-right" : "product-grid-slide-in-left";
@@ -4743,19 +4767,19 @@ small {
 
         grid.classList.remove("product-grid-slide-out-left", "product-grid-slide-out-right", "product-grid-slide-in-left", "product-grid-slide-in-right");
 
-        // Swap the content once the exit animation actually finishes, rather
-        // than guessing with a fixed timer — on slower/mobile devices a
-        // fixed delay can fire before the animation has visibly played,
-        // which looks like the grid just "jumps" with no animation at all.
-        // A short fallback timer still covers browsers that skip the
-        // animationend event (e.g. if the tab is backgrounded).
+        
+        
+        
+        
+        
+        
         var swapped = false;
         function swapContent() {
             if (swapped) return;
             swapped = true;
             renderProductGrid();
             grid.classList.remove(exitClass);
-            void grid.offsetWidth; // force reflow so the enter animation restarts
+            void grid.offsetWidth; 
             grid.classList.add(enterClass);
             grid.addEventListener("animationend", function () {
                 grid.classList.remove(enterClass);
@@ -4765,11 +4789,11 @@ small {
         grid.addEventListener("animationend", swapContent, { once: true });
         setTimeout(swapContent, 320);
 
-        void grid.offsetWidth; // ensure the class removal above is flushed first
+        void grid.offsetWidth; 
         grid.classList.add(exitClass);
 
-        // Only scroll if the grid isn't already fully in view, so the
-        // scroll doesn't compete with (and stall) the CSS animation.
+        
+        
         var rect = grid.getBoundingClientRect();
         if (rect.top < 0 || rect.bottom > window.innerHeight) {
             grid.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -4782,7 +4806,7 @@ small {
 
         var totalPages = Math.ceil(totalItems / getProductsPerPage());
 
-        // Don't show any pagination controls when everything fits on page 1.
+        
         if (totalPages <= 1) {
             el.innerHTML = "";
             return;
@@ -4838,7 +4862,7 @@ small {
         renderProductPagination(ids.length);
     }
 
-    // direction: -1 to deduct stock (order placed), +1 to restore it (order cancelled)
+    
     function adjustStockForItems(items, direction) {
         if (!items || items.length === 0) return;
 
@@ -4867,12 +4891,12 @@ small {
         return !!(user && !user.isOwner && user.isSeller);
     }
 
-    // Determines what role the current user plays for a given order:
-    // "owner"          - the site owner, always full access
-    // "buyer"          - the person who placed the order
-    // "seller-pending" - a seller viewing a not-yet-claimed pending order
-    // "seller-assigned"- the seller who confirmed/claimed this order
-    // "none"           - no access (e.g. another seller after someone else claimed it)
+    
+    
+    
+    
+    
+    
     function getOrderRoleFor(order, user) {
         if (!order || !user) return "none";
         if (user.isOwner) return "owner";
@@ -4893,6 +4917,30 @@ small {
 
     var newProductImageDataUrl = null;
 
+    
+    
+    
+    
+    var NO_SIZE_LABEL = "One Size";
+
+    
+    
+    function toggleNoSizeFields(which) {
+        var checkbox = document.getElementById(which === "edit" ? "editProductNoSize" : "newProductNoSize");
+        var sizesInput = document.getElementById(which === "edit" ? "editProductSizes" : "newProductSizes");
+        var hint = document.getElementById(which === "edit" ? "editProductSizesHint" : "newProductSizesHint");
+        var noSize = checkbox.checked;
+
+        sizesInput.style.display = noSize ? "none" : "";
+        hint.style.display = noSize ? "none" : "";
+        sizesInput.required = !noSize;
+        if (noSize) {
+            sizesInput.value = NO_SIZE_LABEL;
+        } else if (sizesInput.value === NO_SIZE_LABEL) {
+            sizesInput.value = "";
+        }
+    }
+
     function openAddProductModal() {
         if (!isOwnerLoggedIn()) {
             openAuthModal();
@@ -4905,6 +4953,8 @@ small {
         document.getElementById("newProductSizes").value = "";
         document.getElementById("newProductStock").value = "";
         document.getElementById("newProductImageInput").value = "";
+        document.getElementById("newProductNoSize").checked = false;
+        toggleNoSizeFields("new");
         var preview = document.getElementById("newProductImagePreview");
         preview.src = "";
         preview.classList.remove("show");
@@ -4916,11 +4966,11 @@ small {
         document.getElementById("addProductOverlay").classList.remove("show");
     }
 
-    // Resizes/crops any uploaded image to an exact target size (default
-    // 1024x1536, portrait) so every product photo comes out the same dimensions,
-    // regardless of what the seller/owner uploads. Uses a "cover" style
-    // crop (fills the whole frame, trims any excess) rather than squashing
-    // the image, so proportions stay correct.
+    
+    
+    
+    
+    
     function resizeImageToDataUrl(file, targetW, targetH, callback) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -4932,13 +4982,13 @@ small {
 
                 var sx, sy, sw, sh;
                 if (srcRatio > targetRatio) {
-                    // Source is wider than target: crop left/right.
+                    
                     sh = srcH;
                     sw = srcH * targetRatio;
                     sx = (srcW - sw) / 2;
                     sy = 0;
                 } else {
-                    // Source is taller than target: crop top/bottom.
+                    
                     sw = srcW;
                     sh = srcW / targetRatio;
                     sx = 0;
@@ -5002,8 +5052,9 @@ small {
         var priceRaw = document.getElementById("newProductPrice").value;
         var price = parseFloat(priceRaw);
         var description = document.getElementById("newProductDescription").value.trim();
-        var sizesRaw = document.getElementById("newProductSizes").value.trim();
-        var sizes = sizesRaw.split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 0; });
+        var noSize = document.getElementById("newProductNoSize").checked;
+        var sizesRaw = noSize ? NO_SIZE_LABEL : document.getElementById("newProductSizes").value.trim();
+        var sizes = noSize ? [NO_SIZE_LABEL] : sizesRaw.split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 0; });
         var stockRaw = document.getElementById("newProductStock").value;
         var stock = parseInt(stockRaw, 10);
 
@@ -5091,6 +5142,10 @@ small {
         document.getElementById("editProductStock").value = (typeof product.stock === "number") ? product.stock : 0;
         document.getElementById("editProductImageInput").value = "";
 
+        var isNoSize = (product.sizes || []).length === 1 && product.sizes[0] === NO_SIZE_LABEL;
+        document.getElementById("editProductNoSize").checked = isNoSize;
+        toggleNoSizeFields("edit");
+
         var preview = document.getElementById("editProductImagePreview");
         preview.src = product.image;
         preview.classList.add("show");
@@ -5138,8 +5193,9 @@ small {
         var priceRaw = document.getElementById("editProductPrice").value;
         var price = parseFloat(priceRaw);
         var description = document.getElementById("editProductDescription").value.trim();
-        var sizesRaw = document.getElementById("editProductSizes").value.trim();
-        var sizes = sizesRaw.split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 0; });
+        var noSize = document.getElementById("editProductNoSize").checked;
+        var sizesRaw = noSize ? NO_SIZE_LABEL : document.getElementById("editProductSizes").value.trim();
+        var sizes = noSize ? [NO_SIZE_LABEL] : sizesRaw.split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 0; });
         var stockRaw = document.getElementById("editProductStock").value;
         var stock = parseInt(stockRaw, 10);
 
@@ -5505,19 +5561,19 @@ small {
         resetReviewForm();
     }
 
-    // The cart used to live under one shared localStorage key for the whole
-    // browser, so it kept showing items after logout (and would even mix
-    // between different accounts on the same device). Keying it by the
-    // signed-in user's email fixes both: guests always see an empty cart,
-    // and each account gets its own.
+    
+    
+    
+    
+    
     function cartStorageKey() {
         var user = getCurrentUser();
         return user ? ("athletica_cart_" + user.email) : null;
     }
 
-    // One-time migration so anyone who already had items in the old shared
-    // cart doesn't lose them — moves that data into their own per-account key
-    // the next time they're logged in.
+    
+    
+    
     function migrateLegacyCart() {
         var legacy = localStorage.getItem("athletica_cart");
         if (legacy === null) return;
@@ -5573,10 +5629,10 @@ small {
         saveCart(cart);
     }
 
-    // "Add to Cart" now walks through the same size-picking assistant as
-    // "Buy" (see openProductChat) so we always know which size is going into
-    // the cart; the chat's continue button just adds the item instead of
-    // moving on to payment.
+    
+    
+    
+    
     function addToCartFromDetail() {
         openProductChat("cart");
     }
@@ -5683,16 +5739,16 @@ small {
 
     var chatState = { productId: null, qty: 1, size: null };
     var chatMode = "buy";
-    var chatFlowSource = "buy"; // "buy" (Buy Now -> payment) or "cart" (Add to Cart -> cart)
+    var chatFlowSource = "buy"; 
     var paymentProofDataUrl = null;
 
     function openBuyChat() {
         openProductChat("buy");
     }
 
-    // Shared entry point for the size-picking assistant used by both
-    // "Buy" and "Add to Cart". `intent` is "buy" or "cart" and controls the
-    // wording and what happens when the continue button is tapped.
+    
+    
+    
     function openProductChat(intent) {
         if (!getCurrentUser()) {
             closeProductDetail();
@@ -5737,10 +5793,30 @@ small {
         closeProductDetail();
         document.getElementById("chatOverlay").classList.add("show");
 
-        var greeting = chatFlowSource === "cart"
-            ? "Hi! Let's get " + product.name + " ready for your cart. Anong gusto mong malaman, o handa ka na bang pumili ng size?"
-            : "Hi! Tanungin mo ako kahit ano tungkol sa " + product.name + ", o sabihin mo kung handa ka nang bumili.";
+        
+        
+        
+        
+        
+        
+        var isSizeless = product.sizes && product.sizes.length === 1;
+
+        var greeting;
+        if (isSizeless) {
+            greeting = chatFlowSource === "cart"
+                ? "Hi! " + product.name + " doesn't need a size, so it's ready to add to your cart. What would you like to know, or should I add it now?"
+                : "Hi! " + product.name + " doesn't need a size, so it's ready to check out. What would you like to know, or are you ready to buy?";
+        } else {
+            greeting = chatFlowSource === "cart"
+                ? "Hi! Let's get " + product.name + " ready for your cart. What would you like to know, or are you ready to pick a size?"
+                : "Hi! Ask me anything about " + product.name + ", or let me know when you're ready to buy.";
+        }
         addChatMessage("ai", greeting);
+
+        if (isSizeless) {
+            chatSelectSize(product.sizes[0]);
+        }
+
         freeInput.focus();
     }
 
@@ -5772,9 +5848,9 @@ small {
         });
     }
 
-    // Real AI chat, scoped to the one product this chat window was opened
-    // for. chatHistory holds the running back-and-forth so the backend can
-    // keep context across turns; it's reset every time openProductChat runs.
+    
+    
+    
     var chatHistory = [];
     var PRODUCT_CHAT_ENDPOINT = "https://athletica-py.onrender.com/api/product-chat";
 
@@ -5820,7 +5896,7 @@ small {
             })
             .then(function (data) {
                 typingBubble.remove();
-                var reply = (data && data.reply) ? data.reply : "Sorry, walang sagot na natanggap.";
+                var reply = (data && data.reply) ? data.reply : "Sorry, no response was received.";
                 addChatMessage("ai", reply);
                 chatHistory.push({ role: "assistant", content: reply });
 
@@ -5830,7 +5906,7 @@ small {
             })
             .catch(function () {
                 typingBubble.remove();
-                addChatMessage("ai", "Pasensya na, may problema sa koneksyon. Subukan ulit.");
+                addChatMessage("ai", "Sorry, there was a connection problem. Please try again.");
             })
             .finally(function () {
                 inputEl.disabled = false;
@@ -5846,9 +5922,9 @@ small {
         }
     });
 
-    // Called when the AI backend reports the customer has confirmed a size
-    // (via its select_size tool call). Just records it and unlocks the
-    // continue button — the AI's own reply already confirms it in chat.
+    
+    
+    
     function chatSelectSize(size) {
         chatState.size = size;
         document.getElementById("chatContinueBtn").disabled = false;
@@ -6233,7 +6309,7 @@ small {
 
         orders = orders.slice().reverse();
 
-        // Unread/new notifications always float to the top; opened ones sink to the bottom.
+        
         orders.sort(function (a, b) {
             var aUnread = isOrderUnreadFor(a, user) ? 0 : 1;
             var bUnread = isOrderUnreadFor(b, user) ? 0 : 1;
@@ -6498,10 +6574,10 @@ small {
         refreshOrderUI();
     }
 
-    // Called when a seller taps "Confirm" on a still-unclaimed pending order.
-    // Claims the order for that seller: the order becomes confirmed, and from
-    // then on only the buyer, this seller, and the owner can see/chat on it —
-    // every other seller loses the notification and chat head for it.
+    
+    
+    
+    
     function sellerConfirmOrder() {
         var user = getCurrentUser();
         if (!user || !user.isSeller || user.isOwner) return;
@@ -6528,9 +6604,9 @@ small {
         return "buyer";
     }
 
-    // Figures out who "the other side" of this chat is from myRole's point of
-    // view: a buyer chats with the assigned seller (or the owner if no seller
-    // has claimed the order yet); staff always chat with the buyer.
+    
+    
+    
     function otherChatPartyRole(order, myRole) {
         return myRole === "buyer" ? (order.sellerEmail ? "seller" : "owner") : "buyer";
     }
@@ -6589,9 +6665,9 @@ small {
             return;
         }
 
-        // Mark this order as "seen" by me if the other side sent something
-        // since I last looked. Only writes to the cloud when there's actually
-        // something new, so this doesn't spam saves on every re-render.
+        
+        
+        
         order.seenAt = order.seenAt || { buyer: 0, seller: 0, owner: 0 };
         var mySeenAt = order.seenAt[myRole] || 0;
         var hasUnseenFromOther = order.messages.some(function (m) {
@@ -6645,9 +6721,9 @@ small {
         order.messages = order.messages || [];
         order.messages.push({ sender: sender, text: text, time: new Date().toLocaleTimeString(), ts: Date.now() });
 
-        // Notify everyone on this order EXCEPT whoever just sent the message —
-        // buyer, owner, and the assigned seller should all stay in the loop
-        // regardless of which one of them is chatting.
+        
+        
+        
         if (sender === "buyer") {
             order.ownerUnread = (order.ownerUnread || 0) + 1;
             if (order.sellerEmail) order.sellerUnread = (order.sellerUnread || 0) + 1;
@@ -6691,9 +6767,9 @@ small {
         var dockEl = document.getElementById("chatHeadDock");
         var user = getCurrentUser();
 
-        // Chat heads are the owner's + sellers' notification tray: any staff
-        // account (owner, or a seller promoted via a buyer's profile) gets one
-        // for still-open pending orders, plus their own claimed conversations.
+        
+        
+        
         if (!user || (!user.isOwner && !user.isSeller)) {
             dockEl.innerHTML = "";
             dockEl.style.display = "none";
@@ -6760,8 +6836,8 @@ small {
 
     setInterval(refreshOrderUI, 3000);
 
-    // Keeps the "Online"/"Typing..." line in an open chat fresh without
-    // touching the message list or the input (which would steal focus).
+    
+    
     setInterval(function () {
         if (!currentOrderActionId) return;
         if (!document.getElementById("orderActionOverlay").classList.contains("show")) return;
