@@ -1336,6 +1336,48 @@ small {
     margin: 5px 0 0;
 }
 
+.chat-text-input-row {
+    display: flex;
+    gap: 8px;
+    padding-top: 4px;
+    margin-bottom: 10px;
+}
+
+.chat-text-input-row input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+}
+
+.chat-text-input-row input:focus {
+    border-color: #ff523b;
+}
+
+.chat-send-btn {
+    background: #ff523b;
+    color: #fff;
+    border: none;
+    padding: 0 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.chat-send-btn:hover {
+    background: #563434;
+}
+
+.chat-send-btn:disabled,
+.chat-text-input-row input:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
 .orders-panel-box {
     max-width: 460px;
     text-align: left;
@@ -2896,12 +2938,9 @@ small {
 
         <div class="chat-choices" id="chatChoices"></div>
 
-        <div class="chat-measure-input" id="chatMeasureInput" style="display:none;">
-            <div class="chat-measure-row">
-                <input type="number" id="chatWeightInput" placeholder="Weight (kg)" min="1">
-                <input type="number" id="chatHeightInput" placeholder="Height (cm)" min="1">
-            </div>
-            <button type="button" class="chat-choice-btn" onclick="chatSubmitMeasurements()">Get My Size</button>
+        <div class="chat-text-input-row" id="chatTextInputRow" style="display:none;">
+            <input type="text" id="chatFreeInput" placeholder="Magtanong tungkol sa produkto..." autocomplete="off">
+            <button type="button" class="chat-send-btn" id="chatSendBtn" onclick="sendProductChatMessage()">Send</button>
         </div>
 
         <div class="chat-proof-upload" id="chatProofUpload" style="display:none;">
@@ -5679,7 +5718,6 @@ small {
 
         document.getElementById("chatMessages").innerHTML = "";
         document.getElementById("chatChoices").innerHTML = "";
-        document.getElementById("chatMeasureInput").style.display = "none";
         document.getElementById("chatProofUpload").style.display = "none";
         document.getElementById("chatProofPreview").style.display = "none";
         document.getElementById("paymentProofInput").value = "";
@@ -5688,14 +5726,22 @@ small {
         continueBtn.textContent = chatFlowSource === "cart" ? "Add to Cart" : "Continue with Payment";
         continueBtn.disabled = true;
 
+        chatHistory = [];
+        var inputRow = document.getElementById("chatTextInputRow");
+        var freeInput = document.getElementById("chatFreeInput");
+        inputRow.style.display = "flex";
+        freeInput.disabled = false;
+        freeInput.value = "";
+        document.getElementById("chatSendBtn").disabled = false;
+
         closeProductDetail();
         document.getElementById("chatOverlay").classList.add("show");
 
         var greeting = chatFlowSource === "cart"
-            ? "Hi! Let's get " + product.name + " ready for your cart. What would you like to know, or are you ready to pick a size?"
-            : "Hi! I can help you order " + product.name + ". What would you like to know, or are you ready to buy?";
+            ? "Hi! Let's get " + product.name + " ready for your cart. Anong gusto mong malaman, o handa ka na bang pumili ng size?"
+            : "Hi! Tanungin mo ako kahit ano tungkol sa " + product.name + ", o sabihin mo kung handa ka nang bumili.";
         addChatMessage("ai", greeting);
-        showChatMenu();
+        freeInput.focus();
     }
 
     function closeBuyChat() {
@@ -5709,6 +5755,7 @@ small {
         bubble.textContent = text;
         messagesEl.appendChild(bubble);
         messagesEl.scrollTop = messagesEl.scrollHeight;
+        return bubble;
     }
 
     function renderChatChoices(options) {
@@ -5725,114 +5772,85 @@ small {
         });
     }
 
-    function showChatMenu() {
-        renderChatChoices([
-            { label: "Price", onSelect: chatShowPrice },
-            { label: "Description", onSelect: chatShowDescription },
-            { label: "Available Sizes", onSelect: chatShowSizes },
-            { label: chatFlowSource === "cart" ? "I'm ready to add to cart" : "I'm ready to buy", onSelect: chatAskSize }
-        ]);
-    }
+    // Real AI chat, scoped to the one product this chat window was opened
+    // for. chatHistory holds the running back-and-forth so the backend can
+    // keep context across turns; it's reset every time openProductChat runs.
+    var chatHistory = [];
+    var PRODUCT_CHAT_ENDPOINT = "https://athletica-py.onrender.com/api/product-chat";
 
-    function chatShowPrice() {
+    function sendProductChatMessage() {
+        if (chatMode !== "buy") return;
+
+        var inputEl = document.getElementById("chatFreeInput");
+        var sendBtn = document.getElementById("chatSendBtn");
+        var text = inputEl.value.trim();
+        if (!text) return;
+
         var product = PRODUCTS[chatState.productId];
-        addChatMessage("user", "How much is it?");
-        addChatMessage("ai", "The " + product.name + " is ₱" + product.price.toFixed(2) + ".");
-        showChatMenu();
+        if (!product) return;
+
+        addChatMessage("user", text);
+        inputEl.value = "";
+        inputEl.disabled = true;
+        sendBtn.disabled = true;
+
+        var typingBubble = addChatMessage("ai", "...");
+        var historyForRequest = chatHistory.slice();
+        chatHistory.push({ role: "user", content: text });
+
+        fetch(PRODUCT_CHAT_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                product: {
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    description: product.description,
+                    sizes: product.sizes,
+                    stock: product.stock
+                },
+                message: text,
+                history: historyForRequest
+            })
+        })
+            .then(function (res) {
+                if (!res.ok) throw new Error("bad status");
+                return res.json();
+            })
+            .then(function (data) {
+                typingBubble.remove();
+                var reply = (data && data.reply) ? data.reply : "Sorry, walang sagot na natanggap.";
+                addChatMessage("ai", reply);
+                chatHistory.push({ role: "assistant", content: reply });
+
+                if (data && data.size && product.sizes.indexOf(data.size) !== -1) {
+                    chatSelectSize(data.size);
+                }
+            })
+            .catch(function () {
+                typingBubble.remove();
+                addChatMessage("ai", "Pasensya na, may problema sa koneksyon. Subukan ulit.");
+            })
+            .finally(function () {
+                inputEl.disabled = false;
+                sendBtn.disabled = false;
+                inputEl.focus();
+            });
     }
 
-    function chatShowDescription() {
-        var product = PRODUCTS[chatState.productId];
-        addChatMessage("user", "What are the details of this item?");
-        addChatMessage("ai", product.description);
-        showChatMenu();
-    }
-
-    var APPAREL_SIZES = ["Small", "Medium", "Large", "Extra Large"];
-
-    function isApparelSizes(sizes) {
-        return sizes.every(function (s) { return APPAREL_SIZES.indexOf(s) !== -1; });
-    }
-
-    function chatShowSizes() {
-        var product = PRODUCTS[chatState.productId];
-        addChatMessage("user", "What sizes are available?");
-        addChatMessage("ai", "Available sizes: " + product.sizes.join(", ") + ".");
-        showChatMenu();
-    }
-
-    function chatAskSize() {
-        var product = PRODUCTS[chatState.productId];
-        addChatMessage("user", chatFlowSource === "cart" ? "I'm ready to add to cart." : "I'm ready to buy.");
-
-        if (isApparelSizes(product.sizes)) {
-            addChatMessage("ai", "Would you like me to recommend a size based on your weight and height, or would you rather pick it yourself?");
-            renderChatChoices([
-                { label: "Recommend a size for me", onSelect: chatAskMeasurements },
-                { label: "I'll choose my own size", onSelect: chatShowSizeChoices }
-            ]);
-        } else {
-            addChatMessage("ai", "What size would you like?");
-            chatShowSizeChoices();
+    document.getElementById("chatFreeInput").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            sendProductChatMessage();
         }
-    }
+    });
 
-    function chatShowSizeChoices() {
-        var product = PRODUCTS[chatState.productId];
-        renderChatChoices(product.sizes.map(function (size) {
-            return { label: size, onSelect: function () { chatSelectSize(size); } };
-        }));
-    }
-
-    function chatAskMeasurements() {
-        addChatMessage("user", "Recommend a size for me.");
-        addChatMessage("ai", "Sure! Please enter your weight and height below.");
-
-        document.getElementById("chatChoices").innerHTML = "";
-        document.getElementById("chatWeightInput").value = "";
-        document.getElementById("chatHeightInput").value = "";
-        document.getElementById("chatMeasureInput").style.display = "flex";
-    }
-
-    function recommendSizeFromMeasurements(weightKg, heightCm) {
-        var heightM = heightCm / 100;
-        var bmi = weightKg / (heightM * heightM);
-
-        if (bmi < 18.5) return "Small";
-        if (bmi < 25) return "Medium";
-        if (bmi < 30) return "Large";
-        return "Extra Large";
-    }
-
-    function chatSubmitMeasurements() {
-        var weight = parseFloat(document.getElementById("chatWeightInput").value);
-        var height = parseFloat(document.getElementById("chatHeightInput").value);
-
-        if (!weight || !height || weight <= 0 || height <= 0) return;
-
-        document.getElementById("chatMeasureInput").style.display = "none";
-        addChatMessage("user", "Weight: " + weight + "kg, Height: " + height + "cm");
-
-        var recommendedSize = recommendSizeFromMeasurements(weight, height);
-        addChatMessage("ai", "Based on your height and weight, I'd recommend size " + recommendedSize + ". You can go with this or pick a different size.");
-
-        renderChatChoices([
-            { label: "Use " + recommendedSize, onSelect: function () { chatSelectSize(recommendedSize); } },
-            { label: "Choose a Different Size", onSelect: chatShowSizeChoices }
-        ]);
-    }
-
+    // Called when the AI backend reports the customer has confirmed a size
+    // (via its select_size tool call). Just records it and unlocks the
+    // continue button — the AI's own reply already confirms it in chat.
     function chatSelectSize(size) {
         chatState.size = size;
-        addChatMessage("user", size);
-        var actionLabel = chatFlowSource === "cart" ? "\"Add to Cart\"" : "\"Continue with Payment\"";
-        addChatMessage("ai", "Got it — size " + size + " noted. When you're ready, just tap " + actionLabel + " below.");
-
-        renderChatChoices([
-            { label: "Change Size", onSelect: chatAskSize },
-            { label: "Back to Menu", onSelect: showChatMenu }
-        ]);
-
         document.getElementById("chatContinueBtn").disabled = false;
     }
 
@@ -5944,7 +5962,7 @@ small {
 
         document.getElementById("chatMessages").innerHTML = "";
         document.getElementById("chatChoices").innerHTML = "";
-        document.getElementById("chatMeasureInput").style.display = "none";
+        document.getElementById("chatTextInputRow").style.display = "none";
 
         document.getElementById("paymentProofInput").value = "";
         document.getElementById("chatProofPreview").style.display = "none";
