@@ -425,6 +425,227 @@ small {
     display: none;
 }
 
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 30px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #333;
+    border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+.hamburger-btn:hover span {
+    background: #ff523b;
+}
+
+.side-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 5000;
+}
+
+.side-menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 280px;
+    max-width: 80%;
+    background: #fff;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+    z-index: 5001;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.side-menu.show {
+    transform: translateX(0);
+}
+
+.side-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.side-menu-logo {
+    height: 40px;
+    width: auto;
+}
+
+.side-menu-close {
+    background: none;
+    border: none;
+    font-size: 30px;
+    line-height: 1;
+    color: #555;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.side-menu-close:hover {
+    color: #ff523b;
+}
+
+.side-menu-list li {
+    margin-bottom: 4px;
+}
+
+.side-menu-list li a {
+    display: block;
+    padding: 12px 10px;
+    font-size: 16px;
+    color: #333;
+    border-radius: 8px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.side-menu-list li a:hover {
+    background: #ffd6d6;
+    color: #ff523b;
+}
+
+.side-menu-footer {
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dark-mode-label {
+    font-size: 15px;
+    color: #333;
+}
+
+.dark-mode-switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.dark-mode-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.dark-mode-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 26px;
+    transition: background-color 0.3s ease;
+}
+
+.dark-mode-slider::before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.dark-mode-switch input:checked + .dark-mode-slider {
+    background-color: #ff523b;
+}
+
+.dark-mode-switch input:checked + .dark-mode-slider::before {
+    transform: translateX(20px);
+}
+
+body.dark-mode {
+    background: #121212;
+}
+
+body.dark-mode .site-navbar,
+body.dark-mode .side-menu,
+body.dark-mode .header,
+body.dark-mode .offer {
+    background: #1a1a1a;
+}
+
+body.dark-mode p,
+body.dark-mode h4,
+body.dark-mode small,
+body.dark-mode .title,
+body.dark-mode a {
+    color: #ddd;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+    color: #f0f0f0;
+}
+
+body.dark-mode .side-menu-header,
+body.dark-mode .side-menu-footer {
+    border-color: #333;
+}
+
+body.dark-mode .dark-mode-label {
+    color: #ddd;
+}
+
+body.dark-mode .side-menu-list li a {
+    color: #ddd;
+}
+
+body.dark-mode .side-menu-list li a:hover {
+    background: #2a2a2a;
+    color: #ff8a65;
+}
+
+body.dark-mode .col-4,
+body.dark-mode .investors .col-3 {
+    background: #1e1e1e;
+}
+
 .page-transition-overlay {
     position: fixed;
     top: 0;
@@ -3159,6 +3380,12 @@ small {
 
         <div class="navbar">
 
+            <button class="hamburger-btn" onclick="openSideMenu()" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <div class="logo">
                 <img src="images/logo.png" alt="Athletica">
             </div>
@@ -3197,6 +3424,34 @@ small {
     </div>
 
 </header>
+
+<div class="side-menu-overlay" id="sideMenuOverlay" onclick="closeSideMenu()"></div>
+
+<aside class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+        <img src="images/logo.png" alt="Athletica" class="side-menu-logo">
+        <button class="side-menu-close" onclick="closeSideMenu()" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="side-menu-list">
+        <li><a href="#">TEMPLATE 1</a></li>
+        <li><a href="#">TEMPLATE 2</a></li>
+        <li><a href="#">TEMPLATE 3</a></li>
+        <li><a href="#">TEMPLATE 4</a></li>
+        <li><a href="#">TEMPLATE 5</a></li>
+        <li><a href="#">TEMPLATE 6</a></li>
+        <li><a href="#">TEMPLATE 7</a></li>
+        <li><a href="#">TEMPLATE 8</a></li>
+        <li><a href="#">TEMPLATE 9</a></li>
+    </ul>
+
+    <div class="side-menu-footer">
+        <span class="dark-mode-label">Dark Mode</span>
+        <label class="dark-mode-switch">
+            <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+            <span class="dark-mode-slider"></span>
+        </label>
+    </div>
+</aside>
 
 <main id="pagesWrapper">
 
@@ -3834,6 +4089,40 @@ small {
     document.querySelectorAll('#MenuItems a[href^="#"]').forEach(function (link) {
         link.addEventListener("click", handleNavLinkClick);
     });
+
+    var sideMenu = document.getElementById("sideMenu");
+    var sideMenuOverlay = document.getElementById("sideMenuOverlay");
+
+    function openSideMenu() {
+        sideMenu.classList.add("show");
+        sideMenuOverlay.classList.add("show");
+    }
+
+    function closeSideMenu() {
+        sideMenu.classList.remove("show");
+        sideMenuOverlay.classList.remove("show");
+    }
+
+    document.querySelectorAll('#sideMenu a[href^="#"]').forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            handleNavLinkClick.call(this, e);
+            closeSideMenu();
+        });
+    });
+
+    function toggleDarkMode() {
+        var isDark = document.getElementById("darkModeToggle").checked;
+        document.body.classList.toggle("dark-mode", isDark);
+        localStorage.setItem("athletica-dark-mode", isDark ? "1" : "0");
+    }
+
+    (function initDarkMode() {
+        var saved = localStorage.getItem("athletica-dark-mode");
+        if (saved === "1") {
+            document.body.classList.add("dark-mode");
+            document.getElementById("darkModeToggle").checked = true;
+        }
+    })();
 
     var authOverlay = document.getElementById("authOverlay");
 
