@@ -28,8 +28,9 @@ CORS(app)  # sa production, i-restrict mo ito sa domain ng site mo lang
 
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
-# Gemini 2.5 Flash — kasama sa libreng tier (~1,500 requests/araw).
-MODEL = "gemini-2.5-flash"
+# Gemini 3.6 Flash — kasama sa libreng tier (~1,500 requests/araw).
+# (Na-deprecate na ang gemini-2.5-flash; ito na ang kapalit.)
+MODEL = "gemini-3.6-flash"
 
 
 @app.route("/api/product-chat", methods=["POST"])
