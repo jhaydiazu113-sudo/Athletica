@@ -2895,7 +2895,7 @@ small {
                 <h2 id="walletInfoAmount">₱0.00</h2>
             </div>
             <div class="gcash-owner-info" id="walletInfoDetails"></div>
-            <p class="gcash-note">Note: after you send payment, take a screenshot.</p>
+            <p class="gcash-note">Note: after you send payment, take a screenshot. We will never ask for your card number, bank PIN, or OTP.</p>
             <button type="button" class="btn auth-submit" onclick="goToPaymentProofChat()">Next Process</button>
             <a href="#" class="auth-link" onclick="backToPaymentMethod(); return false;">Back</a>
         </div>
@@ -3556,6 +3556,61 @@ small {
 
 </div>
 
+<div class="site-page" data-page="privacy">
+
+<section id="privacy" class="info-section">
+
+    <div class="small-container">
+
+        <h2 class="title">
+            Privacy Policy &amp; Terms
+        </h2>
+
+        <div class="info-content">
+
+            <p>
+                Athletica is a student project store operated by the group members
+                listed in our footer. This page explains what information we collect
+                and how orders are handled.
+            </p>
+
+            <p>
+                <strong>Information we collect</strong><br>
+                When you place an order, we ask for your name, contact number,
+                delivery address, and a screenshot of your payment confirmation.
+                This information is used only to process and deliver your order,
+                and is never sold or shared with third parties.
+            </p>
+
+            <p>
+                <strong>Payment</strong><br>
+                We currently accept manual payment confirmation through GCash, Maya,
+                PayPal, or Cash on Delivery. We never ask for your full card number,
+                bank PIN, or one-time passwords (OTP). If anyone asks you for these
+                while claiming to be Athletica, please contact us immediately using
+                the details on our Contact page.
+            </p>
+
+            <p>
+                <strong>Returns &amp; refunds</strong><br>
+                If an item arrives damaged or incorrect, message us within 3 days of
+                delivery with your order details and photos of the item, and we will
+                arrange a replacement or refund.
+            </p>
+
+            <p>
+                <strong>Questions</strong><br>
+                Reach out through our Contact page for anything not covered here.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
 <div class="site-page" data-page="account">
 
 <section id="account" class="info-section">
@@ -3616,6 +3671,10 @@ small {
                     and Benefits of Sports Accessible to the Many.
                 </p>
 
+                <p>
+                    Questions about an order? <a href="#contact" onclick="goToPageByKey('contact'); return false;" style="color:#fff;text-decoration:underline;">Contact us</a>.
+                </p>
+
             </div>
 
             <div class="footer-col-3">
@@ -3627,19 +3686,15 @@ small {
                 <ul>
 
                     <li>
-                        Coupons
+                        <a href="#about" onclick="goToPageByKey('about'); return false;">About Us</a>
                     </li>
 
                     <li>
-                        Blog Post
+                        <a href="#contact" onclick="goToPageByKey('contact'); return false;">Contact Us</a>
                     </li>
 
                     <li>
-                        Return Policy
-                    </li>
-
-                    <li>
-                        Join Affiliate
+                        <a href="#privacy" onclick="goToPageByKey('privacy'); return false;">Privacy &amp; Return Policy</a>
                     </li>
 
                 </ul>
@@ -3721,7 +3776,7 @@ small {
 
     }
 
-    var PAGE_ORDER = ["home", "product", "about", "contact", "account"];
+    var PAGE_ORDER = ["home", "product", "about", "contact", "privacy", "account"];
     var transitionOverlay = document.getElementById("pageTransitionOverlay");
     var TRANSITION_MS = 320;
     var currentPageKey = "home";
@@ -3755,6 +3810,13 @@ small {
         }, TRANSITION_MS);
     }
 
+    function goToPageByKey(pageKey) {
+        if (PAGE_ORDER.indexOf(pageKey) === -1) return;
+        if (pageKey === currentPageKey) return;
+        var direction = PAGE_ORDER.indexOf(pageKey) > PAGE_ORDER.indexOf(currentPageKey) ? "right" : "left";
+        goToPage(pageKey, direction);
+    }
+
     function handleNavLinkClick(e) {
         var href = this.getAttribute("href");
         if (!href || href.charAt(0) !== "#" || href.length < 2) return;
@@ -3766,10 +3828,7 @@ small {
 
         MenuItems.style.maxHeight = "0px";
 
-        if (pageKey === currentPageKey) return;
-
-        var direction = PAGE_ORDER.indexOf(pageKey) > PAGE_ORDER.indexOf(currentPageKey) ? "right" : "left";
-        goToPage(pageKey, direction);
+        goToPageByKey(pageKey);
     }
 
     document.querySelectorAll('#MenuItems a[href^="#"]').forEach(function (link) {
