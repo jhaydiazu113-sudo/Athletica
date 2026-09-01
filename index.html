@@ -821,6 +821,10 @@ body.dark-mode .account-box div {
     color: #ddd;
 }
 
+body.dark-mode .account-box .profile-avatar-initials {
+    color: #fff;
+}
+
 body.dark-mode .avatar-upload-btn {
     border-color: #1e1e1e;
 }
@@ -938,6 +942,10 @@ body.dark-mode .modal-box .user-profile-view-role {
 
 body.dark-mode .modal-box .user-profile-view-role.role-seller {
     color: #1c8a53;
+}
+
+body.dark-mode .modal-box .user-profile-view-avatar {
+    color: #ff523b;
 }
 
 body.dark-mode .auth-box {
@@ -7091,35 +7099,9 @@ body.dark-mode .wishlist-item {
         }
 
         var toggleWrap = document.getElementById("userProfileViewSellerToggleWrap");
-        if (isOwnerLoggedIn() && found && !found.isOwner) {
-            var isSeller = !!found.isSeller;
-            toggleWrap.innerHTML =
-                '<div class="seller-toggle-btn-wrap">' +
-                    '<button type="button" class="btn seller-toggle-btn' + (isSeller ? ' is-seller' : '') + '" onclick="toggleSellerStatus()">' +
-                        (isSeller ? "Remove to Seller" : "Add to Seller") +
-                    '</button>' +
-                '</div>';
-        } else {
-            toggleWrap.innerHTML = "";
-        }
+        toggleWrap.innerHTML = "";
 
         document.getElementById("userProfileViewOverlay").classList.add("show");
-    }
-
-    function toggleSellerStatus() {
-        if (!isOwnerLoggedIn() || !currentProfileViewEmail) return;
-
-        var email = currentProfileViewEmail;
-        updateUsers(function (users) {
-            var target = users.find(function (u) { return u.email === email; });
-            if (!target || target.isOwner) return users;
-            target.isSeller = !target.isSeller;
-            return users;
-        }, function () {
-            var target = getUsers().find(function (u) { return u.email === email; });
-            openUserProfileView(email, target ? target.name : "");
-            refreshOrderUI();
-        });
     }
 
     function closeUserProfileView() {
