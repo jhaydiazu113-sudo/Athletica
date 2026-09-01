@@ -8830,31 +8830,15 @@ body.dark-mode .wishlist-item {
 
         var buttonsEl = document.getElementById("orderActionButtons");
         var chatSection = document.getElementById("orderChatSection");
+        chatSection.style.display = "none";
 
+        buttonsEl.style.display = "block";
         if (order.status === "pending") {
-            chatSection.style.display = "none";
-            if (isOwnerView) {
-                buttonsEl.style.display = "flex";
-                buttonsEl.innerHTML =
-                    '<button type="button" class="btn order-cancel-btn" onclick="ownerDecideOrder(\'cancelled\')">Cancel</button>' +
-                    '<button type="button" class="btn" onclick="ownerDecideOrder(\'confirmed\')">Confirm</button>';
-            } else if (isSellerView) {
-                buttonsEl.style.display = "flex";
-                buttonsEl.innerHTML =
-                    '<button type="button" class="btn" onclick="sellerConfirmOrder()">Confirm</button>';
-            } else {
-                buttonsEl.style.display = "block";
-                buttonsEl.innerHTML = '<p class="orders-panel-empty">Waiting for approval.</p>';
-            }
+            buttonsEl.innerHTML = '<p class="orders-panel-empty">Waiting for approval.</p>';
         } else if (order.status === "cancelled") {
-            buttonsEl.style.display = "block";
             buttonsEl.innerHTML = '<p class="orders-panel-empty">This order was cancelled.</p>';
-            chatSection.style.display = "none";
         } else {
-            buttonsEl.style.display = "none";
-            buttonsEl.innerHTML = "";
-            chatSection.style.display = "block";
-            renderOrderChatMessages(order);
+            buttonsEl.innerHTML = '<p class="orders-panel-empty">This order is confirmed.</p>';
         }
     }
 
@@ -9282,31 +9266,6 @@ body.dark-mode .wishlist-item {
         }
 
         var heads = [];
-
-        if (user.isOwner || user.isSeller) {
-            var orders = getOrders().filter(function (o) {
-                return isOrderUnreadFor(o, user);
-            });
-
-            orders.forEach(function (o) {
-                var role = getOrderRoleFor(o, user);
-                var initials = (o.buyerName || "?").trim().charAt(0).toUpperCase() || "?";
-                var liveAvatar = liveAvatarFor(o.buyerEmail, o.buyerAvatar);
-                var avatarHtml = liveAvatar
-                    ? '<img src="' + liveAvatar + '" alt="">'
-                    : '<div class="chat-head-initials">' + escapeHtml(initials) + '</div>';
-                var unread = role === "owner" ? o.ownerUnread : o.sellerUnread;
-                var badgeText = o.status === "pending" ? "!" : String(unread);
-
-                heads.push(
-                    '<div class="chat-head" title="' + escapeHtml(o.buyerName) + ' — ' + escapeHtml(orderSummaryText(o)) + '" onclick="openOrderAction(\'' + o.id + '\')">' +
-                        avatarHtml +
-                        '<span class="presence-dot' + (isUserOnline(o.buyerEmail) ? ' online' : '') + '"></span>' +
-                        '<span class="chat-head-badge">' + badgeText + '</span>' +
-                    '</div>'
-                );
-            });
-        }
 
         var dmThreads = getUnreadDmThreadsFor(user.email);
         dmThreads.forEach(function (t) {
