@@ -5310,6 +5310,34 @@ body.dark-mode .wishlist-item {
             });
     }
 
+    // Reads + writes the users list atomically via a Firestore transaction.
+    // Fixes accounts getting silently wiped out: the old code read the
+    // locally cached list, edited it, then overwrote the WHOLE document.
+    // If two people signed up / edited their profile around the same time,
+    // whoever saved last would clobber the other's change and drop their
+    // account (sometimes even the owner account, since seeding used the
+    // same unsafe pattern). Using a transaction forces every write to read
+    // the latest server copy first, so concurrent changes can't erase each
+    // other anymore.
+    function updateUsers(mutator, onDone, onError) {
+        var ref = db.collection("athletica").doc("users");
+        db.runTransaction(function (transaction) {
+            return transaction.get(ref).then(function (doc) {
+                var list = (doc.exists && doc.data().list) ? doc.data().list : [];
+                var result = mutator(list.slice()) || list;
+                transaction.set(ref, { list: result });
+                return result;
+            });
+        }).then(function (result) {
+            _cloud.users = result;
+            if (onDone) onDone(result);
+        }).catch(function (err) {
+            console.error("updateUsers error", err);
+            alert("Sorry, we couldn't save that change. Please check your connection and try again.");
+            if (onError) onError(err);
+        });
+    }
+
     function normalizeUsername(raw) {
         var v = (raw || "").trim();
         if (v && v.charAt(0) !== "@") v = "@" + v;
@@ -5361,8 +5389,11 @@ body.dark-mode .wishlist-item {
         _ownerSeeded = true;
         var exists = _cloud.users.some(function (u) { return u.email === OWNER_EMAIL; });
         if (!exists) {
-            var updated = _cloud.users.concat([{ name: "Athletica Owner", username: "@AthleticaOwner", email: OWNER_EMAIL, password: OWNER_PASSWORD, avatar: "", isOwner: true }]);
-            saveUsers(updated);
+            updateUsers(function (users) {
+                if (users.some(function (u) { return u.email === OWNER_EMAIL; })) return users;
+                users.push({ name: "Athletica Owner", username: "@AthleticaOwner", email: OWNER_EMAIL, password: OWNER_PASSWORD, avatar: "", isOwner: true });
+                return users;
+            });
         }
     }
 
@@ -5580,15 +5611,18 @@ body.dark-mode .wishlist-item {
             return false;
         }
 
-        var users = getUsers();
-        users.push({ name: pending.name, username: pending.username, email: pending.email, password: pending.password, role: pending.role, avatar: "" });
-        saveUsers(users);
-        setCurrentUser(pending.email);
-        localStorage.removeItem("athletica_pending_signup");
+        updateUsers(function (users) {
+            if (users.some(function (u) { return u.email === pending.email; })) return users;
+            users.push({ name: pending.name, username: pending.username, email: pending.email, password: pending.password, role: pending.role, avatar: "" });
+            return users;
+        }, function () {
+            setCurrentUser(pending.email);
+            localStorage.removeItem("athletica_pending_signup");
 
-        errorEl.textContent = "";
-        closeAuthModal();
-        renderAccount();
+            errorEl.textContent = "";
+            closeAuthModal();
+            renderAccount();
+        });
 
         return false;
     }
@@ -5686,21 +5720,23 @@ body.dark-mode .wishlist-item {
             return false;
         }
 
-        var users = getUsers();
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].email === reset.email) {
-                users[i].password = newPassword;
-                break;
+        updateUsers(function (users) {
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].email === reset.email) {
+                    users[i].password = newPassword;
+                    break;
+                }
             }
-        }
-        saveUsers(users);
-        localStorage.removeItem("athletica_reset_request");
+            return users;
+        }, function () {
+            localStorage.removeItem("athletica_reset_request");
 
-        errorEl.textContent = "";
-        document.getElementById("signinEmail").value = reset.email;
-        document.getElementById("signinPassword").value = "";
-        document.getElementById("signinError").textContent = "Password reset! Please sign in with your new password.";
-        switchAuthTab("signin");
+            errorEl.textContent = "";
+            document.getElementById("signinEmail").value = reset.email;
+            document.getElementById("signinPassword").value = "";
+            document.getElementById("signinError").textContent = "Password reset! Please sign in with your new password.";
+            switchAuthTab("signin");
+        });
 
         return false;
     }
@@ -5794,8 +5830,16 @@ body.dark-mode .wishlist-item {
         }
 
         if (!found.avatar && picture) {
-            found.avatar = picture;
-            saveUsers(users);
+            updateUsers(function (users2) {
+                var u = users2.find(function (u) { return u.email === email; });
+                if (u && !u.avatar) u.avatar = picture;
+                return users2;
+            }, function () {
+                setCurrentUser(email);
+                closeAuthModal();
+                renderAccount();
+            });
+            return;
         }
 
         setCurrentUser(email);
@@ -5838,22 +5882,19 @@ body.dark-mode .wishlist-item {
             return false;
         }
 
-        var users = getUsers();
-        var alreadyExists = false;
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].email === pending.email) { alreadyExists = true; break; }
-        }
-
-        if (!alreadyExists) {
-            users.push({ name: name, username: username, email: pending.email, password: "", role: role, avatar: pending.picture || "" });
-            saveUsers(users);
-        }
-
-        localStorage.removeItem("athletica_pending_google_signup");
-        errorEl.textContent = "";
-        setCurrentUser(pending.email);
-        closeAuthModal();
-        renderAccount();
+        updateUsers(function (users) {
+            var alreadyExists = users.some(function (u) { return u.email === pending.email; });
+            if (!alreadyExists) {
+                users.push({ name: name, username: username, email: pending.email, password: "", role: role, avatar: pending.picture || "" });
+            }
+            return users;
+        }, function () {
+            localStorage.removeItem("athletica_pending_google_signup");
+            errorEl.textContent = "";
+            setCurrentUser(pending.email);
+            closeAuthModal();
+            renderAccount();
+        });
 
         return false;
     }
@@ -5871,28 +5912,29 @@ body.dark-mode .wishlist-item {
 
     function socialLogin(provider) {
         var email = provider + "user@" + provider + ".com";
-        var users = getUsers();
-        var found = null;
+        var found = getUsers().some(function (u) { return u.email === email; });
 
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].email === email) { found = users[i]; break; }
+        function proceed() {
+            setCurrentUser(email);
+            closeAuthModal();
+            renderAccount();
         }
 
         if (!found) {
-            found = {
-                name: provider.charAt(0).toUpperCase() + provider.slice(1) + " User",
-                username: "@" + provider + "user",
-                email: email,
-                password: "",
-                avatar: ""
-            };
-            users.push(found);
-            saveUsers(users);
+            updateUsers(function (users) {
+                if (users.some(function (u) { return u.email === email; })) return users;
+                users.push({
+                    name: provider.charAt(0).toUpperCase() + provider.slice(1) + " User",
+                    username: "@" + provider + "user",
+                    email: email,
+                    password: "",
+                    avatar: ""
+                });
+                return users;
+            }, proceed);
+        } else {
+            proceed();
         }
-
-        setCurrentUser(email);
-        closeAuthModal();
-        renderAccount();
     }
 
     function logout() {
@@ -5930,16 +5972,18 @@ body.dark-mode .wishlist-item {
             return false;
         }
 
-        var users = getUsers();
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].email === user.email) {
-                users[i].name = newName;
-                break;
+        updateUsers(function (users) {
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].email === user.email) {
+                    users[i].name = newName;
+                    break;
+                }
             }
-        }
-        saveUsers(users);
-        closeEditName();
-        renderAccount();
+            return users;
+        }, function () {
+            closeEditName();
+            renderAccount();
+        });
 
         return false;
     }
@@ -5969,15 +6013,17 @@ body.dark-mode .wishlist-item {
 
                 var dataUrl = canvas.toDataURL("image/jpeg", 0.72);
 
-                var users = getUsers();
-                for (var i = 0; i < users.length; i++) {
-                    if (users[i].email === user.email) {
-                        users[i].avatar = dataUrl;
-                        break;
+                updateUsers(function (users) {
+                    for (var i = 0; i < users.length; i++) {
+                        if (users[i].email === user.email) {
+                            users[i].avatar = dataUrl;
+                            break;
+                        }
                     }
-                }
-                saveUsers(users);
-                renderAccount();
+                    return users;
+                }, function () {
+                    renderAccount();
+                });
             };
             img.onerror = function () {
                 alert("Couldn't read that image. Please try a different photo.");
@@ -7077,15 +7123,17 @@ body.dark-mode .wishlist-item {
     function toggleSellerStatus() {
         if (!isOwnerLoggedIn() || !currentProfileViewEmail) return;
 
-        var users = getUsers();
-        var target = users.find(function (u) { return u.email === currentProfileViewEmail; });
-        if (!target || target.isOwner) return;
-
-        target.isSeller = !target.isSeller;
-        saveUsers(users);
-
-        openUserProfileView(currentProfileViewEmail, target.name);
-        refreshOrderUI();
+        var email = currentProfileViewEmail;
+        updateUsers(function (users) {
+            var target = users.find(function (u) { return u.email === email; });
+            if (!target || target.isOwner) return users;
+            target.isSeller = !target.isSeller;
+            return users;
+        }, function () {
+            var target = getUsers().find(function (u) { return u.email === email; });
+            openUserProfileView(email, target ? target.name : "");
+            refreshOrderUI();
+        });
     }
 
     function closeUserProfileView() {
