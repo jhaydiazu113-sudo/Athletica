@@ -829,6 +829,49 @@ body.dark-mode .avatar-upload-btn {
     border-color: #1e1e1e;
 }
 
+body.dark-mode .account-order-link {
+    background: #1e1e1e;
+    border-color: #2a2a2a;
+    color: #ddd;
+}
+
+body.dark-mode .order-tracking-tabs {
+    border-bottom-color: #2a2a2a;
+}
+
+body.dark-mode .order-row {
+    border-color: #2a2a2a;
+}
+
+body.dark-mode .review-order-card {
+    border-color: #2a2a2a;
+}
+
+body.dark-mode .quick-review-row {
+    background: #262626;
+}
+
+body.dark-mode .review-refund-btn {
+    background: #2a2a2a;
+    color: #ddd;
+}
+
+body.dark-mode .review-refund-btn:hover {
+    background: #333;
+}
+
+body.dark-mode .write-review-textarea,
+body.dark-mode .write-review-photo-label {
+    background: #262626;
+    color: #ddd;
+}
+
+body.dark-mode .write-review-tag {
+    background: #1e1e1e;
+    border-color: #333;
+    color: #ccc;
+}
+
 body.dark-mode .profile-edit-name-btn {
     border-color: #444;
     color: #ccc;
@@ -970,6 +1013,16 @@ body.dark-mode .modal-box .order-status-cancelled {
 body.dark-mode .modal-box .order-status-delivered {
     background: #16324a;
     color: #82c4ff;
+}
+
+body.dark-mode .modal-box .write-review-star.filled,
+body.dark-mode .modal-box .quick-review-star.filled,
+body.dark-mode .modal-box .star-input span.filled {
+    color: #ffb800;
+}
+
+body.dark-mode .modal-box .review-item-stars {
+    color: #ff8a65;
 }
 
 body.dark-mode .auth-box {
@@ -1617,6 +1670,18 @@ body.dark-mode .confirm-overlay {
     display: flex;
 }
 
+.img-zoom-overlay {
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 7000;
+    cursor: zoom-out;
+}
+
+.img-zoom-overlay img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 8px;
+}
+
 .modal-box {
     position: relative;
     background: #fff;
@@ -2221,6 +2286,380 @@ body.dark-mode .confirm-overlay {
     cursor: pointer;
 }
 
+.account-order-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.account-order-link:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    border-color: #ff523b;
+}
+
+.account-order-link .account-order-link-arrow {
+    color: #999;
+    font-size: 14px;
+}
+
+.order-tracking-box {
+    max-width: 460px;
+    text-align: left;
+}
+
+.order-tracking-tabs {
+    display: flex;
+    gap: 4px;
+    margin-top: 14px;
+    border-bottom: 1px solid #eee;
+    overflow-x: auto;
+}
+
+.order-tracking-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: #888;
+    padding: 10px 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.order-tracking-tab:hover {
+    color: #ff523b;
+}
+
+.order-tracking-tab.active {
+    color: #ff523b;
+    border-bottom-color: #ff523b;
+}
+
+.order-tracking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.review-order-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.review-order-top {
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.review-order-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #f2f2f2;
+}
+
+.review-order-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.review-order-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.review-order-variant {
+    font-size: 12px;
+    color: #999;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.review-order-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 4px;
+    font-size: 13px;
+    color: #555;
+}
+
+.review-order-total {
+    text-align: right;
+    font-size: 13px;
+    color: #777;
+    margin-top: 10px;
+}
+
+.review-order-total strong {
+    color: #222;
+    font-size: 15px;
+}
+
+.review-order-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.review-order-actions button {
+    border: none;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.review-refund-btn {
+    background: #f2f2f2;
+    color: #333;
+}
+
+.review-refund-btn:hover {
+    background: #e6e6e6;
+}
+
+.review-write-btn {
+    background: #ff523b;
+    color: #fff;
+}
+
+.review-write-btn:hover {
+    background: #e6432c;
+}
+
+.quick-review-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 12px;
+}
+
+.quick-review-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+}
+
+.quick-review-stars {
+    display: flex;
+    gap: 4px;
+}
+
+.quick-review-star {
+    font-size: 20px;
+    color: #ddd;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.quick-review-star.filled {
+    color: #ffb800;
+}
+
+.review-order-reviewed-note {
+    font-size: 12px;
+    color: #1c8a53;
+    margin-top: 10px;
+}
+
+.write-review-box {
+    max-width: 460px;
+    text-align: left;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.write-review-product {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 8px;
+}
+
+.write-review-product img {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #f2f2f2;
+}
+
+.write-review-product-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+}
+
+.write-review-product-variant {
+    font-size: 12px;
+    color: #999;
+    margin-top: 2px;
+}
+
+.write-review-stars {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0 6px;
+}
+
+.write-review-star {
+    font-size: 32px;
+    color: #ddd;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.write-review-star.filled {
+    color: #ffb800;
+}
+
+.write-review-rate-label {
+    text-align: center;
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 18px;
+}
+
+.write-review-section-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.write-review-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.write-review-tag {
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #555;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 7px 14px;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.write-review-tag.selected {
+    border-color: #ff523b;
+    color: #ff523b;
+    background: #fff1ef;
+}
+
+.write-review-textarea {
+    width: 100%;
+    min-height: 90px;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #333;
+    resize: vertical;
+}
+
+.write-review-char-count {
+    text-align: right;
+    font-size: 11px;
+    color: #999;
+    margin-top: 4px;
+    margin-bottom: 14px;
+}
+
+.write-review-photo-row {
+    margin-bottom: 14px;
+}
+
+.write-review-photo-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    color: #999;
+    font-size: 13px;
+}
+
+.write-review-photo-preview {
+    width: 100%;
+    max-height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+.write-review-anon-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 18px;
+}
+
+.write-review-submit-btn {
+    width: 100%;
+    background: #ff523b;
+    color: #fff;
+    border: none;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px;
+    border-radius: 24px;
+    cursor: pointer;
+}
+
+.write-review-submit-btn:disabled {
+    background: #f2b3a9;
+    cursor: not-allowed;
+}
+
 .notif-choice-box {
     max-width: 360px;
     text-align: left;
@@ -2547,6 +2986,81 @@ body.dark-mode .confirm-overlay {
     font-size: 13px;
     color: #666;
     line-height: 1.5;
+}
+
+.review-item-photo {
+    max-width: 140px;
+    max-height: 140px;
+    border-radius: 8px;
+    margin-top: 8px;
+    display: block;
+    cursor: zoom-in;
+    border: 1px solid #eee;
+    object-fit: cover;
+}
+
+.review-item-verified {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #1c8a53;
+    background: #e8f5e9;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.review-form-photo-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #777;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding: 6px 14px;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.review-form-photo-label:hover {
+    border-color: #ff523b;
+    color: #ff523b;
+}
+
+.review-form-photo-preview-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.review-form-photo-preview {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 8px;
+    display: block;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+.review-form-photo-remove {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #333;
+    color: #fff;
+    border: none;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .review-empty {
@@ -3980,6 +4494,15 @@ body.dark-mode .wishlist-item {
                     </div>
                     <p class="review-form-label">Leave a comment:</p>
                     <textarea id="reviewComment" placeholder="Write a comment..." rows="2"></textarea>
+                    <div id="reviewPhotoPreviewWrap" class="review-form-photo-preview-wrap" style="display:none;">
+                        <img id="reviewPhotoPreview" class="review-form-photo-preview" src="" alt="Photo preview">
+                        <button type="button" class="review-form-photo-remove" onclick="removeCommentPhoto()">&times;</button>
+                    </div>
+                    <label class="review-form-photo-label">
+                        <i class="fa-solid fa-camera"></i>
+                        <span>Add a photo</span>
+                        <input type="file" accept="image/*" onchange="handleCommentPhoto(this)" hidden>
+                    </label>
                     <p class="auth-error" id="reviewError"></p>
                     <button type="button" class="btn auth-submit" onclick="postComment()">Post Comment</button>
                 </div>
@@ -4177,6 +4700,74 @@ body.dark-mode .wishlist-item {
 
     </div>
 
+</div>
+
+<div class="modal-overlay" id="orderTrackingOverlay">
+
+    <div class="modal-box order-tracking-box">
+
+        <button type="button" class="modal-close" onclick="closeOrderTracking()">&times;</button>
+
+        <h3>Order Tracking</h3>
+
+        <div class="order-tracking-tabs" id="orderTrackingTabs">
+            <button type="button" class="order-tracking-tab" data-tab="toship" onclick="setOrderTrackingTab('toship')">To Ship</button>
+            <button type="button" class="order-tracking-tab" data-tab="toreceive" onclick="setOrderTrackingTab('toreceive')">To Receive</button>
+            <button type="button" class="order-tracking-tab" data-tab="toreview" onclick="setOrderTrackingTab('toreview')">To Review</button>
+            <button type="button" class="order-tracking-tab" data-tab="returns" onclick="setOrderTrackingTab('returns')">Returns</button>
+        </div>
+
+        <div class="order-tracking-list" id="orderTrackingList"></div>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="writeReviewOverlay">
+
+    <div class="modal-box write-review-box">
+
+        <button type="button" class="modal-close" onclick="closeWriteReview()">&times;</button>
+
+        <h3>Write a review</h3>
+
+        <div class="write-review-product" id="writeReviewProduct"></div>
+
+        <div class="write-review-stars" id="writeReviewStars"></div>
+        <div class="write-review-rate-label">Rate your purchase</div>
+
+        <div class="write-review-section-label">Write 30+ characters (optional)</div>
+        <div class="write-review-tags">
+            <button type="button" class="write-review-tag" data-tag="Flavor" onclick="toggleWriteReviewTag('Flavor')">Flavor</button>
+            <button type="button" class="write-review-tag" data-tag="Packaging" onclick="toggleWriteReviewTag('Packaging')">Packaging</button>
+            <button type="button" class="write-review-tag" data-tag="Performance" onclick="toggleWriteReviewTag('Performance')">Performance</button>
+        </div>
+        <textarea class="write-review-textarea" id="writeReviewText" maxlength="300" placeholder="What did you like or dislike about this product?" oninput="updateWriteReviewCharCount()"></textarea>
+        <div class="write-review-char-count" id="writeReviewCharCount">0/300</div>
+
+        <div class="write-review-photo-row">
+            <div class="write-review-section-label">Add a photo (optional)</div>
+            <label class="write-review-photo-label" id="writeReviewPhotoLabel">
+                <i class="fa-solid fa-camera"></i>
+                <span id="writeReviewPhotoText">Add photo</span>
+                <input type="file" accept="image/*" onchange="handleWriteReviewPhoto(this)" hidden>
+            </label>
+            <img id="writeReviewPhotoPreview" class="write-review-photo-preview" style="display:none;" alt="Review photo">
+        </div>
+
+        <label class="write-review-anon-row">
+            <input type="checkbox" id="writeReviewAnon">
+            Post anonymously
+        </label>
+
+        <button type="button" class="write-review-submit-btn" id="writeReviewSubmitBtn" disabled onclick="submitWriteReview()">Submit</button>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay img-zoom-overlay" id="imgZoomOverlay" onclick="closeImgZoom()">
+    <img id="imgZoomImg" src="" alt="Photo">
 </div>
 
 <div class="modal-overlay" id="notifClearChoiceOverlay">
@@ -4917,6 +5508,11 @@ body.dark-mode .wishlist-item {
 <section id="account" class="info-section">
 
     <div class="small-container">
+
+        <button type="button" class="account-order-link" onclick="openOrderTracking()">
+            <span>Order</span>
+            <span class="account-order-link-arrow">&#8250;</span>
+        </button>
 
         <h2 class="title">
             Account
@@ -7142,6 +7738,34 @@ body.dark-mode .wishlist-item {
 
     var currentProductId = null;
     var currentReviewStars = 0;
+    var commentPhotoDataUrl = "";
+
+    function handleCommentPhoto(input) {
+        if (!input.files || !input.files[0]) return;
+
+        var reader = new FileReader();
+        reader.onload = function () {
+            commentPhotoDataUrl = reader.result;
+            document.getElementById("reviewPhotoPreview").src = commentPhotoDataUrl;
+            document.getElementById("reviewPhotoPreviewWrap").style.display = "inline-block";
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    function removeCommentPhoto() {
+        commentPhotoDataUrl = "";
+        document.getElementById("reviewPhotoPreview").src = "";
+        document.getElementById("reviewPhotoPreviewWrap").style.display = "none";
+    }
+
+    function openImgZoom(src) {
+        document.getElementById("imgZoomImg").src = src;
+        document.getElementById("imgZoomOverlay").classList.add("show");
+    }
+
+    function closeImgZoom() {
+        document.getElementById("imgZoomOverlay").classList.remove("show");
+    }
 
     function escapeHtml(str) {
         var div = document.createElement("div");
@@ -7335,12 +7959,14 @@ body.dark-mode .wishlist-item {
         
         
         listEl.innerHTML = comments.slice().reverse().map(function (c) {
-            var initials = (c.name || "?").trim().charAt(0).toUpperCase() || "?";
-            var avatarHtml = c.avatar
+            var isAnon = !!c.anonymous;
+            var displayName = isAnon ? "Anonymous" : c.name;
+            var initials = (displayName || "?").trim().charAt(0).toUpperCase() || "?";
+            var avatarHtml = (c.avatar && !isAnon)
                 ? '<img src="' + c.avatar + '" class="review-item-avatar-img" alt="">'
                 : '<div class="review-item-avatar-initials">' + escapeHtml(initials) + '</div>';
 
-            var ownerCanView = isOwnerLoggedIn();
+            var ownerCanView = isOwnerLoggedIn() && !isAnon;
             var userClickAttr = ownerCanView
                 ? ' onclick="openUserProfileView(\'' + escapeHtml(c.email || "") + '\', \'' + escapeHtml(c.name || "") + '\')"'
                 : '';
@@ -7348,17 +7974,24 @@ body.dark-mode .wishlist-item {
             var userRating = getUserReview(productId, c.email);
             var starsRowHtml = userRating ? '<div class="review-item-stars">' + starsHtml(userRating.rating) + '</div>' : '';
 
+            var verifiedBadge = c.verified ? '<span class="review-item-verified">Verified Purchase</span>' : '';
+            var photoHtml = c.photo
+                ? '<img src="' + c.photo + '" class="review-item-photo" onclick="openImgZoom(\'' + c.photo.replace(/'/g, "\\'") + '\')" alt="Review photo">'
+                : '';
+
             return (
                 '<div class="review-item">' +
                     '<div class="review-item-head">' +
                         '<div class="review-item-user' + (ownerCanView ? ' review-item-user-clickable' : '') + '"' + userClickAttr + '>' +
                             avatarHtml +
-                            '<span class="review-item-name">' + escapeHtml(c.name) + '</span>' +
+                            '<span class="review-item-name">' + escapeHtml(displayName) + '</span>' +
+                            verifiedBadge +
                         '</div>' +
                         '<span class="review-item-date">' + escapeHtml(c.date) + '</span>' +
                     '</div>' +
                     starsRowHtml +
-                    '<p class="review-item-comment">' + escapeHtml(c.comment) + '</p>' +
+                    (c.comment ? '<p class="review-item-comment">' + escapeHtml(c.comment) + '</p>' : '') +
+                    photoHtml +
                 '</div>'
             );
         }).join("");
@@ -7374,6 +8007,7 @@ body.dark-mode .wishlist-item {
         currentReviewStars = existingRating ? existingRating.rating : 0;
         updateStarInputDisplay();
         commentEl.value = "";
+        removeCommentPhoto();
         document.getElementById("reviewError").textContent = "";
 
         if (user) {
@@ -7478,8 +8112,8 @@ body.dark-mode .wishlist-item {
         var commentEl = document.getElementById("reviewComment");
         var comment = commentEl.value.trim();
 
-        if (!comment) {
-            errorEl.textContent = "Please write a comment.";
+        if (!comment && !commentPhotoDataUrl) {
+            errorEl.textContent = "Please write a comment or add a photo.";
             return;
         }
 
@@ -7496,12 +8130,14 @@ body.dark-mode .wishlist-item {
             avatar: user.avatar || "",
             comment: comment,
             date: new Date().toLocaleDateString(),
-            ts: Date.now()
+            ts: Date.now(),
+            photo: commentPhotoDataUrl || ""
         });
 
         setLastCommentTsFor(user.email);
 
         commentEl.value = "";
+        removeCommentPhoto();
         errorEl.textContent = "";
         renderProductReviews(currentProductId);
         updateCommentSubmitState();
@@ -8759,6 +9395,333 @@ body.dark-mode .wishlist-item {
         refreshOrderUI();
     }
 
+    var orderTrackingTab = "toship";
+
+    function openOrderTracking() {
+        var user = getCurrentUser();
+        if (!user) {
+            openAuthModal();
+            return;
+        }
+
+        orderTrackingTab = "toship";
+        document.getElementById("orderTrackingOverlay").classList.add("show");
+        renderOrderTracking();
+    }
+
+    function closeOrderTracking() {
+        document.getElementById("orderTrackingOverlay").classList.remove("show");
+    }
+
+    function setOrderTrackingTab(tab) {
+        orderTrackingTab = tab;
+        renderOrderTracking();
+    }
+
+    function renderOrderTracking() {
+        var user = getCurrentUser();
+        if (!user) return;
+
+        document.querySelectorAll("#orderTrackingTabs .order-tracking-tab").forEach(function (btn) {
+            btn.classList.toggle("active", btn.getAttribute("data-tab") === orderTrackingTab);
+        });
+
+        if (orderTrackingTab === "toreview") {
+            renderReviewOrders();
+            return;
+        }
+
+        var statusByTab = {
+            toship: "pending",
+            toreceive: "confirmed",
+            returns: "cancelled"
+        };
+        var emptyTextByTab = {
+            toship: "No orders to ship.",
+            toreceive: "No orders to receive.",
+            returns: "No returns."
+        };
+
+        var listEl = document.getElementById("orderTrackingList");
+        var orders = getOrders().filter(function (o) {
+            return o.buyerEmail === user.email && o.status === statusByTab[orderTrackingTab];
+        });
+        orders = orders.slice().reverse();
+
+        if (orders.length === 0) {
+            listEl.innerHTML = '<p class="orders-panel-empty">' + emptyTextByTab[orderTrackingTab] + '</p>';
+            return;
+        }
+
+        listEl.innerHTML = orders.map(function (o) {
+            var statusLabel = o.status === "pending" ? "Pending Approval" : (o.status === "confirmed" ? "Confirmed" : (o.status === "delivered" ? "Delivered" : "Cancelled"));
+
+            return (
+                '<div class="order-row" onclick="openOrderAction(\'' + o.id + '\')">' +
+                    '<div class="order-row-top">' +
+                        '<strong>&#8369;' + o.total.toFixed(2) + '</strong>' +
+                        '<span class="order-status order-status-' + o.status + '">' + statusLabel + '</span>' +
+                    '</div>' +
+                    '<div class="order-row-items">' + escapeHtml(orderSummaryText(o)) + '</div>' +
+                    '<div class="order-row-footer">' +
+                        '<div class="order-row-buyer">' + escapeHtml(o.date) + '</div>' +
+                    '</div>' +
+                '</div>'
+            );
+        }).join("");
+    }
+
+    function renderReviewOrders() {
+        var user = getCurrentUser();
+        var listEl = document.getElementById("orderTrackingList");
+
+        var orders = getOrders().filter(function (o) {
+            return o.buyerEmail === user.email && o.status === "delivered" && !o.reviewed;
+        });
+        orders = orders.slice().reverse();
+
+        if (orders.length === 0) {
+            listEl.innerHTML = '<p class="orders-panel-empty">No orders to review.</p>';
+            return;
+        }
+
+        listEl.innerHTML = orders.map(function (o) {
+            var firstItem = o.items[0] || {};
+            var extraCount = o.items.length - 1;
+            var nameLine = escapeHtml(firstItem.name || "") + (extraCount > 0 ? " +" + extraCount + " more" : "");
+            var variantLine = firstItem.size ? escapeHtml(firstItem.size) : "";
+            var thumb = firstItem.image
+                ? '<img class="review-order-thumb" src="' + firstItem.image + '" alt="">'
+                : '<div class="review-order-thumb"></div>';
+
+            var starsHtml = "";
+            for (var i = 1; i <= 5; i++) {
+                starsHtml += '<span class="quick-review-star" onclick="quickReviewSubmit(\'' + o.id + '\', ' + i + ')">&#9733;</span>';
+            }
+
+            return (
+                '<div class="review-order-card">' +
+                    '<div class="review-order-top" onclick="openOrderAction(\'' + o.id + '\')">' +
+                        thumb +
+                        '<div class="review-order-info">' +
+                            '<div class="review-order-name">' + nameLine + '</div>' +
+                            (variantLine ? '<div class="review-order-variant">' + variantLine + '</div>' : '') +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="review-order-total">Total: <strong>&#8369;' + o.total.toFixed(2) + '</strong></div>' +
+                    '<div class="review-order-actions">' +
+                        '<button type="button" class="review-refund-btn" onclick="requestRefund(\'' + o.id + '\')">Request Refund</button>' +
+                        '<button type="button" class="review-write-btn" onclick="openWriteReview(\'' + o.id + '\')">Write Review</button>' +
+                    '</div>' +
+                    '<div class="quick-review-row">' +
+                        '<span class="quick-review-label">Quick review</span>' +
+                        '<div class="quick-review-stars">' + starsHtml + '</div>' +
+                    '</div>' +
+                '</div>'
+            );
+        }).join("");
+    }
+
+    function requestRefund(orderId) {
+        showConfirmModal("Request a refund for this order? This will cancel the order.", function () {
+            var orders = getOrders();
+            var order = orders.find(function (o) { return o.id === orderId; });
+            if (!order) return;
+
+            order.status = "cancelled";
+            order.buyerUnread = (order.buyerUnread || 0) + 1;
+            saveOrdersList(orders);
+            adjustStockForItems(order.items, 1);
+
+            renderOrderTracking();
+            refreshOrderUI();
+        }, { title: "Request Refund", okText: "Request Refund" });
+    }
+
+    function postOrderReviewToProducts(order) {
+        var user = getCurrentUser();
+        if (!user || !order) return;
+
+        var isAnon = !!order.reviewAnonymous;
+        var displayName = isAnon ? "Anonymous" : user.name;
+        var displayAvatar = isAnon ? "" : (user.avatar || "");
+        var dateStr = new Date().toLocaleDateString();
+        var ts = Date.now();
+
+        var productIds = [];
+        (order.items || []).forEach(function (it) {
+            if (it.id && productIds.indexOf(it.id) === -1) productIds.push(it.id);
+        });
+
+        var hasText = !!(order.reviewText && order.reviewText.trim() !== "");
+        var hasPhoto = !!order.reviewPhoto;
+
+        productIds.forEach(function (productId) {
+            saveReview(productId, {
+                name: displayName,
+                email: user.email,
+                avatar: displayAvatar,
+                rating: order.reviewRating,
+                date: dateStr
+            });
+
+            if (hasText || hasPhoto) {
+                saveComment(productId, {
+                    name: displayName,
+                    email: user.email,
+                    avatar: displayAvatar,
+                    comment: order.reviewText || "",
+                    date: dateStr,
+                    ts: ts,
+                    rating: order.reviewRating,
+                    photo: order.reviewPhoto || "",
+                    anonymous: isAnon,
+                    verified: true,
+                    orderId: order.id
+                });
+            }
+        });
+
+        if (typeof renderAllProductRatings === "function") renderAllProductRatings();
+        if (currentProductId && productIds.indexOf(currentProductId) !== -1 && typeof renderProductReviews === "function") {
+            renderProductReviews(currentProductId);
+        }
+    }
+
+    function quickReviewSubmit(orderId, rating) {
+        var orders = getOrders();
+        var order = orders.find(function (o) { return o.id === orderId; });
+        if (!order) return;
+
+        order.reviewRating = rating;
+        order.reviewed = true;
+        saveOrdersList(orders);
+
+        postOrderReviewToProducts(order);
+
+        renderOrderTracking();
+    }
+
+    var writeReviewOrderId = null;
+    var writeReviewRating = 0;
+    var writeReviewTags = [];
+    var writeReviewPhotoDataUrl = "";
+
+    function openWriteReview(orderId) {
+        var order = getOrders().find(function (o) { return o.id === orderId; });
+        if (!order) return;
+
+        writeReviewOrderId = orderId;
+        writeReviewRating = 0;
+        writeReviewTags = [];
+        writeReviewPhotoDataUrl = "";
+
+        var firstItem = order.items[0] || {};
+        var extraCount = order.items.length - 1;
+        var thumb = firstItem.image
+            ? '<img src="' + firstItem.image + '" alt="">'
+            : '<img src="" alt="" style="visibility:hidden;">';
+
+        document.getElementById("writeReviewProduct").innerHTML =
+            thumb +
+            '<div>' +
+                '<div class="write-review-product-name">' + escapeHtml(firstItem.name || "") + (extraCount > 0 ? " +" + extraCount + " more" : "") + '</div>' +
+                (firstItem.size ? '<div class="write-review-product-variant">' + escapeHtml(firstItem.size) + '</div>' : '') +
+            '</div>';
+
+        document.querySelectorAll(".write-review-tag").forEach(function (btn) {
+            btn.classList.remove("selected");
+        });
+        document.getElementById("writeReviewText").value = "";
+        document.getElementById("writeReviewCharCount").textContent = "0/300";
+        document.getElementById("writeReviewAnon").checked = false;
+        document.getElementById("writeReviewPhotoPreview").style.display = "none";
+        document.getElementById("writeReviewPhotoPreview").src = "";
+        document.getElementById("writeReviewPhotoText").textContent = "Add photo";
+
+        renderWriteReviewStars();
+        updateWriteReviewSubmitState();
+
+        document.getElementById("orderTrackingOverlay").classList.remove("show");
+        document.getElementById("writeReviewOverlay").classList.add("show");
+    }
+
+    function closeWriteReview() {
+        document.getElementById("writeReviewOverlay").classList.remove("show");
+        writeReviewOrderId = null;
+    }
+
+    function renderWriteReviewStars() {
+        var el = document.getElementById("writeReviewStars");
+        var html = "";
+        for (var i = 1; i <= 5; i++) {
+            html += '<span class="write-review-star' + (i <= writeReviewRating ? " filled" : "") + '" onclick="setWriteReviewRating(' + i + ')">&#9733;</span>';
+        }
+        el.innerHTML = html;
+    }
+
+    function setWriteReviewRating(rating) {
+        writeReviewRating = rating;
+        renderWriteReviewStars();
+        updateWriteReviewSubmitState();
+    }
+
+    function toggleWriteReviewTag(tag) {
+        var idx = writeReviewTags.indexOf(tag);
+        if (idx === -1) writeReviewTags.push(tag);
+        else writeReviewTags.splice(idx, 1);
+
+        document.querySelectorAll(".write-review-tag").forEach(function (btn) {
+            btn.classList.toggle("selected", writeReviewTags.indexOf(btn.getAttribute("data-tag")) !== -1);
+        });
+    }
+
+    function updateWriteReviewCharCount() {
+        var text = document.getElementById("writeReviewText").value;
+        document.getElementById("writeReviewCharCount").textContent = text.length + "/300";
+    }
+
+    function handleWriteReviewPhoto(input) {
+        if (!input.files || !input.files[0]) return;
+
+        var reader = new FileReader();
+        reader.onload = function () {
+            writeReviewPhotoDataUrl = reader.result;
+            var preview = document.getElementById("writeReviewPhotoPreview");
+            preview.src = writeReviewPhotoDataUrl;
+            preview.style.display = "block";
+            document.getElementById("writeReviewPhotoText").textContent = "Change photo";
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    function updateWriteReviewSubmitState() {
+        document.getElementById("writeReviewSubmitBtn").disabled = writeReviewRating === 0;
+    }
+
+    function submitWriteReview() {
+        if (!writeReviewOrderId || writeReviewRating === 0) return;
+
+        var orders = getOrders();
+        var order = orders.find(function (o) { return o.id === writeReviewOrderId; });
+        if (!order) return;
+
+        order.reviewed = true;
+        order.reviewRating = writeReviewRating;
+        order.reviewText = document.getElementById("writeReviewText").value.trim();
+        order.reviewTags = writeReviewTags.slice();
+        order.reviewPhoto = writeReviewPhotoDataUrl || "";
+        order.reviewAnonymous = document.getElementById("writeReviewAnon").checked;
+        saveOrdersList(orders);
+
+        postOrderReviewToProducts(order);
+
+        closeWriteReview();
+        orderTrackingTab = "toreview";
+        document.getElementById("orderTrackingOverlay").classList.add("show");
+        renderOrderTracking();
+    }
+
     function openOrderAction(orderId) {
         var order = getOrders().find(function (o) { return o.id === orderId; });
         var user = getCurrentUser();
@@ -8779,6 +9742,7 @@ body.dark-mode .wishlist-item {
         }
 
         document.getElementById("ordersPanelOverlay").classList.remove("show");
+        document.getElementById("orderTrackingOverlay").classList.remove("show");
         document.getElementById("orderActionOverlay").classList.add("show");
 
         renderOrderAction();
@@ -9364,6 +10328,9 @@ body.dark-mode .wishlist-item {
 
         if (document.getElementById("ordersPanelOverlay").classList.contains("show")) {
             renderOrdersPanel();
+        }
+        if (document.getElementById("orderTrackingOverlay").classList.contains("show")) {
+            renderOrderTracking();
         }
         if (document.getElementById("orderActionOverlay").classList.contains("show") && currentOrderActionId) {
             renderOrderAction();
