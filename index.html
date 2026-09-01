@@ -2356,9 +2356,9 @@ body.dark-mode .confirm-overlay {
 
 .chat-head-dock {
     position: fixed;
-    top: 130px;
+    bottom: 16px;
     right: 16px;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 12px;
     z-index: 5000;
 }
@@ -3596,6 +3596,25 @@ body.dark-mode .wishlist-item {
     color: #1c8a53;
 }
 
+.message-user-btn-wrap {
+    margin-top: 16px;
+}
+
+.message-user-btn {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 22px;
+    border-radius: 20px;
+    background: #ff523b;
+    color: #fff;
+}
+
+.message-user-btn:hover {
+    background: #e0452f;
+}
+
 .seller-toggle-btn-wrap {
     margin-top: 16px;
 }
@@ -4333,7 +4352,25 @@ body.dark-mode .wishlist-item {
         <h3 class="user-profile-view-name" id="userProfileViewName"></h3>
         <p class="user-profile-view-username" id="userProfileViewUsername"></p>
         <div id="userProfileViewRoleWrap"></div>
+        <div id="userProfileViewMessageWrap"></div>
         <div id="userProfileViewSellerToggleWrap"></div>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="dmOverlay">
+
+    <div class="modal-box order-action-box">
+
+        <button type="button" class="modal-close" onclick="closeDirectMessage()">&times;</button>
+
+        <div class="chat-with-header" id="dmChatWithHeader"></div>
+        <div class="chat-messages" id="dmMessages"></div>
+        <div class="order-chat-input-row">
+            <input type="text" id="dmInput" placeholder="Type a message...">
+            <button type="button" class="btn" onclick="sendDirectMessage()">Send</button>
+        </div>
 
     </div>
 
@@ -5092,18 +5129,22 @@ body.dark-mode .wishlist-item {
         if (toggle) toggle.checked = isDark;
     }
 
+    function currentUserEmailForDarkMode() {
+        return localStorage.getItem("athletica_current_user");
+    }
+
     function toggleDarkMode() {
         var isDark = document.getElementById("darkModeToggle").checked;
         applyDarkMode(isDark);
-        var user = getCurrentUser();
-        if (user) {
-            localStorage.setItem(darkModeKeyFor(user.email), isDark ? "1" : "0");
+        var email = currentUserEmailForDarkMode();
+        if (email) {
+            localStorage.setItem(darkModeKeyFor(email), isDark ? "1" : "0");
         }
     }
 
     function loadDarkModeForCurrentUser() {
-        var user = getCurrentUser();
-        var isDark = !!user && localStorage.getItem(darkModeKeyFor(user.email)) === "1";
+        var email = currentUserEmailForDarkMode();
+        var isDark = !!email && localStorage.getItem(darkModeKeyFor(email)) === "1";
         applyDarkMode(isDark);
     }
 
@@ -5120,7 +5161,8 @@ body.dark-mode .wishlist-item {
         comments: {},
         products: {},
         promocodes: [],
-        ready: { users: false, orders: false, reviews: false, comments: false, products: false, promocodes: false }
+        dms: {},
+        ready: { users: false, orders: false, reviews: false, comments: false, products: false, promocodes: false, dms: false }
     };
     var _ownerSeeded = false;
 
@@ -5145,6 +5187,10 @@ body.dark-mode .wishlist-item {
         }
         if (kind === "promocodes") {
             if (typeof renderPromoHistoryList === "function") renderPromoHistoryList();
+        }
+        if (kind === "dms") {
+            if (typeof renderDmMessages === "function") renderDmMessages();
+            if (typeof renderChatHeadDock === "function") renderChatHeadDock();
         }
     }
 
@@ -5188,6 +5234,12 @@ body.dark-mode .wishlist-item {
         _cloud.ready.promocodes = true;
         _onCloudChange("promocodes");
     }, function (err) { console.error("promocodes sync error", err); });
+
+    db.collection("athletica").doc("dms").onSnapshot(function (doc) {
+        _cloud.dms = (doc.exists && doc.data().map) ? doc.data().map : {};
+        _cloud.ready.dms = true;
+        _onCloudChange("dms");
+    }, function (err) { console.error("dms sync error", err); });
 
     
     
@@ -6964,7 +7016,8 @@ body.dark-mode .wishlist-item {
 
     function openUserProfileView(email, fallbackName, event) {
         if (event) event.stopPropagation();
-        if (!getCurrentUser()) return;
+        var viewer = getCurrentUser();
+        if (!viewer) return;
 
         currentProfileViewEmail = email || null;
 
@@ -6994,6 +7047,16 @@ body.dark-mode .wishlist-item {
             roleHtml = '<span class="user-profile-view-role">' + escapeHtml(found.role) + '</span>';
         }
         roleWrap.innerHTML = roleHtml || (found ? "" : '<p class="user-profile-view-empty">No account info available.</p>');
+
+        var msgWrap = document.getElementById("userProfileViewMessageWrap");
+        if (found && found.email !== viewer.email) {
+            msgWrap.innerHTML =
+                '<div class="message-user-btn-wrap">' +
+                    '<button type="button" class="message-user-btn" onclick="openDirectMessage(\'' + escapeHtml(found.email) + '\', \'' + escapeHtml(found.name || "") + '\')">Message</button>' +
+                '</div>';
+        } else {
+            msgWrap.innerHTML = "";
+        }
 
         var toggleWrap = document.getElementById("userProfileViewSellerToggleWrap");
         if (isOwnerLoggedIn() && found && !found.isOwner) {
@@ -9004,48 +9067,274 @@ body.dark-mode .wishlist-item {
         notifyTyping(currentOrderActionId, chatSenderRoleFor(order, user));
     });
 
+    
+    
+    
+
+    var currentDmOtherEmail = null;
+    var currentDmOtherName = null;
+
+    function dmConvId(a, b) {
+        return [a, b].sort().join("::");
+    }
+
+    function getDms() {
+        return _cloud.dms || {};
+    }
+
+    function saveDms(map) {
+        _cloud.dms = map;
+        db.collection("athletica").doc("dms").set({ map: map });
+    }
+
+    function getUnreadDmThreadsFor(email) {
+        var dms = getDms();
+        var result = [];
+        Object.keys(dms).forEach(function (convId) {
+            var conv = dms[convId];
+            if (!conv || !conv.participants || conv.participants.indexOf(email) === -1) return;
+            var otherEmail = conv.participants[0] === email ? conv.participants[1] : conv.participants[0];
+            var seenAt = (conv.seenAt && conv.seenAt[email]) || 0;
+            var unread = (conv.messages || []).filter(function (m) {
+                return m.sender !== email && (m.ts || 0) > seenAt;
+            }).length;
+            if (unread > 0) {
+                result.push({ convId: convId, otherEmail: otherEmail, unread: unread });
+            }
+        });
+        return result;
+    }
+
+    function openDirectMessage(email, name) {
+        var user = getCurrentUser();
+        if (!user) {
+            openAuthModal();
+            return;
+        }
+        if (!email || email === user.email) return;
+
+        currentDmOtherEmail = email;
+        currentDmOtherName = name || email;
+
+        document.getElementById("userProfileViewOverlay").classList.remove("show");
+        document.getElementById("orderActionOverlay").classList.remove("show");
+        document.getElementById("dmOverlay").classList.add("show");
+
+        renderDmMessages();
+
+        var dmInputEl = document.getElementById("dmInput");
+        if (dmInputEl) dmInputEl.focus();
+    }
+
+    function closeDirectMessage() {
+        document.getElementById("dmOverlay").classList.remove("show");
+        currentDmOtherEmail = null;
+    }
+
+    function renderDmChatWithHeader() {
+        var headerEl = document.getElementById("dmChatWithHeader");
+        var user = getCurrentUser();
+        if (!headerEl || !user || !currentDmOtherEmail) return;
+
+        var otherEmail = currentDmOtherEmail;
+        var name = liveNameFor(otherEmail, currentDmOtherName) || currentDmOtherName || otherEmail;
+        var avatar = liveAvatarFor(otherEmail, "");
+        var initials = name.trim().charAt(0).toUpperCase() || "?";
+
+        var avatarHtml = avatar
+            ? '<img src="' + avatar + '" alt="">'
+            : '<div class="chat-with-avatar-initials">' + escapeHtml(initials) + '</div>';
+
+        var online = isUserOnline(otherEmail);
+        var convId = dmConvId(user.email, otherEmail);
+        var typing = isOtherDmTyping(convId, otherEmail);
+
+        headerEl.innerHTML =
+            '<div class="chat-with-avatar-wrap">' +
+                avatarHtml +
+                '<span class="presence-dot' + (online ? ' online' : '') + '"></span>' +
+            '</div>' +
+            '<div>' +
+                '<div class="chat-with-name">' + escapeHtml(name) + '</div>' +
+                '<div class="chat-with-status' + (typing ? ' is-typing' : '') + '">' +
+                    (typing ? "Typing..." : (online ? "Online" : "Offline")) +
+                '</div>' +
+            '</div>';
+    }
+
+    function renderDmMessages() {
+        var user = getCurrentUser();
+        if (!user || !currentDmOtherEmail) return;
+
+        var messagesEl = document.getElementById("dmMessages");
+        renderDmChatWithHeader();
+
+        var convId = dmConvId(user.email, currentDmOtherEmail);
+        var dms = getDms();
+        var conv = dms[convId];
+
+        if (!conv || !conv.messages || conv.messages.length === 0) {
+            messagesEl.innerHTML = '<p class="review-empty">Say hi to start the conversation.</p>';
+            if (typeof renderChatHeadDock === "function") renderChatHeadDock();
+            return;
+        }
+
+        conv.seenAt = conv.seenAt || {};
+        var mySeenAt = conv.seenAt[user.email] || 0;
+        var hasUnseenFromOther = conv.messages.some(function (m) {
+            return m.sender !== user.email && (m.ts || 0) > mySeenAt;
+        });
+        if (hasUnseenFromOther) {
+            conv.seenAt[user.email] = Date.now();
+            saveDms(dms);
+        }
+
+        var otherSeenAt = (conv.seenAt && conv.seenAt[currentDmOtherEmail]) || 0;
+
+        var lastMineIndex = -1;
+        for (var i = conv.messages.length - 1; i >= 0; i--) {
+            if (conv.messages[i].sender === user.email) { lastMineIndex = i; break; }
+        }
+
+        messagesEl.innerHTML = conv.messages.map(function (m, idx) {
+            var isFromOther = m.sender !== user.email;
+            var html = '<div class="chat-bubble ' + (isFromOther ? "chat-bubble-ai" : "chat-bubble-user") + '">' + escapeHtml(m.text) + '</div>';
+
+            if (!isFromOther && idx === lastMineIndex) {
+                var status = "Sent";
+                if (otherSeenAt >= (m.ts || 0)) status = "Seen";
+                else if (isUserOnline(currentDmOtherEmail)) status = "Delivered";
+                html += '<div class="chat-status-label">' + status + '</div>';
+            }
+            return html;
+        }).join("");
+
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+
+        if (typeof renderChatHeadDock === "function") renderChatHeadDock();
+    }
+
+    function sendDirectMessage() {
+        var input = document.getElementById("dmInput");
+        var text = input.value.trim();
+        var user = getCurrentUser();
+        if (!text || !currentDmOtherEmail || !user) return;
+
+        var convId = dmConvId(user.email, currentDmOtherEmail);
+        var dms = getDms();
+        if (!dms[convId]) {
+            dms[convId] = { participants: [user.email, currentDmOtherEmail], messages: [], seenAt: {} };
+        }
+        var conv = dms[convId];
+        conv.messages = conv.messages || [];
+        conv.messages.push({ sender: user.email, text: text, ts: Date.now() });
+        conv.seenAt = conv.seenAt || {};
+        conv.seenAt[user.email] = Date.now();
+
+        saveDms(dms);
+
+        input.value = "";
+        renderDmMessages();
+    }
+
+    function isOtherDmTyping(convId, otherEmail) {
+        if (!convId || !otherEmail || !_typing[convId]) return false;
+        var ts = _typing[convId][otherEmail];
+        if (!ts) return false;
+        return (Date.now() - ts) < TYPING_ACTIVE_MS;
+    }
+
+    function notifyDmTyping(convId, myEmail) {
+        if (!convId || !myEmail) return;
+        var now = Date.now();
+        if (now - _lastTypingWriteAt < TYPING_WRITE_THROTTLE_MS) return;
+        _lastTypingWriteAt = now;
+
+        var patch = {};
+        patch[convId] = {};
+        patch[convId][myEmail] = now;
+        db.collection("athletica").doc("typing").set({ map: patch }, { merge: true })
+            .catch(function (err) { console.error("typing write error", err); });
+    }
+
+    document.getElementById("dmInput").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            sendDirectMessage();
+        }
+    });
+
+    document.getElementById("dmInput").addEventListener("input", function () {
+        var user = getCurrentUser();
+        if (!user || !currentDmOtherEmail) return;
+
+        notifyDmTyping(dmConvId(user.email, currentDmOtherEmail), user.email);
+    });
+
     function renderChatHeadDock() {
         var dockEl = document.getElementById("chatHeadDock");
         var user = getCurrentUser();
 
-        
-        
-        
-        if (!user || (!user.isOwner && !user.isSeller)) {
+        if (!user) {
             dockEl.innerHTML = "";
             dockEl.style.display = "none";
             return;
         }
 
-        var orders = getOrders().filter(function (o) {
-            return isOrderUnreadFor(o, user);
+        var heads = [];
+
+        if (user.isOwner || user.isSeller) {
+            var orders = getOrders().filter(function (o) {
+                return isOrderUnreadFor(o, user);
+            });
+
+            orders.forEach(function (o) {
+                var role = getOrderRoleFor(o, user);
+                var initials = (o.buyerName || "?").trim().charAt(0).toUpperCase() || "?";
+                var liveAvatar = liveAvatarFor(o.buyerEmail, o.buyerAvatar);
+                var avatarHtml = liveAvatar
+                    ? '<img src="' + liveAvatar + '" alt="">'
+                    : '<div class="chat-head-initials">' + escapeHtml(initials) + '</div>';
+                var unread = role === "owner" ? o.ownerUnread : o.sellerUnread;
+                var badgeText = o.status === "pending" ? "!" : String(unread);
+
+                heads.push(
+                    '<div class="chat-head" title="' + escapeHtml(o.buyerName) + ' — ' + escapeHtml(orderSummaryText(o)) + '" onclick="openOrderAction(\'' + o.id + '\')">' +
+                        avatarHtml +
+                        '<span class="presence-dot' + (isUserOnline(o.buyerEmail) ? ' online' : '') + '"></span>' +
+                        '<span class="chat-head-badge">' + badgeText + '</span>' +
+                    '</div>'
+                );
+            });
+        }
+
+        var dmThreads = getUnreadDmThreadsFor(user.email);
+        dmThreads.forEach(function (t) {
+            var otherEmail = t.otherEmail;
+            var name = liveNameFor(otherEmail, otherEmail);
+            var initials = (name || "?").trim().charAt(0).toUpperCase() || "?";
+            var liveAvatar = liveAvatarFor(otherEmail, "");
+            var avatarHtml = liveAvatar
+                ? '<img src="' + liveAvatar + '" alt="">'
+                : '<div class="chat-head-initials">' + escapeHtml(initials) + '</div>';
+
+            heads.push(
+                '<div class="chat-head" title="' + escapeHtml(name) + '" onclick="openDirectMessage(\'' + escapeHtml(otherEmail) + '\', \'' + escapeHtml(name) + '\')">' +
+                    avatarHtml +
+                    '<span class="presence-dot' + (isUserOnline(otherEmail) ? ' online' : '') + '"></span>' +
+                    '<span class="chat-head-badge">' + String(t.unread) + '</span>' +
+                '</div>'
+            );
         });
 
-        if (orders.length === 0) {
+        if (heads.length === 0) {
             dockEl.innerHTML = "";
             dockEl.style.display = "none";
             return;
         }
 
         dockEl.style.display = "flex";
-        dockEl.innerHTML = orders.map(function (o) {
-            var role = getOrderRoleFor(o, user);
-            var initials = (o.buyerName || "?").trim().charAt(0).toUpperCase() || "?";
-            var liveAvatar = liveAvatarFor(o.buyerEmail, o.buyerAvatar);
-            var avatarHtml = liveAvatar
-                ? '<img src="' + liveAvatar + '" alt="">'
-                : '<div class="chat-head-initials">' + escapeHtml(initials) + '</div>';
-            var unread = role === "owner" ? o.ownerUnread : o.sellerUnread;
-            var badgeText = o.status === "pending" ? "!" : String(unread);
-
-            return (
-                '<div class="chat-head" title="' + escapeHtml(o.buyerName) + ' — ' + escapeHtml(orderSummaryText(o)) + '" onclick="openOrderAction(\'' + o.id + '\')">' +
-                    avatarHtml +
-                    '<span class="presence-dot' + (isUserOnline(o.buyerEmail) ? ' online' : '') + '"></span>' +
-                    '<span class="chat-head-badge">' + badgeText + '</span>' +
-                '</div>'
-            );
-        }).join("");
+        dockEl.innerHTML = heads.join("");
     }
 
     function updateNotifBadge() {
