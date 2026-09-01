@@ -356,6 +356,153 @@ small {
     line-height: 1.6;
 }
 
+.profile-username {
+    color: #ff523b;
+    font-weight: 600;
+    margin: -8px 0 6px;
+}
+
+.user-search-wrap {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto 14px;
+}
+
+.user-search-input {
+    width: 100%;
+    padding: 12px 18px 12px 42px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #555;
+    background: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.user-search-input:focus {
+    outline: none;
+    border-color: #ff523b;
+}
+
+.user-search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    color: #999;
+    pointer-events: none;
+}
+
+.user-search-results {
+    max-width: 480px;
+    margin: 0 auto 25px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 340px;
+    overflow-y: auto;
+}
+
+.user-search-results:empty {
+    display: none;
+    padding: 0;
+    margin-bottom: 0;
+    box-shadow: none;
+}
+
+.user-search-result {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.user-search-result:hover {
+    background: #f5f5f5;
+}
+
+.user-search-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: #ff523b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 15px;
+    overflow: hidden;
+}
+
+.user-search-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-search-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+.user-search-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: bold;
+    color: #fff;
+    background: #ff523b;
+    padding: 1px 7px;
+    border-radius: 8px;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.user-search-username {
+    font-size: 12px;
+    color: #888;
+}
+
+.user-search-empty {
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+    padding: 10px 0;
+}
+
+body.dark-mode .user-search-input {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #ddd;
+}
+
+body.dark-mode .user-search-results {
+    background: #1e1e1e;
+}
+
+body.dark-mode .user-search-result:hover {
+    background: #2a2a2a;
+}
+
+body.dark-mode .user-search-name {
+    color: #eee;
+}
+
+body.dark-mode .user-search-username {
+    color: #aaa;
+}
+
 .footer {
     background: #000;
     color: #8a8a8a;
@@ -623,6 +770,15 @@ body.dark-mode h3 {
     color: #f0f0f0;
 }
 
+body.dark-mode .ratings h2 {
+    color: #ff523b;
+}
+
+body.dark-mode .account-box p.profile-username,
+body.dark-mode .modal-box p.user-profile-view-username {
+    color: #ff523b;
+}
+
 body.dark-mode .side-menu-header,
 body.dark-mode .side-menu-footer {
     border-color: #333;
@@ -644,6 +800,161 @@ body.dark-mode .side-menu-list li a:hover {
 body.dark-mode .col-4,
 body.dark-mode .investors .col-3 {
     background: #1e1e1e;
+}
+
+body.dark-mode .account-box {
+    background: #1e1e1e;
+    color: #ddd;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .account-box h1,
+body.dark-mode .account-box h2,
+body.dark-mode .account-box h3,
+body.dark-mode .account-box h4,
+body.dark-mode .account-box p,
+body.dark-mode .account-box small,
+body.dark-mode .account-box label,
+body.dark-mode .account-box span,
+body.dark-mode .account-box a,
+body.dark-mode .account-box div {
+    color: #ddd;
+}
+
+body.dark-mode .avatar-upload-btn {
+    border-color: #1e1e1e;
+}
+
+body.dark-mode .profile-edit-name-btn {
+    border-color: #444;
+    color: #ccc;
+}
+
+body.dark-mode .profile-logout-btn {
+    background: #1e1e1e;
+}
+
+body.dark-mode .modal-box {
+    background: #1e1e1e;
+    color: #ddd;
+}
+
+body.dark-mode .modal-box h1,
+body.dark-mode .modal-box h2,
+body.dark-mode .modal-box h3,
+body.dark-mode .modal-box h4,
+body.dark-mode .modal-box p,
+body.dark-mode .modal-box small,
+body.dark-mode .modal-box label,
+body.dark-mode .modal-box span,
+body.dark-mode .modal-box a,
+body.dark-mode .modal-box div {
+    color: #ddd;
+}
+
+body.dark-mode .chat-bubble-ai {
+    background: #2a2a2a;
+    color: #eee;
+}
+
+body.dark-mode .chat-bubble-user {
+    color: #fff;
+}
+
+body.dark-mode .chat-header {
+    border-bottom-color: #333;
+}
+
+body.dark-mode .chat-choice-btn {
+    background: #1e1e1e;
+}
+
+body.dark-mode .chat-status-label {
+    color: #999;
+}
+
+body.dark-mode .payment-order-summary {
+    background: #262626;
+}
+
+body.dark-mode .promo-code-row input {
+    background: #262626;
+    border-color: #444;
+    color: #ddd;
+}
+
+body.dark-mode .promo-apply-btn {
+    background: #1e1e1e;
+}
+
+body.dark-mode .promo-applied-row {
+    background: #1c2e21;
+    border-color: #2e5c3c;
+}
+
+body.dark-mode .summary-total-row {
+    color: #f0f0f0;
+}
+
+body.dark-mode .gcash-amount-box {
+    background: #2a1e1a;
+    border-color: #4a2f24;
+}
+
+body.dark-mode .gcash-owner-info {
+    border-color: #333;
+}
+
+body.dark-mode .promo-percent-presets button {
+    background: #262626;
+    border-color: #444;
+    color: #ddd;
+}
+
+body.dark-mode .promo-history-title {
+    border-top-color: #333;
+    color: #ddd;
+}
+
+body.dark-mode .promo-history-item {
+    background: #262626;
+}
+
+body.dark-mode .promo-history-info strong {
+    color: #eee;
+}
+
+body.dark-mode .modal-close {
+    color: #ddd;
+}
+
+body.dark-mode .logo img,
+body.dark-mode .cart-icon-wrap img {
+    filter: brightness(0) invert(1);
+}
+
+body.dark-mode .logo {
+    color: #fff;
+}
+
+body.dark-mode .notif-icon-wrap svg {
+    stroke: #fff;
+}
+
+body.dark-mode .wishlist-icon-wrap svg {
+    stroke: #fff;
+}
+
+body.dark-mode .info-section {
+    background: #181818;
+}
+
+body.dark-mode .info-content strong {
+    color: #f0f0f0;
+}
+
+body.dark-mode .page-transition-overlay {
+    background: linear-gradient(135deg, #3a3a3a, #5a5a5a);
 }
 
 .page-transition-overlay {
@@ -1133,6 +1444,43 @@ body.dark-mode .investors .col-3 {
     text-decoration: underline;
 }
 
+.confirm-box {
+    max-width: 360px;
+    text-align: center;
+    padding: 30px 25px 25px;
+}
+
+.confirm-box h4 {
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.confirm-box p {
+    font-size: 14px;
+    margin-bottom: 22px;
+}
+
+.confirm-box-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.confirm-box-actions .btn,
+.confirm-box-actions .btn-outline {
+    margin: 0;
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+body.dark-mode .confirm-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
 .modal-overlay {
     display: none;
     position: fixed;
@@ -1189,6 +1537,10 @@ body.dark-mode .investors .col-3 {
 
 .modal-close:hover {
     color: #ff523b;
+}
+
+#confirmModalOverlay {
+    z-index: 9999;
 }
 
 .product-detail-top {
@@ -1554,7 +1906,6 @@ body.dark-mode .investors .col-3 {
     text-align: center;
     margin: 5px 0 0;
 }
-
 .chat-text-input-row {
     display: flex;
     gap: 8px;
@@ -2115,6 +2466,186 @@ body.dark-mode .investors .col-3 {
     display: block;
 }
 
+.wishlist-icon-wrap {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+    margin-right: 18px;
+    transition: opacity 0.3s ease;
+}
+
+.wishlist-icon-wrap:hover {
+    opacity: 0.7;
+}
+
+.wishlist-icon-wrap svg {
+    display: block;
+}
+
+.product-wishlist-btn {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    border: none;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.product-wishlist-btn svg {
+    width: 15px;
+    height: 15px;
+    stroke: #fff;
+    fill: none;
+    stroke-width: 2;
+}
+
+.product-wishlist-btn:hover {
+    transform: scale(1.12);
+}
+
+.product-wishlist-btn.active svg {
+    fill: #ff523b;
+    stroke: #ff523b;
+}
+
+@keyframes heartPop {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.5); }
+    55% { transform: scale(0.85); }
+    75% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
+
+@keyframes heartBurst {
+    0% { transform: scale(0); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.product-wishlist-btn.heart-pop svg,
+.pd-wishlist-btn.heart-pop svg {
+    animation: heartPop 0.45s ease;
+}
+
+.product-wishlist-btn.heart-pop::after,
+.pd-wishlist-btn.heart-pop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255, 82, 59, 0.45);
+    animation: heartBurst 0.45s ease-out;
+    pointer-events: none;
+}
+
+.pd-wishlist-btn {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    width: 30px;
+    height: 30px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+
+.pd-wishlist-btn svg {
+    width: 14px;
+    height: 14px;
+    stroke: #555;
+    fill: none;
+    stroke-width: 2;
+}
+
+.pd-wishlist-btn:hover {
+    border-color: #ff523b;
+}
+
+.pd-wishlist-btn.active svg {
+    fill: #ff523b;
+    stroke: #ff523b;
+}
+
+.wishlist-empty {
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.wishlist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.wishlist-item img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.wishlist-item-info {
+    flex: 1;
+    cursor: pointer;
+}
+
+.wishlist-item-name {
+    font-size: 14px;
+    color: #555;
+}
+
+.wishlist-item-price {
+    font-size: 13px;
+    color: #ff523b;
+    margin-top: 4px;
+}
+
+.wishlist-item-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.wishlist-item-actions button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 20px;
+}
+
+.wishlist-add-cart-btn {
+    background: #ff523b;
+    color: #fff !important;
+}
+
+.wishlist-remove-btn {
+    color: #999 !important;
+}
+
+body.dark-mode .wishlist-item {
+    border-color: #333;
+}
+
 .cart-box h3 {
     font-weight: normal;
     margin-bottom: 15px;
@@ -2210,6 +2741,90 @@ body.dark-mode .investors .col-3 {
     font-size: 12px;
     color: #777;
     margin-bottom: 18px;
+}
+
+.promo-code-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.promo-code-row input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.promo-code-row input:focus {
+    outline: none;
+    border-color: #ff523b;
+}
+
+.promo-apply-btn {
+    background: #fff;
+    border: 1px solid #ff523b;
+    color: #ff523b;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+
+.promo-apply-btn:hover {
+    background: #ff523b;
+    color: #fff;
+}
+
+.promo-message {
+    font-size: 12px;
+    margin: -2px 0 12px;
+    min-height: 15px;
+}
+
+.promo-message.success {
+    color: #2e9e4f;
+}
+
+.promo-message.error {
+    color: #e0402c;
+}
+
+.promo-applied-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #eafaf0;
+    border: 1px solid #bfe9cc;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #2e9e4f;
+    margin-bottom: 12px;
+}
+
+.promo-applied-row button {
+    background: none;
+    border: none;
+    color: #2e9e4f;
+    text-decoration: underline;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.summary-discount-row {
+    color: #2e9e4f;
+}
+
+.summary-total-row {
+    color: #333;
+    font-weight: bold;
 }
 
 .payment-step {
@@ -2701,6 +3316,112 @@ body.dark-mode .investors .col-3 {
     text-decoration: underline;
 }
 
+.promo-manager-box {
+    max-width: 440px;
+}
+
+.promo-percent-presets {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.promo-percent-presets button {
+    flex: 1;
+    padding: 8px 0;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.promo-percent-presets button:hover,
+.promo-percent-presets button.selected {
+    border-color: #ff523b;
+    background: #ff523b;
+    color: #fff;
+}
+
+.promo-history-title {
+    font-weight: normal;
+    font-size: 15px;
+    color: #555;
+    margin: 22px 0 10px;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.promo-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.promo-history-empty {
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.promo-history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.promo-history-info strong {
+    font-size: 14px;
+    color: #333;
+}
+
+.promo-history-info div {
+    font-size: 12px;
+    color: #888;
+    margin-top: 2px;
+}
+
+.promo-history-status {
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 3px 10px;
+    white-space: nowrap;
+}
+
+.promo-history-status.status-active {
+    background: #eafaf0;
+    color: #2e9e4f;
+}
+
+.promo-history-status.status-expired {
+    background: #fdeceb;
+    color: #e0402c;
+}
+
+.promo-history-delete {
+    background: none;
+    border: none;
+    color: #bbb;
+    cursor: pointer;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.promo-history-delete:hover {
+    color: #e63946;
+}
+
 .review-item-user-clickable,
 .profile-link-clickable,
 .buyer-name-link {
@@ -2752,6 +3473,13 @@ body.dark-mode .investors .col-3 {
 .user-profile-view-name {
     margin: 0 0 6px;
     color: #555;
+}
+
+.user-profile-view-username {
+    margin: -4px 0 10px;
+    color: #ff523b;
+    font-weight: 600;
+    font-size: 14px;
 }
 
 .user-profile-view-role {
@@ -2839,6 +3567,7 @@ body.dark-mode .investors .col-3 {
     font-size: 12px;
     font-weight: bold;
     margin-top: -10px;
+    text-align: right;
 }
 
 .stock-badge.stock-out {
@@ -2870,6 +3599,59 @@ body.dark-mode .investors .col-3 {
 
 .product-detail-stock.stock-ok {
     color: #2a9d5c;
+}
+
+.discount-badge {
+    display: inline-block;
+    background: #e63946;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.price-original {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 0.85em;
+    margin-right: 6px;
+}
+
+.price-discounted {
+    color: #ff523b;
+}
+
+.product-detail-discount-expiry {
+    font-size: 12px;
+    color: #999;
+    margin: -4px 0 6px;
+}
+
+.discount-fields {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 4px 0;
+}
+
+.discount-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    margin: 6px 0;
+}
+
+.discount-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    cursor: pointer;
 }
 
     </style>
@@ -2925,6 +3707,7 @@ body.dark-mode .investors .col-3 {
 
         <form id="signupForm" class="auth-form" onsubmit="return handleSignUp(event)">
             <input type="text" id="signupName" placeholder="Full Name" required>
+            <input type="text" id="signupUsername" placeholder="Username (e.g. @Athletica2026)" required>
             <input type="email" id="signupEmail" placeholder="Email" required>
             <input type="password" id="signupPassword" placeholder="Password (min 6 characters)" required>
             <select id="signupRole" required>
@@ -2952,6 +3735,7 @@ body.dark-mode .investors .col-3 {
         <form id="signupGoogleNameForm" class="auth-form" onsubmit="return handleGoogleSignupName(event)">
             <p class="auth-note" id="signupGoogleNameNote"></p>
             <input type="text" id="signupGoogleFullName" placeholder="Full Name" required>
+            <input type="text" id="signupGoogleUsername" placeholder="Username (e.g. @Athletica2026)" required>
             <select id="signupGoogleRole" required>
                 <option value="" disabled selected>I am a...</option>
                 <option value="Teacher">Teacher</option>
@@ -2997,6 +3781,10 @@ body.dark-mode .investors .col-3 {
 
         <button type="button" class="modal-close" onclick="closeProductDetail()">&times;</button>
 
+        <button type="button" class="pd-wishlist-btn" id="pdWishlistBtn" onclick="toggleWishlist(currentProductId, event)" title="Add to wishlist">
+            <svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.2C.5 8 2 4.5 5.4 3.7 7.7 3.1 10 4.2 12 6.5c2-2.3 4.3-3.4 6.6-2.8C22 4.5 23.5 8 22 11.3c-2.5 4.6-10 9.2-10 9.2z"/></svg>
+        </button>
+
         <div class="product-detail-top">
 
             <img id="pdImage" src="" alt="" class="product-detail-img">
@@ -3004,6 +3792,7 @@ body.dark-mode .investors .col-3 {
             <div class="product-detail-info">
                 <h3 id="pdName"></h3>
                 <p class="product-detail-price" id="pdPrice"></p>
+                <p class="product-detail-discount-expiry" id="pdDiscountExpiry" style="display:none;"></p>
                 <div class="ratings" id="pdStars"><h2>☆☆☆☆☆</h2></div>
                 <p class="product-detail-ratingcount" id="pdRatingCount"></p>
                 <p class="product-detail-desc" id="pdDescription"></p>
@@ -3036,7 +3825,7 @@ body.dark-mode .investors .col-3 {
             <div class="comments-body" id="commentsBody">
 
                 <div class="review-form">
-                    <p class="review-form-label">Leave a rating:</p>
+                    <p class="review-form-label">Your rating (tap to set or update):</p>
                     <div class="star-input" id="reviewStarInput">
                         <span data-star="1">☆</span><span data-star="2">☆</span><span data-star="3">☆</span><span data-star="4">☆</span><span data-star="5">☆</span>
                     </div>
@@ -3044,9 +3833,10 @@ body.dark-mode .investors .col-3 {
                         <span id="reviewAsAvatar"></span>
                         <span>Posting as <strong id="reviewAsName"></strong></span>
                     </div>
-                    <textarea id="reviewComment" placeholder="Write a comment (optional)" rows="2"></textarea>
+                    <p class="review-form-label">Leave a comment:</p>
+                    <textarea id="reviewComment" placeholder="Write a comment..." rows="2"></textarea>
                     <p class="auth-error" id="reviewError"></p>
-                    <button type="button" class="btn auth-submit" onclick="submitReview()">Submit Review</button>
+                    <button type="button" class="btn auth-submit" onclick="postComment()">Post Comment</button>
                 </div>
 
                 <div class="reviews-list" id="reviewsList"></div>
@@ -3080,6 +3870,20 @@ body.dark-mode .investors .col-3 {
 
 </div>
 
+<div class="modal-overlay" id="wishlistOverlay">
+
+    <div class="modal-box cart-box">
+
+        <button type="button" class="modal-close" onclick="closeWishlist()">&times;</button>
+
+        <h3>Your Wishlist</h3>
+
+        <div class="cart-items" id="wishlistItemsList"></div>
+
+    </div>
+
+</div>
+
 <div class="modal-overlay" id="paymentOverlay">
 
     <div class="modal-box payment-box">
@@ -3089,6 +3893,19 @@ body.dark-mode .investors .col-3 {
         <h3 id="paymentTitle">Checkout</h3>
 
         <div class="payment-order-summary" id="paymentOrderSummary"></div>
+
+        <div id="promoCodeSection">
+            <p class="promo-message" id="promoBlockedMessage" style="display:none;">This order already has a product discount — promo codes can't be combined with it.</p>
+            <div class="promo-code-row" id="promoInputRow">
+                <input type="text" id="promoCodeInput" placeholder="Promo code (optional)" maxlength="20">
+                <button type="button" class="promo-apply-btn" onclick="applyPromoCode()">Apply</button>
+            </div>
+            <p class="promo-message" id="promoMessage"></p>
+            <div class="promo-applied-row" id="promoAppliedRow" style="display:none;">
+                <span id="promoAppliedText"></span>
+                <button type="button" onclick="removePromoCode()">Remove</button>
+            </div>
+        </div>
 
         <div class="payment-step active" id="paymentStepMethod">
             <p class="payment-subtitle">Choose a payment method</p>
@@ -3235,6 +4052,22 @@ body.dark-mode .investors .col-3 {
 
 </div>
 
+<div class="modal-overlay confirm-overlay" id="confirmModalOverlay">
+
+    <div class="modal-box confirm-box">
+
+        <h4 id="confirmModalTitle">Are you sure?</h4>
+        <p id="confirmModalMessage"></p>
+
+        <div class="confirm-box-actions">
+            <button type="button" class="btn-outline" id="confirmModalCancelBtn" onclick="closeConfirmModal(false)">Cancel</button>
+            <button type="button" class="btn-outline" id="confirmModalOkBtn" onclick="closeConfirmModal(true)">OK</button>
+        </div>
+
+    </div>
+
+</div>
+
 <div class="modal-overlay" id="orderActionOverlay">
 
     <div class="modal-box order-action-box">
@@ -3321,6 +4154,37 @@ body.dark-mode .investors .col-3 {
 
 </div>
 
+<div class="modal-overlay" id="promoManagerOverlay">
+
+    <div class="modal-box add-product-box promo-manager-box">
+
+        <button type="button" class="modal-close" onclick="closePromoManager()">&times;</button>
+
+        <h3>Release a Promo Code</h3>
+
+        <form class="auth-form active" onsubmit="return submitReleasePromoCode(event)">
+            <input type="text" id="releasePromoCode" placeholder="Release code (e.g. SUMMER30)" maxlength="20" required>
+            <input type="date" id="releasePromoExpiry" required>
+
+            <label class="form-hint" style="display:block; margin-bottom: 6px;">Discount percent</label>
+            <div class="promo-percent-presets">
+                <button type="button" onclick="setPromoPercentPreset(30)">30%</button>
+                <button type="button" onclick="setPromoPercentPreset(50)">50%</button>
+                <button type="button" onclick="setPromoPercentPreset(70)">70%</button>
+            </div>
+            <input type="number" id="releasePromoPercent" placeholder="Discount percent (e.g. 30)" min="1" max="100" step="1" required>
+
+            <p class="auth-error" id="releasePromoError"></p>
+            <button type="submit" class="btn auth-submit">Release Code</button>
+        </form>
+
+        <h3 class="promo-history-title">Released Codes</h3>
+        <div class="promo-history-list" id="promoHistoryList"></div>
+
+    </div>
+
+</div>
+
 <div class="modal-overlay" id="editProductOverlay">
 
     <div class="modal-box add-product-box">
@@ -3350,6 +4214,17 @@ body.dark-mode .investors .col-3 {
             <input type="number" id="editProductStock" placeholder="Stock quantity" min="0" step="1" required>
             <p class="form-hint">Update this to restock the item.</p>
 
+            <label class="discount-toggle">
+                <input type="checkbox" id="editProductDiscountToggle" onchange="toggleDiscountFields('edit')">
+                Add a discount to this product
+            </label>
+            <div class="discount-fields" id="editProductDiscountFields" style="display:none;">
+                <input type="number" id="editProductDiscountPercent" placeholder="Discount percent (1-101)" min="1" max="101" step="1">
+                <p class="form-hint">Enter a value from 1 to 101.</p>
+                <input type="date" id="editProductDiscountExpiry">
+                <p class="form-hint">The discount stops applying automatically after this date.</p>
+            </div>
+
             <p class="auth-error" id="editProductError"></p>
             <button type="submit" class="btn auth-submit">Save Changes</button>
             <button type="button" class="remove-product-link" onclick="removeProductFromEdit()">Remove this product</button>
@@ -3367,6 +4242,7 @@ body.dark-mode .investors .col-3 {
 
         <div class="user-profile-view-avatar" id="userProfileViewAvatar"></div>
         <h3 class="user-profile-view-name" id="userProfileViewName"></h3>
+        <p class="user-profile-view-username" id="userProfileViewUsername"></p>
         <div id="userProfileViewRoleWrap"></div>
         <div id="userProfileViewSellerToggleWrap"></div>
 
@@ -3408,6 +4284,13 @@ body.dark-mode .investors .col-3 {
                 <span class="cart-badge" id="notifBadge">0</span>
             </div>
 
+            <div class="wishlist-icon-wrap" onclick="openWishlist()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-label="Wishlist">
+                    <path d="M12 20.5s-7.5-4.6-10-9.2C.5 8 2 4.5 5.4 3.7 7.7 3.1 10 4.2 12 6.5c2-2.3 4.3-3.4 6.6-2.8C22 4.5 23.5 8 22 11.3c-2.5 4.6-10 9.2-10 9.2z"/>
+                </svg>
+                <span class="cart-badge" id="wishlistBadge">0</span>
+            </div>
+
             <div class="cart-icon-wrap" onclick="openCart()">
                 <img src="images/cart.png" width="30px" height="30">
                 <span class="cart-badge" id="cartBadge">0</span>
@@ -3441,7 +4324,7 @@ body.dark-mode .investors .col-3 {
         <li><a href="#">TEMPLATE 6</a></li>
         <li><a href="#">TEMPLATE 7</a></li>
         <li><a href="#">TEMPLATE 8</a></li>
-        <li><a href="#">TEMPLATE 9</a></li>
+        <li id="promoManagerMenuItem" style="display:none;"><a href="#" onclick="closeSideMenu(); openPromoManager(); return false;">Promo Codes</a></li>
     </ul>
 
     <div class="side-menu-footer">
@@ -4130,8 +5013,10 @@ body.dark-mode .investors .col-3 {
         users: [],
         orders: [],
         reviews: {},
+        comments: {},
         products: {},
-        ready: { users: false, orders: false, reviews: false, products: false }
+        promocodes: [],
+        ready: { users: false, orders: false, reviews: false, comments: false, products: false, promocodes: false }
     };
     var _ownerSeeded = false;
 
@@ -4143,6 +5028,9 @@ body.dark-mode .investors .col-3 {
             if (typeof renderAllProductRatings === "function") renderAllProductRatings();
             if (typeof renderProductReviews === "function" && currentProductId) renderProductReviews(currentProductId);
         }
+        if (kind === "comments") {
+            if (typeof renderProductReviews === "function" && currentProductId) renderProductReviews(currentProductId);
+        }
         if (kind === "users" && typeof renderAccount === "function") {
             renderAccount();
         }
@@ -4151,11 +5039,17 @@ body.dark-mode .investors .col-3 {
             if (typeof renderProductGrid === "function") renderProductGrid();
             if (typeof renderAllProductRatings === "function") renderAllProductRatings();
         }
+        if (kind === "promocodes") {
+            if (typeof renderPromoHistoryList === "function") renderPromoHistoryList();
+        }
     }
+
+    var _usersServerConfirmed = false;
 
     db.collection("athletica").doc("users").onSnapshot(function (doc) {
         _cloud.users = (doc.exists && doc.data().list) ? doc.data().list : [];
         _cloud.ready.users = true;
+        if (!doc.metadata.fromCache) _usersServerConfirmed = true;
         seedOwnerAccountIfNeeded();
         _onCloudChange("users");
     }, function (err) { console.error("users sync error", err); });
@@ -4178,6 +5072,18 @@ body.dark-mode .investors .col-3 {
         _cloud.ready.reviews = true;
         _onCloudChange("reviews");
     }, function (err) { console.error("reviews sync error", err); });
+
+    db.collection("athletica").doc("comments").onSnapshot(function (doc) {
+        _cloud.comments = (doc.exists && doc.data().map) ? doc.data().map : {};
+        _cloud.ready.comments = true;
+        _onCloudChange("comments");
+    }, function (err) { console.error("comments sync error", err); });
+
+    db.collection("athletica").doc("promocodes").onSnapshot(function (doc) {
+        _cloud.promocodes = (doc.exists && doc.data().list) ? doc.data().list : [];
+        _cloud.ready.promocodes = true;
+        _onCloudChange("promocodes");
+    }, function (err) { console.error("promocodes sync error", err); });
 
     
     
@@ -4248,6 +5154,26 @@ body.dark-mode .investors .col-3 {
             });
     }
 
+    function normalizeUsername(raw) {
+        var v = (raw || "").trim();
+        if (v && v.charAt(0) !== "@") v = "@" + v;
+        return v;
+    }
+
+    function isValidUsername(username) {
+        return /^@[A-Za-z0-9_]{3,20}$/.test(username);
+    }
+
+    function isUsernameTaken(username, excludeEmail) {
+        var users = getUsers();
+        var lower = username.toLowerCase();
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].email === excludeEmail) continue;
+            if ((users[i].username || "").toLowerCase() === lower) return true;
+        }
+        return false;
+    }
+
     
     
     
@@ -4279,7 +5205,7 @@ body.dark-mode .investors .col-3 {
         _ownerSeeded = true;
         var exists = _cloud.users.some(function (u) { return u.email === OWNER_EMAIL; });
         if (!exists) {
-            var updated = _cloud.users.concat([{ name: "Athletica Owner", email: OWNER_EMAIL, password: OWNER_PASSWORD, avatar: "", isOwner: true }]);
+            var updated = _cloud.users.concat([{ name: "Athletica Owner", username: "@AthleticaOwner", email: OWNER_EMAIL, password: OWNER_PASSWORD, avatar: "", isOwner: true }]);
             saveUsers(updated);
         }
     }
@@ -4360,10 +5286,21 @@ body.dark-mode .investors .col-3 {
         e.preventDefault();
 
         var name = document.getElementById("signupName").value.trim();
+        var username = normalizeUsername(document.getElementById("signupUsername").value);
         var email = document.getElementById("signupEmail").value.trim().toLowerCase();
         var password = document.getElementById("signupPassword").value;
         var role = document.getElementById("signupRole").value;
         var errorEl = document.getElementById("signupError");
+
+        if (!isValidUsername(username)) {
+            errorEl.textContent = "Username must start with @ and be 3-20 letters, numbers, or underscores (e.g. @Athletica2026).";
+            return false;
+        }
+
+        if (isUsernameTaken(username)) {
+            errorEl.textContent = "That username is already taken. Please choose another.";
+            return false;
+        }
 
         if (password.length < 6) {
             errorEl.textContent = "Password must be at least 6 characters.";
@@ -4385,7 +5322,7 @@ body.dark-mode .investors .col-3 {
         }
 
         errorEl.textContent = "";
-        sendSignupCode(name, email, password, role);
+        sendSignupCode(name, username, email, password, role);
 
         return false;
     }
@@ -4404,11 +5341,11 @@ body.dark-mode .investors .col-3 {
         });
     }
 
-    function sendSignupCode(name, email, password, role) {
+    function sendSignupCode(name, username, email, password, role) {
         var code = generateCode();
 
         localStorage.setItem("athletica_pending_signup", JSON.stringify({
-            name: name, email: email, password: password, role: role, code: code
+            name: name, username: username, email: email, password: password, role: role, code: code
         }));
 
         document.getElementById("signupVerifyNote").innerHTML =
@@ -4487,7 +5424,7 @@ body.dark-mode .investors .col-3 {
         }
 
         var users = getUsers();
-        users.push({ name: pending.name, email: pending.email, password: pending.password, role: pending.role, avatar: "" });
+        users.push({ name: pending.name, username: pending.username, email: pending.email, password: pending.password, role: pending.role, avatar: "" });
         saveUsers(users);
         setCurrentUser(pending.email);
         localStorage.removeItem("athletica_pending_signup");
@@ -4713,6 +5650,7 @@ body.dark-mode .investors .col-3 {
         e.preventDefault();
 
         var name = document.getElementById("signupGoogleFullName").value.trim();
+        var username = normalizeUsername(document.getElementById("signupGoogleUsername").value);
         var role = document.getElementById("signupGoogleRole").value;
         var errorEl = document.getElementById("signupGoogleNameError");
         var pending = JSON.parse(localStorage.getItem("athletica_pending_google_signup") || "null");
@@ -4728,6 +5666,16 @@ body.dark-mode .investors .col-3 {
             return false;
         }
 
+        if (!isValidUsername(username)) {
+            errorEl.textContent = "Username must start with @ and be 3-20 letters, numbers, or underscores (e.g. @Athletica2026).";
+            return false;
+        }
+
+        if (isUsernameTaken(username, pending.email)) {
+            errorEl.textContent = "That username is already taken. Please choose another.";
+            return false;
+        }
+
         if (!role) {
             errorEl.textContent = "Please select whether you are a Teacher or Student.";
             return false;
@@ -4740,7 +5688,7 @@ body.dark-mode .investors .col-3 {
         }
 
         if (!alreadyExists) {
-            users.push({ name: name, email: pending.email, password: "", role: role, avatar: pending.picture || "" });
+            users.push({ name: name, username: username, email: pending.email, password: "", role: role, avatar: pending.picture || "" });
             saveUsers(users);
         }
 
@@ -4776,6 +5724,7 @@ body.dark-mode .investors .col-3 {
         if (!found) {
             found = {
                 name: provider.charAt(0).toUpperCase() + provider.slice(1) + " User",
+                username: "@" + provider + "user",
                 email: email,
                 password: "",
                 avatar: ""
@@ -4792,6 +5741,7 @@ body.dark-mode .investors .col-3 {
     function logout() {
         localStorage.removeItem("athletica_current_user");
         updateCartBadge();
+        updateWishlistBadge();
         renderAccount();
         openAuthModal();
     }
@@ -4914,9 +5864,18 @@ body.dark-mode .investors .col-3 {
 
         if (!user) {
 
+            if (storedEmail && !_usersServerConfirmed) {
+                container.innerHTML =
+                    '<div class="account-box">' +
+                        '<h3>Loading your account…</h3>' +
+                    '</div>';
+                return;
+            }
+
             if (storedEmail) localStorage.removeItem("athletica_current_user");
 
             updateCartBadge();
+            updateWishlistBadge();
 
             container.innerHTML =
                 '<div class="account-box">' +
@@ -4930,6 +5889,7 @@ body.dark-mode .investors .col-3 {
 
         migrateLegacyCart();
         updateCartBadge();
+        updateWishlistBadge();
 
         var initials = user.name.trim().charAt(0).toUpperCase() || "?";
 
@@ -4938,6 +5898,11 @@ body.dark-mode .investors .col-3 {
             : '<div class="profile-avatar-initials">' + initials + '</div>';
 
         container.innerHTML =
+            '<div class="user-search-wrap">' +
+                '<span class="user-search-icon">&#128269;</span>' +
+                '<input type="text" id="userSearchInput" class="user-search-input" placeholder="Search users by name or username..." oninput="handleUserSearchInput()" autocomplete="off">' +
+            '</div>' +
+            '<div class="user-search-results" id="userSearchResults"></div>' +
             '<div class="account-box profile-box">' +
                 '<div class="profile-avatar-wrap">' +
                     avatarHtml +
@@ -4951,6 +5916,7 @@ body.dark-mode .investors .col-3 {
                     '<h3>' + user.name + '</h3>' +
                     '<button type="button" class="profile-edit-name-btn" onclick="editName()" title="Edit name"><i class="fa-solid fa-pen"></i></button>' +
                 '</div>' +
+                (user.username ? '<p class="profile-username">' + escapeHtml(user.username) + '</p>' : '') +
                 '<p class="profile-email">' + user.email + '</p>' +
                 (user.role ? '<p class="profile-role">' + escapeHtml(user.role) + '</p>' : '') +
                 (user.isOwner ? '<p class="profile-email">Signed in as site owner</p>' : '') +
@@ -4959,6 +5925,49 @@ body.dark-mode .investors .col-3 {
             '</div>';
 
         refreshOrderUI();
+    }
+
+    function handleUserSearchInput() {
+        var input = document.getElementById("userSearchInput");
+        var resultsEl = document.getElementById("userSearchResults");
+        if (!input || !resultsEl) return;
+
+        var query = input.value.trim().toLowerCase().replace(/^@/, "");
+
+        if (!query) {
+            resultsEl.innerHTML = "";
+            return;
+        }
+
+        var users = getUsers().filter(function (u) {
+            var name = (u.name || "").toLowerCase();
+            var username = (u.username || "").toLowerCase().replace(/^@/, "");
+            return name.indexOf(query) !== -1 || username.indexOf(query) !== -1;
+        }).slice(0, 25);
+
+        if (!users.length) {
+            resultsEl.innerHTML = '<p class="user-search-empty">No users found.</p>';
+            return;
+        }
+
+        resultsEl.innerHTML = users.map(function (u) {
+            var initials = (u.name || "?").trim().charAt(0).toUpperCase() || "?";
+            var avatarHtml = u.avatar
+                ? ('<img src="' + u.avatar + '" alt="">')
+                : ('<span>' + initials + '</span>');
+
+            return (
+                '<div class="user-search-result" onclick="openUserProfileView(\'' + escapeHtml(u.email || "") + '\', \'' + escapeHtml(u.name || "") + '\')">' +
+                    '<div class="user-search-avatar">' + avatarHtml + '</div>' +
+                    '<div class="user-search-info">' +
+                        '<div class="user-search-name">' + escapeHtml(u.name || "Unknown") +
+                            (u.isOwner ? ' <span class="user-search-tag">Owner</span>' : (u.isSeller ? ' <span class="user-search-tag">Seller</span>' : '')) +
+                        '</div>' +
+                        (u.username ? '<div class="user-search-username">' + escapeHtml(u.username) + '</div>' : '') +
+                    '</div>' +
+                '</div>'
+            );
+        }).join('');
     }
 
     if (!localStorage.getItem("athletica_current_user")) {
@@ -5056,13 +6065,18 @@ body.dark-mode .investors .col-3 {
         var stock = (typeof product.stock === "number") ? product.stock : 0;
         var outOfStock = stock <= 0;
 
+        var inWishlist = isInWishlist(product.id);
+
         return (
             '<div class="col-4 product-card' + (outOfStock ? ' product-out-of-stock' : '') + '" data-product-id="' + product.id + '" onclick="openProductDetail(\'' + product.id + '\')">' +
                 (isOwnerLoggedIn() ? '<button type="button" class="product-edit-btn" onclick="openEditProductModal(\'' + product.id + '\', event)" title="Edit product">&#9998;</button>' : '') +
+                '<button type="button" class="product-wishlist-btn' + (inWishlist ? ' active' : '') + '" onclick="toggleWishlist(\'' + product.id + '\', event)" title="Add to wishlist">' +
+                    '<svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-10-9.2C.5 8 2 4.5 5.4 3.7 7.7 3.1 10 4.2 12 6.5c2-2.3 4.3-3.4 6.6-2.8C22 4.5 23.5 8 22 11.3c-2.5 4.6-10 9.2-10 9.2z"/></svg>' +
+                '</button>' +
                 '<img src="' + product.image + '" alt="' + escapeHtml(product.name) + '">' +
                 '<h4>' + escapeHtml(product.name) + '</h4>' +
                 '<div class="ratings" id="rating-' + product.id + '"><h2>☆☆☆☆☆</h2></div>' +
-                '<p>₱' + Number(product.price).toFixed(2) + '</p>' +
+                '<p>' + priceDisplayHtml(product) + '</p>' +
                 (outOfStock
                     ? '<p class="stock-badge stock-out">Out of Stock</p>'
                     : (stock <= 10 ? '<p class="stock-badge stock-low">Only ' + stock + ' left</p>' : '')) +
@@ -5258,8 +6272,11 @@ body.dark-mode .investors .col-3 {
 
     function updateAddProductButtonVisibility() {
         var btn = document.getElementById("addProductBtn");
-        if (!btn) return;
-        btn.style.display = isOwnerLoggedIn() ? "inline-block" : "none";
+        if (btn) btn.style.display = isOwnerLoggedIn() ? "inline-block" : "none";
+
+        var promoItem = document.getElementById("promoManagerMenuItem");
+        if (promoItem) promoItem.style.display = isOwnerLoggedIn() ? "block" : "none";
+
         renderProductGrid();
     }
 
@@ -5289,6 +6306,55 @@ body.dark-mode .investors .col-3 {
         }
     }
 
+    
+    
+    
+    function toggleDiscountFields(which) {
+        var checkbox = document.getElementById(which === "edit" ? "editProductDiscountToggle" : "newProductDiscountToggle");
+        var fieldsWrap = document.getElementById(which === "edit" ? "editProductDiscountFields" : "newProductDiscountFields");
+        if (!checkbox || !fieldsWrap) return;
+
+        fieldsWrap.style.display = checkbox.checked ? "block" : "none";
+    }
+
+    
+    
+    
+    function getActiveDiscount(product) {
+        if (!product || !product.discount) return null;
+        var d = product.discount;
+        if (!d.percent || d.percent <= 0) return null;
+        if (d.expiresAt && Date.now() > d.expiresAt) return null;
+        return d;
+    }
+
+    function getDiscountedPrice(product) {
+        var d = getActiveDiscount(product);
+        if (!d) return Number(product.price);
+        var price = Number(product.price) * (1 - d.percent / 100);
+        return Math.max(0, price);
+    }
+
+    function priceDisplayHtml(product) {
+        var d = getActiveDiscount(product);
+        if (!d) {
+            return '₱' + Number(product.price).toFixed(2);
+        }
+        return (
+            '<span class="price-original">₱' + Number(product.price).toFixed(2) + '</span>' +
+            '<span class="price-discounted">₱' + getDiscountedPrice(product).toFixed(2) + '</span>' +
+            '<span class="discount-badge">-' + d.percent + '%</span>'
+        );
+    }
+
+    
+    
+    
+    function cartItemUnitPrice(item) {
+        var product = PRODUCTS[item.id];
+        return product ? getDiscountedPrice(product) : item.price;
+    }
+
     function openAddProductModal() {
         if (!isOwnerLoggedIn()) {
             openAuthModal();
@@ -5312,6 +6378,150 @@ body.dark-mode .investors .col-3 {
 
     function closeAddProductModal() {
         document.getElementById("addProductOverlay").classList.remove("show");
+    }
+
+    
+    
+    
+    
+    
+    function getPromoCodesList() {
+        return _cloud.promocodes || [];
+    }
+
+    function savePromoCodesList(list) {
+        _cloud.promocodes = list;
+        db.collection("athletica").doc("promocodes").set({ list: list });
+    }
+
+    function todayDateStr() {
+        var d = new Date();
+        var m = String(d.getMonth() + 1).padStart(2, "0");
+        var day = String(d.getDate()).padStart(2, "0");
+        return d.getFullYear() + "-" + m + "-" + day;
+    }
+
+    function isPromoExpired(entry) {
+        return !!entry.expiredDate && entry.expiredDate < todayDateStr();
+    }
+
+    function openPromoManager() {
+        if (!isOwnerLoggedIn()) {
+            openAuthModal();
+            return;
+        }
+        document.getElementById("releasePromoCode").value = "";
+        document.getElementById("releasePromoExpiry").value = "";
+        document.getElementById("releasePromoPercent").value = "";
+        document.getElementById("releasePromoError").textContent = "";
+        document.querySelectorAll(".promo-percent-presets button").forEach(function (b) {
+            b.classList.remove("selected");
+        });
+        renderPromoHistoryList();
+        document.getElementById("promoManagerOverlay").classList.add("show");
+    }
+
+    function closePromoManager() {
+        document.getElementById("promoManagerOverlay").classList.remove("show");
+    }
+
+    function setPromoPercentPreset(percent) {
+        document.getElementById("releasePromoPercent").value = percent;
+        document.querySelectorAll(".promo-percent-presets button").forEach(function (b) {
+            b.classList.toggle("selected", parseInt(b.textContent, 10) === percent);
+        });
+    }
+
+    function submitReleasePromoCode(event) {
+        event.preventDefault();
+        if (!isOwnerLoggedIn()) return false;
+
+        var codeInput = document.getElementById("releasePromoCode");
+        var expiryInput = document.getElementById("releasePromoExpiry");
+        var percentInput = document.getElementById("releasePromoPercent");
+        var errorEl = document.getElementById("releasePromoError");
+
+        var code = codeInput.value.trim().toUpperCase();
+        var expiry = expiryInput.value;
+        var percent = parseInt(percentInput.value, 10);
+
+        if (!code) {
+            errorEl.textContent = "Please enter a code to release.";
+            return false;
+        }
+        if (!expiry) {
+            errorEl.textContent = "Please set an expiry date.";
+            return false;
+        }
+        if (!percent || percent < 1 || percent > 100) {
+            errorEl.textContent = "Please enter a valid discount percent (1-100).";
+            return false;
+        }
+
+        var list = getPromoCodesList();
+        if (list.some(function (e) { return e.code === code; })) {
+            errorEl.textContent = "That code has already been released.";
+            return false;
+        }
+
+        errorEl.textContent = "";
+
+        list = list.concat([{
+            code: code,
+            discountPercent: percent,
+            expiredDate: expiry,
+            releasedAt: new Date().toLocaleString(),
+            releasedBy: (getCurrentUser() && getCurrentUser().name) || "Owner"
+        }]);
+        savePromoCodesList(list);
+
+        codeInput.value = "";
+        expiryInput.value = "";
+        percentInput.value = "";
+        document.querySelectorAll(".promo-percent-presets button").forEach(function (b) {
+            b.classList.remove("selected");
+        });
+
+        renderPromoHistoryList();
+        return false;
+    }
+
+    function deletePromoCode(code) {
+        if (!isOwnerLoggedIn()) return;
+        var sure = confirm('Delete promo code "' + code + '"? This cannot be undone.');
+        if (!sure) return;
+
+        var list = getPromoCodesList().filter(function (e) { return e.code !== code; });
+        savePromoCodesList(list);
+        renderPromoHistoryList();
+    }
+
+    function renderPromoHistoryList() {
+        var listEl = document.getElementById("promoHistoryList");
+        if (!listEl) return;
+
+        var list = getPromoCodesList();
+
+        if (list.length === 0) {
+            listEl.innerHTML = '<p class="promo-history-empty">No promo codes released yet.</p>';
+            return;
+        }
+
+        var sorted = list.slice().reverse();
+
+        listEl.innerHTML = sorted.map(function (entry) {
+            var expired = isPromoExpired(entry);
+            return (
+                '<div class="promo-history-item">' +
+                    '<div class="promo-history-info">' +
+                        '<strong>' + escapeHtml(entry.code) + '</strong>' +
+                        '<div>' + entry.discountPercent + '% off &middot; expires ' + escapeHtml(entry.expiredDate) + '</div>' +
+                    '</div>' +
+                    '<span class="promo-history-status ' + (expired ? "status-expired" : "status-active") + '">' + (expired ? "Expired" : "Active") + '</span>' +
+                    '<button type="button" class="promo-history-delete" onclick="deletePromoCode(\'' + entry.code + '\')" title="Delete code"><i class="fa-solid fa-trash"></i></button>' +
+                '</div>'
+            );
+        }).join("");
     }
 
     
@@ -5457,14 +6667,13 @@ body.dark-mode .investors .col-3 {
         if (event) event.stopPropagation();
         if (!isOwnerLoggedIn()) return;
 
-        var sure = confirm("Remove this product from the shop?");
-        if (!sure) return;
+        showConfirmModal("Remove this product from the shop?", function () {
+            delete _cloud.products[productId];
+            delete PRODUCTS[productId];
+            db.collection("athletica").doc("products").set({ map: _cloud.products });
 
-        delete _cloud.products[productId];
-        delete PRODUCTS[productId];
-        db.collection("athletica").doc("products").set({ map: _cloud.products });
-
-        renderProductGrid();
+            renderProductGrid();
+        }, { title: "Remove Product", okText: "Remove" });
     }
 
     var currentEditProductId = null;
@@ -5493,6 +6702,21 @@ body.dark-mode .investors .col-3 {
         var isNoSize = (product.sizes || []).length === 1 && product.sizes[0] === NO_SIZE_LABEL;
         document.getElementById("editProductNoSize").checked = isNoSize;
         toggleNoSizeFields("edit");
+
+        var existingDiscount = getActiveDiscount(product) || (product.discount || null);
+        var discountToggle = document.getElementById("editProductDiscountToggle");
+        if (existingDiscount) {
+            discountToggle.checked = true;
+            document.getElementById("editProductDiscountPercent").value = existingDiscount.percent;
+            document.getElementById("editProductDiscountExpiry").value = existingDiscount.expiresAt
+                ? new Date(existingDiscount.expiresAt).toISOString().slice(0, 10)
+                : "";
+        } else {
+            discountToggle.checked = false;
+            document.getElementById("editProductDiscountPercent").value = "";
+            document.getElementById("editProductDiscountExpiry").value = "";
+        }
+        toggleDiscountFields("edit");
 
         var preview = document.getElementById("editProductImagePreview");
         preview.src = product.image;
@@ -5568,6 +6792,28 @@ body.dark-mode .investors .col-3 {
             return false;
         }
 
+        var discountEnabled = document.getElementById("editProductDiscountToggle").checked;
+        var discount = null;
+        if (discountEnabled) {
+            var discountPercentRaw = document.getElementById("editProductDiscountPercent").value;
+            var discountPercent = parseFloat(discountPercentRaw);
+            var discountExpiryRaw = document.getElementById("editProductDiscountExpiry").value;
+
+            if (discountPercentRaw === "" || isNaN(discountPercent) || discountPercent < 1 || discountPercent > 101) {
+                errorEl.textContent = "Please enter a discount percent between 1 and 101.";
+                return false;
+            }
+            if (!discountExpiryRaw) {
+                errorEl.textContent = "Please set an expiry date for the discount.";
+                return false;
+            }
+
+            discount = {
+                percent: discountPercent,
+                expiresAt: new Date(discountExpiryRaw + "T23:59:59").getTime()
+            };
+        }
+
         var updatedProduct = {
             id: productId,
             name: name,
@@ -5575,7 +6821,8 @@ body.dark-mode .investors .col-3 {
             image: editProductImageDataUrl || existing.image,
             description: description,
             sizes: sizes,
-            stock: stock
+            stock: stock,
+            discount: discount
         };
 
         _cloud.products[productId] = updatedProduct;
@@ -5597,22 +6844,21 @@ body.dark-mode .investors .col-3 {
         if (!currentEditProductId) return;
         var productId = currentEditProductId;
 
-        var sure = confirm("Remove this product from the shop?");
-        if (!sure) return;
+        showConfirmModal("Remove this product from the shop?", function () {
+            delete _cloud.products[productId];
+            delete PRODUCTS[productId];
+            db.collection("athletica").doc("products").set({ map: _cloud.products });
 
-        delete _cloud.products[productId];
-        delete PRODUCTS[productId];
-        db.collection("athletica").doc("products").set({ map: _cloud.products });
-
-        closeEditProductModal();
-        renderProductGrid();
+            closeEditProductModal();
+            renderProductGrid();
+        }, { title: "Remove Product", okText: "Remove" });
     }
 
     var currentProfileViewEmail = null;
 
     function openUserProfileView(email, fallbackName, event) {
         if (event) event.stopPropagation();
-        if (!isOwnerLoggedIn()) return;
+        if (!getCurrentUser()) return;
 
         currentProfileViewEmail = email || null;
 
@@ -5630,6 +6876,7 @@ body.dark-mode .investors .col-3 {
         avatarEl.innerHTML = avatarInner + dotHtml;
 
         document.getElementById("userProfileViewName").textContent = name;
+        document.getElementById("userProfileViewUsername").textContent = (found && found.username) ? found.username : "";
 
         var roleWrap = document.getElementById("userProfileViewRoleWrap");
         var roleHtml = "";
@@ -5643,7 +6890,7 @@ body.dark-mode .investors .col-3 {
         roleWrap.innerHTML = roleHtml || (found ? "" : '<p class="user-profile-view-empty">No account info available.</p>');
 
         var toggleWrap = document.getElementById("userProfileViewSellerToggleWrap");
-        if (found && !found.isOwner) {
+        if (isOwnerLoggedIn() && found && !found.isOwner) {
             var isSeller = !!found.isSeller;
             toggleWrap.innerHTML =
                 '<div class="seller-toggle-btn-wrap">' +
@@ -5688,14 +6935,66 @@ body.dark-mode .investors .col-3 {
         return div.innerHTML;
     }
 
+    var COMMENT_COOLDOWN_MS = 10000;
+
     function getReviews(productId) {
         return _cloud.reviews[productId] || [];
     }
 
+    function getUserReview(productId, email) {
+        if (!email) return null;
+        return getReviews(productId).find(function (r) { return r.email === email; }) || null;
+    }
+
+    
+    
+    
     function saveReview(productId, review) {
         if (!_cloud.reviews[productId]) _cloud.reviews[productId] = [];
-        _cloud.reviews[productId].push(review);
+
+        var list = _cloud.reviews[productId];
+        var existingIndex = -1;
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].email && list[i].email === review.email) { existingIndex = i; break; }
+        }
+
+        if (existingIndex !== -1) {
+            list[existingIndex] = review;
+        } else {
+            list.push(review);
+        }
+
         db.collection("athletica").doc("reviews").set({ map: _cloud.reviews });
+    }
+
+    function getComments(productId) {
+        return _cloud.comments[productId] || [];
+    }
+
+    
+    
+    
+    function saveComment(productId, comment) {
+        if (!_cloud.comments[productId]) _cloud.comments[productId] = [];
+        _cloud.comments[productId].push(comment);
+        db.collection("athletica").doc("comments").set({ map: _cloud.comments });
+    }
+
+    function lastCommentTsFor(email) {
+        if (!email) return 0;
+        var v = localStorage.getItem("athletica_lastComment_" + email);
+        return v ? parseInt(v, 10) : 0;
+    }
+
+    function setLastCommentTsFor(email) {
+        if (!email) return;
+        localStorage.setItem("athletica_lastComment_" + email, String(Date.now()));
+    }
+
+    function commentCooldownRemainingMs(email) {
+        if (!email) return 0;
+        var remaining = COMMENT_COOLDOWN_MS - (Date.now() - lastCommentTsFor(email));
+        return remaining > 0 ? remaining : 0;
     }
 
     function getAverageRating(productId) {
@@ -5734,7 +7033,18 @@ body.dark-mode .investors .col-3 {
         document.getElementById("pdImage").src = product.image;
         document.getElementById("pdImage").alt = product.name;
         document.getElementById("pdName").textContent = product.name;
-        document.getElementById("pdPrice").textContent = "₱" + product.price.toFixed(2);
+        document.getElementById("pdPrice").innerHTML = priceDisplayHtml(product);
+
+        var discountExpiryEl = document.getElementById("pdDiscountExpiry");
+        var activeDiscount = getActiveDiscount(product);
+        if (activeDiscount && activeDiscount.expiresAt) {
+            discountExpiryEl.textContent = "Discount ends " + new Date(activeDiscount.expiresAt).toLocaleDateString();
+            discountExpiryEl.style.display = "block";
+        } else {
+            discountExpiryEl.textContent = "";
+            discountExpiryEl.style.display = "none";
+        }
+
         document.getElementById("pdDescription").textContent = product.description;
         document.getElementById("pdQty").value = 1;
         document.getElementById("pdQty").max = inStock ? stock : 1;
@@ -5755,6 +7065,9 @@ body.dark-mode .investors .col-3 {
         document.getElementById("pdAddToCartBtn").disabled = !loggedIn || !inStock;
         document.getElementById("pdBuyNowBtn").disabled = !loggedIn || !inStock;
         document.getElementById("pdLoginNotice").style.display = (loggedIn || !inStock) ? "none" : "block";
+
+        var pdWishlistBtn = document.getElementById("pdWishlistBtn");
+        pdWishlistBtn.classList.toggle("active", isInWishlist(productId));
 
         renderProductReviews(productId);
         resetReviewForm();
@@ -5788,58 +7101,66 @@ body.dark-mode .investors .col-3 {
     function renderProductReviews(productId) {
         var reviews = getReviews(productId);
         var avg = getAverageRating(productId);
+        var comments = getComments(productId);
 
         document.getElementById("pdStars").innerHTML = "<h2>" + starsHtml(avg) + "</h2>";
         document.getElementById("pdRatingCount").textContent = reviews.length === 0
-            ? "No ratings yet — be the first to review!"
-            : avg.toFixed(1) + " out of 5 (" + reviews.length + (reviews.length === 1 ? " review" : " reviews") + ")";
+            ? "No ratings yet — be the first to rate!"
+            : avg.toFixed(1) + " out of 5 (" + reviews.length + (reviews.length === 1 ? " rating" : " ratings") + ")";
 
-        document.getElementById("commentsToggleLabel").textContent = "Comments " + reviews.length;
+        document.getElementById("commentsToggleLabel").textContent = "Comments " + comments.length;
 
         var listEl = document.getElementById("reviewsList");
 
-        if (reviews.length === 0) {
+        if (comments.length === 0) {
             listEl.innerHTML = '<p class="review-empty">No comments yet.</p>';
             return;
         }
 
-        listEl.innerHTML = reviews.slice().reverse().map(function (r) {
-            var initials = (r.name || "?").trim().charAt(0).toUpperCase() || "?";
-            var avatarHtml = r.avatar
-                ? '<img src="' + r.avatar + '" class="review-item-avatar-img" alt="">'
+        
+        
+        
+        listEl.innerHTML = comments.slice().reverse().map(function (c) {
+            var initials = (c.name || "?").trim().charAt(0).toUpperCase() || "?";
+            var avatarHtml = c.avatar
+                ? '<img src="' + c.avatar + '" class="review-item-avatar-img" alt="">'
                 : '<div class="review-item-avatar-initials">' + escapeHtml(initials) + '</div>';
 
             var ownerCanView = isOwnerLoggedIn();
             var userClickAttr = ownerCanView
-                ? ' onclick="openUserProfileView(\'' + escapeHtml(r.email || "") + '\', \'' + escapeHtml(r.name || "") + '\')"'
+                ? ' onclick="openUserProfileView(\'' + escapeHtml(c.email || "") + '\', \'' + escapeHtml(c.name || "") + '\')"'
                 : '';
+
+            var userRating = getUserReview(productId, c.email);
+            var starsRowHtml = userRating ? '<div class="review-item-stars">' + starsHtml(userRating.rating) + '</div>' : '';
 
             return (
                 '<div class="review-item">' +
                     '<div class="review-item-head">' +
                         '<div class="review-item-user' + (ownerCanView ? ' review-item-user-clickable' : '') + '"' + userClickAttr + '>' +
                             avatarHtml +
-                            '<span class="review-item-name">' + escapeHtml(r.name) + '</span>' +
+                            '<span class="review-item-name">' + escapeHtml(c.name) + '</span>' +
                         '</div>' +
-                        '<span class="review-item-date">' + escapeHtml(r.date) + '</span>' +
+                        '<span class="review-item-date">' + escapeHtml(c.date) + '</span>' +
                     '</div>' +
-                    '<div class="review-item-stars">' + starsHtml(r.rating) + '</div>' +
-                    (r.comment ? '<p class="review-item-comment">' + escapeHtml(r.comment) + '</p>' : '') +
+                    starsRowHtml +
+                    '<p class="review-item-comment">' + escapeHtml(c.comment) + '</p>' +
                 '</div>'
             );
         }).join("");
     }
 
     function resetReviewForm() {
-        currentReviewStars = 0;
-        updateStarInputDisplay();
-        document.getElementById("reviewComment").value = "";
-        document.getElementById("reviewError").textContent = "";
-
         var user = getCurrentUser();
         var whoEl = document.getElementById("reviewAsWho");
         var commentEl = document.getElementById("reviewComment");
-        var submitBtn = document.querySelector(".review-form .auth-submit");
+
+        var existingRating = user ? getUserReview(currentProductId, user.email) : null;
+
+        currentReviewStars = existingRating ? existingRating.rating : 0;
+        updateStarInputDisplay();
+        commentEl.value = "";
+        document.getElementById("reviewError").textContent = "";
 
         if (user) {
             whoEl.style.display = "flex";
@@ -5848,14 +7169,12 @@ body.dark-mode .investors .col-3 {
                 ? '<img src="' + user.avatar + '" class="review-as-avatar-img" alt="">'
                 : '<div class="review-as-avatar-initials">' + escapeHtml(initials) + '</div>';
             document.getElementById("reviewAsName").textContent = user.name;
-            commentEl.disabled = false;
-            submitBtn.disabled = false;
         } else {
             whoEl.style.display = "none";
-            commentEl.disabled = true;
-            submitBtn.disabled = true;
             document.getElementById("reviewError").textContent = "Sign in to leave a rating or comment.";
         }
+
+        updateCommentSubmitState();
     }
 
     function updateStarInputDisplay() {
@@ -5866,6 +7185,9 @@ body.dark-mode .investors .col-3 {
         });
     }
 
+    
+    
+    
     document.querySelectorAll("#reviewStarInput span").forEach(function (span) {
         span.addEventListener("click", function () {
             if (!getCurrentUser()) {
@@ -5874,10 +7196,62 @@ body.dark-mode .investors .col-3 {
             }
             currentReviewStars = parseInt(this.getAttribute("data-star"), 10);
             updateStarInputDisplay();
+            submitRating();
         });
     });
 
-    function submitReview() {
+    function submitRating() {
+        var user = getCurrentUser();
+        if (!user || !currentProductId || currentReviewStars === 0) return;
+
+        saveReview(currentProductId, {
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar || "",
+            rating: currentReviewStars,
+            date: new Date().toLocaleDateString()
+        });
+
+        renderProductReviews(currentProductId);
+        renderAllProductRatings();
+    }
+
+    
+    
+    
+    function updateCommentSubmitState() {
+        var user = getCurrentUser();
+        var submitBtn = document.querySelector(".review-form .auth-submit");
+        var commentEl = document.getElementById("reviewComment");
+        if (!submitBtn || !commentEl) return;
+
+        if (!user) {
+            commentEl.disabled = true;
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Post Comment";
+            return;
+        }
+
+        commentEl.disabled = false;
+
+        var remaining = commentCooldownRemainingMs(user.email);
+        if (remaining > 0) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Wait " + Math.ceil(remaining / 1000) + "s";
+        } else {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Post Comment";
+        }
+    }
+
+    setInterval(function () {
+        var overlay = document.getElementById("productOverlay");
+        if (overlay && overlay.classList.contains("show")) {
+            updateCommentSubmitState();
+        }
+    }, 1000);
+
+    function postComment() {
         var errorEl = document.getElementById("reviewError");
         var user = getCurrentUser();
 
@@ -5887,26 +7261,36 @@ body.dark-mode .investors .col-3 {
             return;
         }
 
-        var comment = document.getElementById("reviewComment").value.trim();
+        var commentEl = document.getElementById("reviewComment");
+        var comment = commentEl.value.trim();
 
-        if (currentReviewStars === 0) {
-            errorEl.textContent = "Please select a star rating.";
+        if (!comment) {
+            errorEl.textContent = "Please write a comment.";
             return;
         }
 
-        saveReview(currentProductId, {
+        var remaining = commentCooldownRemainingMs(user.email);
+        if (remaining > 0) {
+            errorEl.textContent = "Please wait " + Math.ceil(remaining / 1000) + "s before commenting again.";
+            updateCommentSubmitState();
+            return;
+        }
+
+        saveComment(currentProductId, {
             name: user.name,
             email: user.email,
             avatar: user.avatar || "",
-            rating: currentReviewStars,
             comment: comment,
-            date: new Date().toLocaleDateString()
+            date: new Date().toLocaleDateString(),
+            ts: Date.now()
         });
 
+        setLastCommentTsFor(user.email);
+
+        commentEl.value = "";
         errorEl.textContent = "";
         renderProductReviews(currentProductId);
-        renderAllProductRatings();
-        resetReviewForm();
+        updateCommentSubmitState();
     }
 
     
@@ -5971,7 +7355,7 @@ body.dark-mode .investors .col-3 {
         if (existing) {
             existing.qty = Math.min(maxQty, existing.qty + qty);
         } else {
-            cart.push({ id: productId, name: product.name, price: product.price, image: product.image, qty: Math.min(maxQty, qty), size: size || null });
+            cart.push({ id: productId, name: product.name, price: getDiscountedPrice(product), image: product.image, qty: Math.min(maxQty, qty), size: size || null });
         }
 
         saveCart(cart);
@@ -5991,6 +7375,21 @@ body.dark-mode .investors .col-3 {
         addToCart(chatState.productId, chatState.qty, chatState.size);
         closeBuyChat();
         openCart();
+    }
+
+    
+    
+    
+    function addToCartFromWishlist(productId) {
+        if (!getCurrentUser()) {
+            openAuthModal();
+            return;
+        }
+        if (!PRODUCTS[productId]) return;
+
+        currentProductId = productId;
+        closeWishlist();
+        openProductChat("cart", 1);
     }
 
     function removeFromCart(productId, size) {
@@ -6044,14 +7443,25 @@ body.dark-mode .investors .col-3 {
 
         var total = 0;
         listEl.innerHTML = cart.map(function (item) {
-            total += item.price * item.qty;
+            var unitPrice = cartItemUnitPrice(item);
+            total += unitPrice * item.qty;
             var sizeAttr = escapeHtml(item.size || "");
+            var product = PRODUCTS[item.id];
+            var activeDiscount = product ? getActiveDiscount(product) : null;
+            var priceHtml = activeDiscount
+                ? (
+                    '<span class="price-original">₱' + Number(product.price).toFixed(2) + '</span>' +
+                    '<span class="price-discounted">₱' + unitPrice.toFixed(2) + '</span>' +
+                    '<span class="discount-badge">-' + activeDiscount.percent + '%</span>' +
+                    ' x ' + item.qty
+                )
+                : ('₱' + unitPrice.toFixed(2) + ' x ' + item.qty);
             return (
                 '<div class="cart-item">' +
                     '<img src="' + item.image + '" alt="' + escapeHtml(item.name) + '">' +
                     '<div class="cart-item-info">' +
                         '<div class="cart-item-name">' + escapeHtml(item.name) + (item.size ? ' <span class="cart-item-size">(' + escapeHtml(item.size) + ')</span>' : '') + '</div>' +
-                        '<div class="cart-item-price">₱' + item.price.toFixed(2) + ' x ' + item.qty + '</div>' +
+                        '<div class="cart-item-price">' + priceHtml + '</div>' +
                     '</div>' +
                     '<div class="cart-item-controls">' +
                         '<button type="button" class="qty-btn" onclick="changeCartQty(\'' + item.id + '\', \'' + sizeAttr + '\', -1)">-</button>' +
@@ -6066,8 +7476,140 @@ body.dark-mode .investors .col-3 {
         totalEl.textContent = "₱" + total.toFixed(2);
     }
 
+    
+    
+    
+    
+    
+    function wishlistStorageKey() {
+        var user = getCurrentUser();
+        return user ? ("athletica_wishlist_" + user.email) : null;
+    }
+
+    function getWishlist() {
+        var key = wishlistStorageKey();
+        if (!key) return [];
+        return JSON.parse(localStorage.getItem(key) || "[]");
+    }
+
+    function saveWishlist(list) {
+        var key = wishlistStorageKey();
+        if (!key) return;
+        localStorage.setItem(key, JSON.stringify(list));
+        updateWishlistBadge();
+    }
+
+    function isInWishlist(productId) {
+        return getWishlist().indexOf(productId) !== -1;
+    }
+
+    function updateWishlistBadge() {
+        var badge = document.getElementById("wishlistBadge");
+        if (!badge) return;
+        badge.textContent = getWishlist().length;
+        badge.style.display = "flex";
+    }
+
+    function playHeartPop(btn) {
+        if (!btn) return;
+        btn.classList.remove("heart-pop");
+        void btn.offsetWidth;
+        btn.classList.add("heart-pop");
+        setTimeout(function () {
+            btn.classList.remove("heart-pop");
+        }, 450);
+    }
+
+    function toggleWishlist(productId, event) {
+        if (event) event.stopPropagation();
+
+        if (!getCurrentUser()) {
+            openAuthModal();
+            return;
+        }
+
+        var list = getWishlist();
+        var idx = list.indexOf(productId);
+        var wasAdded = (idx === -1);
+        if (idx === -1) {
+            list.push(productId);
+        } else {
+            list.splice(idx, 1);
+        }
+        saveWishlist(list);
+
+        
+        document.querySelectorAll('.product-wishlist-btn').forEach(function (btn) {
+            var card = btn.closest(".product-card");
+            if (card && card.getAttribute("data-product-id") === productId) {
+                btn.classList.toggle("active", wasAdded);
+                if (wasAdded) playHeartPop(btn);
+            }
+        });
+
+        var pdWishlistBtn = document.getElementById("pdWishlistBtn");
+        if (pdWishlistBtn && currentProductId === productId) {
+            pdWishlistBtn.classList.toggle("active", wasAdded);
+            if (wasAdded) playHeartPop(pdWishlistBtn);
+        }
+
+        if (document.getElementById("wishlistOverlay").classList.contains("show")) {
+            renderWishlist();
+        }
+    }
+
+    function openWishlist() {
+        if (!getCurrentUser()) {
+            openAuthModal();
+            return;
+        }
+        renderWishlist();
+        document.getElementById("wishlistOverlay").classList.add("show");
+    }
+
+    function closeWishlist() {
+        document.getElementById("wishlistOverlay").classList.remove("show");
+    }
+
+    function renderWishlist() {
+        var list = getWishlist();
+        var listEl = document.getElementById("wishlistItemsList");
+
+        var validIds = list.filter(function (id) { return !!PRODUCTS[id]; });
+        if (validIds.length !== list.length) saveWishlist(validIds);
+
+        if (validIds.length === 0) {
+            listEl.innerHTML = '<p class="wishlist-empty">Your wishlist is empty.</p>';
+            return;
+        }
+
+        listEl.innerHTML = validIds.map(function (id) {
+            var product = PRODUCTS[id];
+            var stock = (typeof product.stock === "number") ? product.stock : 0;
+            return (
+                '<div class="wishlist-item">' +
+                    '<img src="' + product.image + '" alt="' + escapeHtml(product.name) + '" onclick="closeWishlist(); openProductDetail(\'' + id + '\')">' +
+                    '<div class="wishlist-item-info" onclick="closeWishlist(); openProductDetail(\'' + id + '\')">' +
+                        '<div class="wishlist-item-name">' + escapeHtml(product.name) + '</div>' +
+                        '<div class="wishlist-item-price">' + priceDisplayHtml(product) + '</div>' +
+                    '</div>' +
+                    '<div class="wishlist-item-actions">' +
+                        (stock > 0 ? '<button type="button" class="wishlist-add-cart-btn" onclick="addToCartFromWishlist(\'' + id + '\')">Add to Cart</button>' : '') +
+                        '<button type="button" class="wishlist-remove-btn" onclick="toggleWishlist(\'' + id + '\', event); renderWishlist();"><i class="fa-solid fa-trash"></i></button>' +
+                    '</div>' +
+                '</div>'
+            );
+        }).join("");
+    }
+
     var checkoutOrder = null;
     var selectedPaymentMethod = null;
+
+    var PROMO_CODES = {
+        "ATHLETICA10": { type: "percent", value: 10, label: "10% off" },
+        "WELCOME15": { type: "percent", value: 15, label: "15% off" },
+        "SAVE50": { type: "fixed", value: 50, label: "₱50 off" }
+    };
 
     var WALLET_ACCOUNTS = {
         GCash: [
@@ -6097,7 +7639,7 @@ body.dark-mode .investors .col-3 {
     
     
     
-    function openProductChat(intent) {
+    function openProductChat(intent, qtyOverride) {
         if (!getCurrentUser()) {
             closeProductDetail();
             openAuthModal();
@@ -6109,7 +7651,7 @@ body.dark-mode .investors .col-3 {
 
         chatState = {
             productId: currentProductId,
-            qty: parseInt(document.getElementById("pdQty").value, 10) || 1,
+            qty: (typeof qtyOverride === "number") ? qtyOverride : (parseInt(document.getElementById("pdQty").value, 10) || 1),
             size: null
         };
         chatMode = "buy";
@@ -6164,6 +7706,8 @@ body.dark-mode .investors .col-3 {
         if (isSizeless) {
             chatSelectSize(product.sizes[0]);
         }
+
+        showChatReadyChoice();
 
         freeInput.focus();
     }
@@ -6229,7 +7773,7 @@ body.dark-mode .investors .col-3 {
                 product: {
                     id: product.id,
                     name: product.name,
-                    price: product.price,
+                    price: getDiscountedPrice(product),
                     description: product.description,
                     sizes: product.sizes,
                     stock: product.stock
@@ -6254,7 +7798,8 @@ body.dark-mode .investors .col-3 {
             })
             .catch(function () {
                 typingBubble.remove();
-                addChatMessage("ai", "Sorry, there was a connection problem. Please try again.");
+                addChatMessage("ai", "Sorry, there was a connection problem. You can still use the choices below to continue.");
+                ensureChatFallbackChoices();
             })
             .finally(function () {
                 inputEl.disabled = false;
@@ -6278,22 +7823,100 @@ body.dark-mode .investors .col-3 {
         document.getElementById("chatContinueBtn").disabled = false;
     }
 
+    
+    
+    
+    
+    function ensureChatFallbackChoices() {
+        var choicesEl = document.getElementById("chatChoices");
+        if (!choicesEl || choicesEl.children.length > 0) return;
+
+        var product = PRODUCTS[chatState.productId];
+        if (!product || chatState.size) return;
+
+        if (product.sizes && product.sizes.length > 1) {
+            showChatSizeChoices();
+        } else {
+            showChatReadyChoice();
+        }
+    }
+
+    function showChatReadyChoice() {
+        var product = PRODUCTS[chatState.productId];
+        if (!product) return;
+
+        var label = chatFlowSource === "cart" ? "I'm ready to add to cart" : "I'm ready to buy";
+
+        renderChatChoices([
+            { label: label, onSelect: handleReadyToBuyChoice }
+        ]);
+    }
+
+    function handleReadyToBuyChoice() {
+        var product = PRODUCTS[chatState.productId];
+        if (!product) return;
+
+        var label = chatFlowSource === "cart" ? "I'm ready to add to cart" : "I'm ready to buy";
+        addChatMessage("user", label);
+        document.getElementById("chatChoices").innerHTML = "";
+
+        if (chatState.size) {
+            var confirmMsg = (chatState.size !== NO_SIZE_LABEL)
+                ? "Great! " + product.name + " in size " + chatState.size + " is all set. Tap Continue below whenever you're ready."
+                : "Great! " + product.name + " is all set. Tap Continue below whenever you're ready.";
+            addChatMessage("ai", confirmMsg);
+            return;
+        }
+
+        addChatMessage("ai", "Awesome! What size would you like for " + product.name + "?");
+        showChatSizeChoices();
+    }
+
+    function showChatSizeChoices() {
+        var product = PRODUCTS[chatState.productId];
+        if (!product || !product.sizes) return;
+
+        renderChatChoices(product.sizes.map(function (size) {
+            return {
+                label: size,
+                onSelect: function () { handleChatSizeChoice(size); }
+            };
+        }));
+    }
+
+    function handleChatSizeChoice(size) {
+        var product = PRODUCTS[chatState.productId];
+        if (!product) return;
+
+        addChatMessage("user", size);
+        document.getElementById("chatChoices").innerHTML = "";
+
+        chatSelectSize(size);
+
+        addChatMessage("ai", "Got it — size " + size + " selected for " + product.name + ". Tap Continue below whenever you're ready.");
+    }
+
     function continueToPaymentFromChat() {
         if (!chatState.size) return;
 
         var product = PRODUCTS[chatState.productId];
         if (!product) return;
 
+        var effectivePrice = getDiscountedPrice(product);
+
         checkoutOrder = {
             items: [{
                 id: product.id,
                 name: product.name,
-                price: product.price,
+                price: effectivePrice,
                 image: product.image,
                 qty: chatState.qty,
                 size: chatState.size
             }],
-            total: product.price * chatState.qty,
+            subtotal: effectivePrice * chatState.qty,
+            discount: 0,
+            promoCode: null,
+            total: effectivePrice * chatState.qty,
             source: "buynow"
         };
 
@@ -6311,9 +7934,25 @@ body.dark-mode .investors .col-3 {
         var cart = getCart();
         if (cart.length === 0) return;
 
+        var checkoutItems = cart.map(function (item) {
+            return {
+                id: item.id,
+                name: item.name,
+                price: cartItemUnitPrice(item),
+                image: item.image,
+                qty: item.qty,
+                size: item.size
+            };
+        });
+
+        var cartSubtotal = checkoutItems.reduce(function (sum, item) { return sum + item.price * item.qty; }, 0);
+
         checkoutOrder = {
-            items: cart,
-            total: cart.reduce(function (sum, item) { return sum + item.price * item.qty; }, 0),
+            items: checkoutItems,
+            subtotal: cartSubtotal,
+            discount: 0,
+            promoCode: null,
+            total: cartSubtotal,
             source: "cart"
         };
 
@@ -6321,14 +7960,137 @@ body.dark-mode .investors .col-3 {
         openPayment();
     }
 
+    function renderPaymentSummary() {
+        if (!checkoutOrder) return;
+
+        var itemsHtml = checkoutOrder.items.map(function (item) {
+            return escapeHtml(item.name) + (item.size ? " (" + escapeHtml(item.size) + ")" : "") + " x" + item.qty;
+        }).join("<br>");
+
+        var html = itemsHtml;
+
+        if (checkoutOrder.discount > 0) {
+            html += "<br><br>Subtotal: ₱" + checkoutOrder.subtotal.toFixed(2);
+            html += '<br><span class="summary-discount-row">Discount (' + escapeHtml(checkoutOrder.promoCode) + "): -₱" + checkoutOrder.discount.toFixed(2) + "</span>";
+            html += '<br><span class="summary-total-row">Total: ₱' + checkoutOrder.total.toFixed(2) + "</span>";
+        } else {
+            html += '<br><br><span class="summary-total-row">Total: ₱' + checkoutOrder.total.toFixed(2) + "</span>";
+        }
+
+        document.getElementById("paymentOrderSummary").innerHTML = html;
+    }
+
+    function checkoutHasActiveDiscount() {
+        if (!checkoutOrder) return false;
+        return checkoutOrder.items.some(function (item) {
+            var product = PRODUCTS[item.id];
+            return !!getActiveDiscount(product);
+        });
+    }
+
+    function applyPromoCode() {
+        if (!checkoutOrder) return;
+
+        var messageEl = document.getElementById("promoMessage");
+
+        if (checkoutHasActiveDiscount()) {
+            messageEl.textContent = "This order already has a product discount — promo codes can't be combined with it.";
+            messageEl.className = "promo-message error";
+            return;
+        }
+
+        var input = document.getElementById("promoCodeInput");
+        var code = input.value.trim().toUpperCase();
+
+        if (!code) {
+            messageEl.textContent = "Please enter a promo code.";
+            messageEl.className = "promo-message error";
+            return;
+        }
+
+        var promo = null;
+
+        var released = getPromoCodesList().find(function (e) { return e.code === code; });
+        if (released) {
+            if (isPromoExpired(released)) {
+                messageEl.textContent = "This promo code has expired.";
+                messageEl.className = "promo-message error";
+                return;
+            }
+            promo = { type: "percent", value: released.discountPercent, label: released.discountPercent + "% off" };
+        } else if (PROMO_CODES[code]) {
+            promo = PROMO_CODES[code];
+        }
+
+        if (!promo) {
+            messageEl.textContent = "Invalid or expired promo code.";
+            messageEl.className = "promo-message error";
+            return;
+        }
+
+        var discount = promo.type === "percent"
+            ? checkoutOrder.subtotal * (promo.value / 100)
+            : promo.value;
+        discount = Math.min(discount, checkoutOrder.subtotal);
+
+        checkoutOrder.promoCode = code;
+        checkoutOrder.discount = discount;
+        checkoutOrder.total = checkoutOrder.subtotal - discount;
+
+        messageEl.textContent = "";
+        messageEl.className = "promo-message";
+
+        document.getElementById("promoInputRow").style.display = "none";
+        document.getElementById("promoAppliedRow").style.display = "flex";
+        document.getElementById("promoAppliedText").textContent = code + " applied — " + promo.label;
+
+        renderPaymentSummary();
+        refreshWalletAmountIfVisible();
+    }
+
+    function removePromoCode() {
+        if (!checkoutOrder) return;
+
+        checkoutOrder.promoCode = null;
+        checkoutOrder.discount = 0;
+        checkoutOrder.total = checkoutOrder.subtotal;
+
+        document.getElementById("promoCodeInput").value = "";
+        document.getElementById("promoInputRow").style.display = "flex";
+        document.getElementById("promoAppliedRow").style.display = "none";
+        document.getElementById("promoMessage").textContent = "";
+        document.getElementById("promoMessage").className = "promo-message";
+
+        renderPaymentSummary();
+        refreshWalletAmountIfVisible();
+    }
+
+    function refreshWalletAmountIfVisible() {
+        var walletStep = document.getElementById("paymentStepWalletInfo");
+        if (walletStep && walletStep.classList.contains("active")) {
+            document.getElementById("walletInfoAmount").textContent =
+                "₱" + (checkoutOrder ? checkoutOrder.total.toFixed(2) : "0.00");
+        }
+    }
+
     function openPayment() {
         if (!checkoutOrder) return;
 
-        document.getElementById("paymentOrderSummary").innerHTML =
-            checkoutOrder.items.map(function (item) {
-                return escapeHtml(item.name) + (item.size ? " (" + escapeHtml(item.size) + ")" : "") + " x" + item.qty;
-            }).join("<br>") +
-            "<br><strong>Total: ₱" + checkoutOrder.total.toFixed(2) + "</strong>";
+        document.getElementById("promoCodeInput").value = "";
+        document.getElementById("promoMessage").textContent = "";
+        document.getElementById("promoMessage").className = "promo-message";
+        document.getElementById("promoAppliedRow").style.display = "none";
+
+        var blockedMsg = document.getElementById("promoBlockedMessage");
+        if (checkoutHasActiveDiscount()) {
+            document.getElementById("promoInputRow").style.display = "none";
+            blockedMsg.style.display = "block";
+        } else {
+            document.getElementById("promoInputRow").style.display = "flex";
+            blockedMsg.style.display = "none";
+        }
+
+        renderPaymentSummary();
 
         goToPaymentStep("paymentStepMethod");
         document.getElementById("paymentOverlay").classList.add("show");
@@ -6467,6 +8229,9 @@ body.dark-mode .investors .col-3 {
                 buyerName: user.name,
                 buyerAvatar: user.avatar || "",
                 items: checkoutOrder.items,
+                subtotal: checkoutOrder.subtotal,
+                discount: checkoutOrder.discount,
+                promoCode: checkoutOrder.promoCode,
                 total: checkoutOrder.total,
                 method: selectedPaymentMethod,
                 details: extraDetails,
@@ -6575,6 +8340,28 @@ body.dark-mode .investors .col-3 {
             return order.status === "pending" || !!(order.buyerUnread && order.buyerUnread > 0);
         }
         return false;
+    }
+
+    
+    
+    
+    var confirmModalCallback = null;
+
+    function showConfirmModal(message, onConfirm, options) {
+        options = options || {};
+        document.getElementById("confirmModalTitle").textContent = options.title || "Are you sure?";
+        document.getElementById("confirmModalMessage").textContent = message;
+        document.getElementById("confirmModalOkBtn").textContent = options.okText || "OK";
+        document.getElementById("confirmModalCancelBtn").textContent = options.cancelText || "Cancel";
+        confirmModalCallback = onConfirm;
+        document.getElementById("confirmModalOverlay").classList.add("show");
+    }
+
+    function closeConfirmModal(confirmed) {
+        document.getElementById("confirmModalOverlay").classList.remove("show");
+        var cb = confirmModalCallback;
+        confirmModalCallback = null;
+        if (confirmed && typeof cb === "function") cb();
     }
 
     function openClearNotificationChoice() {
@@ -7202,6 +8989,7 @@ body.dark-mode .investors .col-3 {
 
     renderAllProductRatings();
     updateCartBadge();
+    updateWishlistBadge();
     refreshOrderUI();
     sendPresenceHeartbeat();
 
