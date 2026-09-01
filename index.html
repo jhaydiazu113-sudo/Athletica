@@ -948,6 +948,30 @@ body.dark-mode .modal-box .user-profile-view-avatar {
     color: #ff523b;
 }
 
+body.dark-mode .order-row-top strong {
+    color: #f0f0f0;
+}
+
+body.dark-mode .modal-box .order-status-pending {
+    background: #4a3c12;
+    color: #ffd54f;
+}
+
+body.dark-mode .modal-box .order-status-confirmed {
+    background: #17421f;
+    color: #6fcf97;
+}
+
+body.dark-mode .modal-box .order-status-cancelled {
+    background: #4a1f1f;
+    color: #ff8a80;
+}
+
+body.dark-mode .modal-box .order-status-delivered {
+    background: #16324a;
+    color: #82c4ff;
+}
+
 body.dark-mode .auth-box {
     background: #1e1e1e;
     color: #ddd;
@@ -2244,6 +2268,11 @@ body.dark-mode .confirm-overlay {
 .order-status-cancelled {
     background: #fbdada;
     color: #c0392b;
+}
+
+.order-status-delivered {
+    background: #d9ecfb;
+    color: #1565c0;
 }
 
 .orders-panel-empty {
@@ -8666,7 +8695,7 @@ body.dark-mode .wishlist-item {
 
         listEl.innerHTML = orders.map(function (o) {
             var role = getOrderRoleFor(o, user);
-            var statusLabel = o.status === "pending" ? "Pending Approval" : (o.status === "confirmed" ? "Confirmed" : "Cancelled");
+            var statusLabel = o.status === "pending" ? "Pending Approval" : (o.status === "confirmed" ? "Confirmed" : (o.status === "delivered" ? "Delivered" : "Cancelled"));
             var unread = role === "owner" ? o.ownerUnread : (role === "seller-assigned" ? o.sellerUnread : o.buyerUnread);
             var isRead = !isOrderUnreadFor(o, user);
 
@@ -8853,6 +8882,8 @@ body.dark-mode .wishlist-item {
             buttonsEl.innerHTML = '<p class="orders-panel-empty">Waiting for approval.</p>';
         } else if (order.status === "cancelled") {
             buttonsEl.innerHTML = '<p class="orders-panel-empty">This order was cancelled.</p>';
+        } else if (order.status === "delivered") {
+            buttonsEl.innerHTML = '<p class="orders-panel-empty">This order has been delivered.</p>';
         } else {
             buttonsEl.innerHTML = '<p class="orders-panel-empty">This order is confirmed.</p>';
         }
