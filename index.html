@@ -4730,12 +4730,6 @@ body.dark-mode .wishlist-item {
                 <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('GCash')">
                     <img src="images/gcash-logo.png" alt="GCash" class="payment-method-logo"> GCash
                 </button>
-                <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('Maya')">
-                    <img src="images/maya.png" alt="Maya" class="payment-method-logo"> Maya
-                </button>
-                <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('PayPal')">
-                    <img src="images/logo-paypal.png" alt="PayPal" class="payment-method-logo"> PayPal
-                </button>
                 <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('COD')">
                     <img src="images/cod.png" alt="Cash on Delivery" class="payment-method-logo"> Cash on Delivery
                 </button>
@@ -4946,8 +4940,6 @@ body.dark-mode .wishlist-item {
         <select id="refundMethodSelect" class="refund-input" style="display:none;" onchange="renderRefundMethodFields()">
             <option value="">Select a method</option>
             <option value="GCash">GCash</option>
-            <option value="Maya">Maya</option>
-            <option value="PayPal">PayPal</option>
         </select>
 
         <div id="refundMethodFields"></div>
@@ -5280,8 +5272,8 @@ body.dark-mode .wishlist-item {
         <button class="side-menu-close" onclick="closeSideMenu()" aria-label="Close menu">&times;</button>
     </div>
     <ul class="side-menu-list">
-        <li><a href="#">TEMPLATE 1</a></li>
-        <li><a href="#">TEMPLATE 2</a></li>
+        <li><a href="#privacy">Privacy Policy</a></li>
+        <li><a href="#faqs">FAQs / Help Center</a></li>
         <li><a href="#">TEMPLATE 3</a></li>
         <li><a href="#">TEMPLATE 4</a></li>
         <li><a href="#">TEMPLATE 5</a></li>
@@ -5558,19 +5550,11 @@ body.dark-mode .wishlist-item {
         <div class="row">
 
             <div class="col-5">
-                <img src="images/maya.png">
-            </div>
-
-            <div class="col-5">
                 <img src="images/logo-oppo.png">
             </div>
 
             <div class="col-5">
                 <img src="images/logo-coca-cola.png">
-            </div>
-
-            <div class="col-5">
-                <img src="images/logo-paypal.png">
             </div>
 
             <div class="col-5">
@@ -5658,6 +5642,77 @@ body.dark-mode .wishlist-item {
 
 </div>
 
+<div class="site-page" data-page="faqs">
+
+<section id="faqs" class="info-section">
+
+    <div class="small-container">
+
+        <h2 class="title">
+            FAQs &amp; Help Center
+        </h2>
+
+        <div class="info-content">
+
+            <p>
+                <strong>How do I place an order?</strong><br>
+                Browse our products, pick a size and quantity, then check out
+                through Buy Now or your Cart. You'll choose a payment method and
+                submit payment confirmation to complete the order.
+            </p>
+
+            <p>
+                <strong>What payment methods do you accept?</strong><br>
+                We accept GCash and Cash on Delivery (COD).
+            </p>
+
+            <p>
+                <strong>How do I track my order?</strong><br>
+                Go to Account &rarr; Order to open Order Tracking. You'll see your
+                orders grouped into To Ship, To Receive, To Review, and Returns.
+            </p>
+
+            <p>
+                <strong>How do I request a refund or return?</strong><br>
+                Once an order is delivered, open Order Tracking &rarr; To Review and
+                tap Request Refund on the item. Fill out the form with your
+                details, payment method for the refund, and reason, then submit.
+                You can follow the status (Pending Approval &rarr; Returning &rarr;
+                Success Return) under the Returns tab.
+            </p>
+
+            <p>
+                <strong>How do I leave a product review?</strong><br>
+                From Order Tracking &rarr; To Review, you can tap a quick star
+                rating or Write Review for a full review with photos.
+            </p>
+
+            <p>
+                <strong>Do I need an account to order?</strong><br>
+                Yes, you'll need to sign in so we can keep your order history and
+                let you track deliveries and returns.
+            </p>
+
+            <p>
+                <strong>Can I change or cancel my order after placing it?</strong><br>
+                Message us as soon as possible through the order chat or our
+                Contact page — we can still make changes while your order is
+                pending approval.
+            </p>
+
+            <p>
+                <strong>Still need help?</strong><br>
+                Visit our Contact page and we'll get back to you as soon as we can.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
 <div class="site-page" data-page="privacy">
 
 <section id="privacy" class="info-section">
@@ -5686,8 +5741,8 @@ body.dark-mode .wishlist-item {
 
             <p>
                 <strong>Payment</strong><br>
-                We currently accept manual payment confirmation through GCash, Maya,
-                PayPal, or Cash on Delivery. We never ask for your full card number,
+                We currently accept manual payment confirmation through GCash
+                or Cash on Delivery. We never ask for your full card number,
                 bank PIN, or one-time passwords (OTP). If anyone asks you for these
                 while claiming to be Athletica, please contact us immediately using
                 the details on our Contact page.
@@ -5883,7 +5938,7 @@ body.dark-mode .wishlist-item {
 
     }
 
-    var PAGE_ORDER = ["home", "product", "about", "contact", "privacy", "account"];
+    var PAGE_ORDER = ["home", "product", "about", "contact", "faqs", "privacy", "account"];
     var transitionOverlay = document.getElementById("pageTransitionOverlay");
     var TRANSITION_MS = 320;
     var currentPageKey = "home";
@@ -8717,15 +8772,6 @@ body.dark-mode .wishlist-item {
         GCash: [
             { label: "Name", value: "JENELYN DIAZ" },
             { label: "GCash Number", value: "09929883855" }
-        ],
-        Maya: [
-            { label: "Name", value: "JENELYN DIAZ" },
-            { label: "Maya Number", value: "09929883855" }
-        ],
-        PayPal: [
-            { label: "Name", value: "JENELYN DIAZ" },
-            { label: "Email", value: "AthleticaCVSU@gmail.com" },
-            { label: "Number", value: "09929883855" }
         ]
     };
 
@@ -9817,20 +9863,10 @@ body.dark-mode .wishlist-item {
 
     var refundRequestOrderId = null;
     var refundPhotoDataUrl = "";
-    var REFUND_FIXED_METHODS = ["GCash", "Maya", "PayPal"];
+    var REFUND_FIXED_METHODS = ["GCash"];
 
     function refundMethodFieldsHtml(method) {
-        if (method === "PayPal") {
-            return (
-                '<label class="refund-field-label">Account Name</label>' +
-                '<input type="text" id="refundAccName" class="refund-input">' +
-                '<label class="refund-field-label">Account Number</label>' +
-                '<input type="text" id="refundAccNumber" class="refund-input">' +
-                '<label class="refund-field-label">Account Email</label>' +
-                '<input type="email" id="refundAccEmail" class="refund-input">'
-            );
-        }
-        if (method === "GCash" || method === "Maya") {
+        if (method === "GCash") {
             return (
                 '<label class="refund-field-label">Account Name</label>' +
                 '<input type="text" id="refundAccName" class="refund-input">' +
@@ -9942,12 +9978,10 @@ body.dark-mode .wishlist-item {
 
         var accNameEl = document.getElementById("refundAccName");
         var accNumberEl = document.getElementById("refundAccNumber");
-        var accEmailEl = document.getElementById("refundAccEmail");
         var accName = accNameEl ? accNameEl.value.trim() : "";
         var accNumber = accNumberEl ? accNumberEl.value.trim() : "";
-        var accEmail = accEmailEl ? accEmailEl.value.trim() : "";
 
-        if (!accName || !accNumber || (method === "PayPal" && !accEmail)) {
+        if (!accName || !accNumber) {
             errorEl.textContent = "Please fill out your account details.";
             return;
         }
@@ -9966,7 +10000,6 @@ body.dark-mode .wishlist-item {
             paymentMethod: method,
             accountName: accName,
             accountNumber: accNumber,
-            accountEmail: method === "PayPal" ? accEmail : "",
             reason: reason,
             photo: refundPhotoDataUrl || "",
             submittedAt: new Date().toLocaleString()
