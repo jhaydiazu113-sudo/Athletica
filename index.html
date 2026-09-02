@@ -872,6 +872,18 @@ body.dark-mode .write-review-tag {
     color: #ccc;
 }
 
+body.dark-mode .refund-input,
+body.dark-mode .refund-textarea {
+    background: #262626;
+    border-color: #333;
+    color: #ddd;
+}
+
+body.dark-mode .refund-method-fixed {
+    background: #262626;
+    color: #ddd;
+}
+
 body.dark-mode .profile-edit-name-btn {
     border-color: #444;
     color: #ccc;
@@ -1013,6 +1025,21 @@ body.dark-mode .modal-box .order-status-cancelled {
 body.dark-mode .modal-box .order-status-delivered {
     background: #16324a;
     color: #82c4ff;
+}
+
+body.dark-mode .modal-box .order-status-refund-pending {
+    background: #4a3c12;
+    color: #ffd54f;
+}
+
+body.dark-mode .modal-box .order-status-refund-approved {
+    background: #17421f;
+    color: #6fcf97;
+}
+
+body.dark-mode .modal-box .order-status-refund-completed {
+    background: #333;
+    color: #ccc;
 }
 
 body.dark-mode .modal-box .write-review-star.filled,
@@ -2660,6 +2687,82 @@ body.dark-mode .confirm-overlay {
     cursor: not-allowed;
 }
 
+.refund-request-box {
+    max-width: 460px;
+    text-align: left;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.refund-field-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    margin: 12px 0 5px;
+}
+
+.refund-field-label:first-of-type {
+    margin-top: 16px;
+}
+
+.refund-input,
+.refund-textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #333;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.refund-textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.refund-role-options {
+    display: flex;
+    gap: 18px;
+}
+
+.refund-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #444;
+    cursor: pointer;
+}
+
+.refund-method-fixed {
+    display: inline-block;
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+}
+
+.refund-photo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.refund-error {
+    color: #c0392b;
+    font-size: 12px;
+    margin: 10px 0 0;
+    min-height: 14px;
+}
+
 .notif-choice-box {
     max-width: 360px;
     text-align: left;
@@ -2712,6 +2815,21 @@ body.dark-mode .confirm-overlay {
 .order-status-delivered {
     background: #d9ecfb;
     color: #1565c0;
+}
+
+.order-status-refund-pending {
+    background: #fff3cd;
+    color: #9a7d0a;
+}
+
+.order-status-refund-approved {
+    background: #d9f7e5;
+    color: #1a7f4b;
+}
+
+.order-status-refund-completed {
+    background: #e0e0e0;
+    color: #555;
 }
 
 .orders-panel-empty {
@@ -4766,6 +4884,68 @@ body.dark-mode .wishlist-item {
 
 </div>
 
+<div class="modal-overlay" id="refundRequestOverlay">
+
+    <div class="modal-box refund-request-box">
+
+        <button type="button" class="modal-close" onclick="closeRefundRequest()">&times;</button>
+
+        <h3>Request a Refund</h3>
+
+        <label class="refund-field-label">Full Name</label>
+        <input type="text" id="refundFullName" class="refund-input" placeholder="Juan Dela Cruz">
+
+        <label class="refund-field-label">Address</label>
+        <input type="text" id="refundAddress" class="refund-input" placeholder="House No., Street, Barangay, City">
+
+        <label class="refund-field-label">I am:</label>
+        <div class="refund-role-options">
+            <label class="refund-radio-label"><input type="radio" name="refundRole" value="Teacher" onchange="toggleRefundRoleFields()"> Teacher</label>
+            <label class="refund-radio-label"><input type="radio" name="refundRole" value="Student" onchange="toggleRefundRoleFields()"> Student</label>
+        </div>
+
+        <div id="refundStudentFields" style="display:none;">
+            <label class="refund-field-label">Year Level</label>
+            <input type="text" id="refundYearLevel" class="refund-input" placeholder="e.g. Grade 10 / 2nd Year">
+            <label class="refund-field-label">Section</label>
+            <input type="text" id="refundSection" class="refund-input" placeholder="e.g. Section A">
+        </div>
+
+        <label class="refund-field-label">Payment Method</label>
+        <div id="refundMethodFixed" class="refund-method-fixed" style="display:none;"></div>
+        <select id="refundMethodSelect" class="refund-input" style="display:none;" onchange="renderRefundMethodFields()">
+            <option value="">Select a method</option>
+            <option value="GCash">GCash</option>
+            <option value="Maya">Maya</option>
+            <option value="PayPal">PayPal</option>
+        </select>
+
+        <div id="refundMethodFields"></div>
+
+        <label class="refund-field-label">Reason for refund</label>
+        <textarea id="refundReason" class="refund-textarea" placeholder="Tell us what happened..."></textarea>
+
+        <label class="refund-field-label">Upload photo (optional)</label>
+        <div class="refund-photo-row">
+            <div id="refundPhotoPreviewWrap" class="review-form-photo-preview-wrap" style="display:none;">
+                <img id="refundPhotoPreview" class="review-form-photo-preview" src="" alt="">
+                <button type="button" class="review-form-photo-remove" onclick="removeRefundPhoto()">&times;</button>
+            </div>
+            <label class="review-form-photo-label">
+                <i class="fa-solid fa-camera"></i>
+                <span>Add photo</span>
+                <input type="file" accept="image/*" onchange="handleRefundPhoto(this)" hidden>
+            </label>
+        </div>
+
+        <p class="refund-error" id="refundError"></p>
+
+        <button type="button" class="write-review-submit-btn" onclick="submitRefundRequest()">Submit</button>
+
+    </div>
+
+</div>
+
 <div class="modal-overlay img-zoom-overlay" id="imgZoomOverlay" onclick="closeImgZoom()">
     <img id="imgZoomImg" src="" alt="Photo">
 </div>
@@ -6669,6 +6849,40 @@ body.dark-mode .wishlist-item {
         reader.readAsDataURL(input.files[0]);
     }
 
+    // Resizes/compresses an uploaded image before it's stored as base64.
+    // Firestore documents cap out at 1MB, and several docs in this app
+    // (orders, comments) store many base64 photos inside ONE document, so
+    // uncompressed camera photos (often several MB each) can quickly push a
+    // doc over the limit — after which every further save to that doc fails
+    // silently. Always route photo uploads (other than the small avatar)
+    // through this so they stay small.
+    function readImageAsResizedDataUrl(file, maxDim, quality, onDone, onError) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var img = new Image();
+            img.onload = function () {
+                var w = img.width, h = img.height;
+                if (w > h && w > maxDim) { h = Math.round(h * (maxDim / w)); w = maxDim; }
+                else if (h >= w && h > maxDim) { w = Math.round(w * (maxDim / h)); h = maxDim; }
+
+                var canvas = document.createElement("canvas");
+                canvas.width = w;
+                canvas.height = h;
+                canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+
+                onDone(canvas.toDataURL("image/jpeg", quality));
+            };
+            img.onerror = function () {
+                if (onError) onError();
+            };
+            img.src = e.target.result;
+        };
+        reader.onerror = function () {
+            if (onError) onError();
+        };
+        reader.readAsDataURL(file);
+    }
+
     function renderAccount() {
         var container = document.getElementById("accountContent");
         var storedEmail = localStorage.getItem("athletica_current_user");
@@ -7743,13 +7957,13 @@ body.dark-mode .wishlist-item {
     function handleCommentPhoto(input) {
         if (!input.files || !input.files[0]) return;
 
-        var reader = new FileReader();
-        reader.onload = function () {
-            commentPhotoDataUrl = reader.result;
+        readImageAsResizedDataUrl(input.files[0], 900, 0.7, function (dataUrl) {
+            commentPhotoDataUrl = dataUrl;
             document.getElementById("reviewPhotoPreview").src = commentPhotoDataUrl;
             document.getElementById("reviewPhotoPreviewWrap").style.display = "inline-block";
-        };
-        reader.readAsDataURL(input.files[0]);
+        }, function () {
+            alert("Couldn't read that image. Please try a different photo.");
+        });
     }
 
     function removeCommentPhoto() {
@@ -7802,7 +8016,9 @@ body.dark-mode .wishlist-item {
             list.push(review);
         }
 
-        db.collection("athletica").doc("reviews").set({ map: _cloud.reviews });
+        db.collection("athletica").doc("reviews").set({ map: _cloud.reviews }).catch(function (err) {
+            console.error("Failed to save review", err);
+        });
     }
 
     function getComments(productId) {
@@ -7815,7 +8031,10 @@ body.dark-mode .wishlist-item {
     function saveComment(productId, comment) {
         if (!_cloud.comments[productId]) _cloud.comments[productId] = [];
         _cloud.comments[productId].push(comment);
-        db.collection("athletica").doc("comments").set({ map: _cloud.comments });
+        db.collection("athletica").doc("comments").set({ map: _cloud.comments }).catch(function (err) {
+            console.error("Failed to save comment", err);
+            alert("Something went wrong posting this. Please check your connection and try again.");
+        });
     }
 
     function lastCommentTsFor(email) {
@@ -9018,17 +9237,17 @@ body.dark-mode .wishlist-item {
         var file = e.target.files && e.target.files[0];
         if (!file) return;
 
-        var reader = new FileReader();
-        reader.onload = function () {
-            paymentProofDataUrl = reader.result;
+        readImageAsResizedDataUrl(file, 1100, 0.75, function (dataUrl) {
+            paymentProofDataUrl = dataUrl;
 
             var previewImg = document.getElementById("chatProofPreviewImg");
             previewImg.src = paymentProofDataUrl;
             document.getElementById("chatProofPreview").style.display = "flex";
 
             document.getElementById("chatContinueBtn").disabled = false;
-        };
-        reader.readAsDataURL(file);
+        }, function () {
+            alert("Couldn't read that image. Please try a different photo.");
+        });
     }
 
     function handleChatContinueClick() {
@@ -9138,7 +9357,10 @@ body.dark-mode .wishlist-item {
 
     function saveOrdersList(orders) {
         _cloud.orders = orders;
-        db.collection("athletica").doc("orders").set({ list: orders });
+        db.collection("athletica").doc("orders").set({ list: orders }).catch(function (err) {
+            console.error("Failed to save orders", err);
+            alert("Something went wrong saving this order. Please check your connection and try again.");
+        });
     }
 
     function generateOrderId() {
@@ -9430,16 +9652,18 @@ body.dark-mode .wishlist-item {
             renderReviewOrders();
             return;
         }
+        if (orderTrackingTab === "returns") {
+            renderReturnsOrders();
+            return;
+        }
 
         var statusByTab = {
             toship: "pending",
-            toreceive: "confirmed",
-            returns: "cancelled"
+            toreceive: "confirmed"
         };
         var emptyTextByTab = {
             toship: "No orders to ship.",
-            toreceive: "No orders to receive.",
-            returns: "No returns."
+            toreceive: "No orders to receive."
         };
 
         var listEl = document.getElementById("orderTrackingList");
@@ -9454,7 +9678,7 @@ body.dark-mode .wishlist-item {
         }
 
         listEl.innerHTML = orders.map(function (o) {
-            var statusLabel = o.status === "pending" ? "Pending Approval" : (o.status === "confirmed" ? "Confirmed" : (o.status === "delivered" ? "Delivered" : "Cancelled"));
+            var statusLabel = o.status === "pending" ? "Pending Approval" : (o.status === "confirmed" ? "In Transit" : (o.status === "delivered" ? "Delivered" : "Cancelled"));
 
             return (
                 '<div class="order-row" onclick="openOrderAction(\'' + o.id + '\')">' +
@@ -9499,6 +9723,10 @@ body.dark-mode .wishlist-item {
                 starsHtml += '<span class="quick-review-star" onclick="quickReviewSubmit(\'' + o.id + '\', ' + i + ')">&#9733;</span>';
             }
 
+            var refundBtnHtml = o.refundStatus
+                ? '<button type="button" class="review-refund-btn" disabled>Refund Requested</button>'
+                : '<button type="button" class="review-refund-btn" onclick="openRefundRequestForm(\'' + o.id + '\')">Request Refund</button>';
+
             return (
                 '<div class="review-order-card">' +
                     '<div class="review-order-top" onclick="openOrderAction(\'' + o.id + '\')">' +
@@ -9510,7 +9738,7 @@ body.dark-mode .wishlist-item {
                     '</div>' +
                     '<div class="review-order-total">Total: <strong>&#8369;' + o.total.toFixed(2) + '</strong></div>' +
                     '<div class="review-order-actions">' +
-                        '<button type="button" class="review-refund-btn" onclick="requestRefund(\'' + o.id + '\')">Request Refund</button>' +
+                        refundBtnHtml +
                         '<button type="button" class="review-write-btn" onclick="openWriteReview(\'' + o.id + '\')">Write Review</button>' +
                     '</div>' +
                     '<div class="quick-review-row">' +
@@ -9522,20 +9750,203 @@ body.dark-mode .wishlist-item {
         }).join("");
     }
 
-    function requestRefund(orderId) {
-        showConfirmModal("Request a refund for this order? This will cancel the order.", function () {
-            var orders = getOrders();
-            var order = orders.find(function (o) { return o.id === orderId; });
-            if (!order) return;
+    function renderReturnsOrders() {
+        var user = getCurrentUser();
+        var listEl = document.getElementById("orderTrackingList");
 
-            order.status = "cancelled";
-            order.buyerUnread = (order.buyerUnread || 0) + 1;
-            saveOrdersList(orders);
-            adjustStockForItems(order.items, 1);
+        var orders = getOrders().filter(function (o) {
+            return o.buyerEmail === user.email && !!o.refundStatus;
+        });
+        orders = orders.slice().reverse();
 
-            renderOrderTracking();
-            refreshOrderUI();
-        }, { title: "Request Refund", okText: "Request Refund" });
+        if (orders.length === 0) {
+            listEl.innerHTML = '<p class="orders-panel-empty">No returns.</p>';
+            return;
+        }
+
+        var labelByStatus = { pending: "Pending Approval", approved: "Returning", completed: "Success Return" };
+
+        listEl.innerHTML = orders.map(function (o) {
+            return (
+                '<div class="order-row" onclick="openOrderAction(\'' + o.id + '\')">' +
+                    '<div class="order-row-top">' +
+                        '<strong>&#8369;' + o.total.toFixed(2) + '</strong>' +
+                        '<span class="order-status order-status-refund-' + o.refundStatus + '">' + labelByStatus[o.refundStatus] + '</span>' +
+                    '</div>' +
+                    '<div class="order-row-items">' + escapeHtml(orderSummaryText(o)) + '</div>' +
+                    '<div class="order-row-footer">' +
+                        '<div class="order-row-buyer">' + escapeHtml(o.date) + '</div>' +
+                    '</div>' +
+                '</div>'
+            );
+        }).join("");
+    }
+
+    var refundRequestOrderId = null;
+    var refundPhotoDataUrl = "";
+    var REFUND_FIXED_METHODS = ["GCash", "Maya", "PayPal"];
+
+    function refundMethodFieldsHtml(method) {
+        if (method === "PayPal") {
+            return (
+                '<label class="refund-field-label">Account Name</label>' +
+                '<input type="text" id="refundAccName" class="refund-input">' +
+                '<label class="refund-field-label">Account Number</label>' +
+                '<input type="text" id="refundAccNumber" class="refund-input">' +
+                '<label class="refund-field-label">Account Email</label>' +
+                '<input type="email" id="refundAccEmail" class="refund-input">'
+            );
+        }
+        if (method === "GCash" || method === "Maya") {
+            return (
+                '<label class="refund-field-label">Account Name</label>' +
+                '<input type="text" id="refundAccName" class="refund-input">' +
+                '<label class="refund-field-label">Account Number</label>' +
+                '<input type="text" id="refundAccNumber" class="refund-input">'
+            );
+        }
+        return "";
+    }
+
+    function renderRefundMethodFields() {
+        var order = getOrders().find(function (o) { return o.id === refundRequestOrderId; });
+        var method = order && REFUND_FIXED_METHODS.indexOf(order.method) !== -1
+            ? order.method
+            : document.getElementById("refundMethodSelect").value;
+        document.getElementById("refundMethodFields").innerHTML = refundMethodFieldsHtml(method);
+    }
+
+    function toggleRefundRoleFields() {
+        var role = document.querySelector('input[name="refundRole"]:checked');
+        document.getElementById("refundStudentFields").style.display = (role && role.value === "Student") ? "block" : "none";
+    }
+
+    function handleRefundPhoto(input) {
+        if (!input.files || !input.files[0]) return;
+
+        readImageAsResizedDataUrl(input.files[0], 900, 0.7, function (dataUrl) {
+            refundPhotoDataUrl = dataUrl;
+            document.getElementById("refundPhotoPreview").src = dataUrl;
+            document.getElementById("refundPhotoPreviewWrap").style.display = "inline-block";
+        }, function () {
+            alert("Couldn't read that image. Please try a different photo.");
+        });
+    }
+
+    function removeRefundPhoto() {
+        refundPhotoDataUrl = "";
+        var prev = document.getElementById("refundPhotoPreview");
+        if (prev) prev.src = "";
+        var wrap = document.getElementById("refundPhotoPreviewWrap");
+        if (wrap) wrap.style.display = "none";
+    }
+
+    function openRefundRequestForm(orderId) {
+        var order = getOrders().find(function (o) { return o.id === orderId; });
+        if (!order || order.refundStatus) return;
+
+        refundRequestOrderId = orderId;
+        removeRefundPhoto();
+
+        document.getElementById("refundFullName").value = "";
+        document.getElementById("refundAddress").value = "";
+        document.querySelectorAll('input[name="refundRole"]').forEach(function (r) { r.checked = false; });
+        document.getElementById("refundStudentFields").style.display = "none";
+        document.getElementById("refundYearLevel").value = "";
+        document.getElementById("refundSection").value = "";
+        document.getElementById("refundReason").value = "";
+        document.getElementById("refundError").textContent = "";
+
+        var fixedEl = document.getElementById("refundMethodFixed");
+        var selectEl = document.getElementById("refundMethodSelect");
+        selectEl.value = "";
+
+        if (REFUND_FIXED_METHODS.indexOf(order.method) !== -1) {
+            fixedEl.style.display = "block";
+            fixedEl.textContent = order.method;
+            selectEl.style.display = "none";
+        } else {
+            fixedEl.style.display = "none";
+            selectEl.style.display = "block";
+        }
+        document.getElementById("refundMethodFields").innerHTML = "";
+        if (REFUND_FIXED_METHODS.indexOf(order.method) !== -1) renderRefundMethodFields();
+
+        document.getElementById("orderTrackingOverlay").classList.remove("show");
+        document.getElementById("refundRequestOverlay").classList.add("show");
+    }
+
+    function closeRefundRequest() {
+        document.getElementById("refundRequestOverlay").classList.remove("show");
+        refundRequestOrderId = null;
+    }
+
+    function submitRefundRequest() {
+        var order = getOrders().find(function (o) { return o.id === refundRequestOrderId; });
+        var errorEl = document.getElementById("refundError");
+        if (!order) return;
+
+        var fullName = document.getElementById("refundFullName").value.trim();
+        var address = document.getElementById("refundAddress").value.trim();
+        var roleEl = document.querySelector('input[name="refundRole"]:checked');
+        var role = roleEl ? roleEl.value : "";
+        var yearLevel = document.getElementById("refundYearLevel").value.trim();
+        var section = document.getElementById("refundSection").value.trim();
+        var reason = document.getElementById("refundReason").value.trim();
+
+        var method = REFUND_FIXED_METHODS.indexOf(order.method) !== -1
+            ? order.method
+            : document.getElementById("refundMethodSelect").value;
+
+        if (!fullName || !address || !role || !reason || !method) {
+            errorEl.textContent = "Please fill out all required fields.";
+            return;
+        }
+        if (role === "Student" && (!yearLevel || !section)) {
+            errorEl.textContent = "Please fill out year level and section.";
+            return;
+        }
+
+        var accNameEl = document.getElementById("refundAccName");
+        var accNumberEl = document.getElementById("refundAccNumber");
+        var accEmailEl = document.getElementById("refundAccEmail");
+        var accName = accNameEl ? accNameEl.value.trim() : "";
+        var accNumber = accNumberEl ? accNumberEl.value.trim() : "";
+        var accEmail = accEmailEl ? accEmailEl.value.trim() : "";
+
+        if (!accName || !accNumber || (method === "PayPal" && !accEmail)) {
+            errorEl.textContent = "Please fill out your account details.";
+            return;
+        }
+
+        var orders = getOrders();
+        var target = orders.find(function (o) { return o.id === refundRequestOrderId; });
+        if (!target) return;
+
+        target.refundStatus = "pending";
+        target.refundRequest = {
+            fullName: fullName,
+            address: address,
+            role: role,
+            yearLevel: role === "Student" ? yearLevel : "",
+            section: role === "Student" ? section : "",
+            paymentMethod: method,
+            accountName: accName,
+            accountNumber: accNumber,
+            accountEmail: method === "PayPal" ? accEmail : "",
+            reason: reason,
+            photo: refundPhotoDataUrl || "",
+            submittedAt: new Date().toLocaleString()
+        };
+        target.ownerUnread = (target.ownerUnread || 0) + 1;
+
+        saveOrdersList(orders);
+
+        closeRefundRequest();
+        orderTrackingTab = "returns";
+        document.getElementById("orderTrackingOverlay").classList.add("show");
+        renderOrderTracking();
+        refreshOrderUI();
     }
 
     function postOrderReviewToProducts(order) {
@@ -9684,15 +10095,15 @@ body.dark-mode .wishlist-item {
     function handleWriteReviewPhoto(input) {
         if (!input.files || !input.files[0]) return;
 
-        var reader = new FileReader();
-        reader.onload = function () {
-            writeReviewPhotoDataUrl = reader.result;
+        readImageAsResizedDataUrl(input.files[0], 900, 0.7, function (dataUrl) {
+            writeReviewPhotoDataUrl = dataUrl;
             var preview = document.getElementById("writeReviewPhotoPreview");
             preview.src = writeReviewPhotoDataUrl;
             preview.style.display = "block";
             document.getElementById("writeReviewPhotoText").textContent = "Change photo";
-        };
-        reader.readAsDataURL(input.files[0]);
+        }, function () {
+            alert("Couldn't read that image. Please try a different photo.");
+        });
     }
 
     function updateWriteReviewSubmitState() {
