@@ -5287,7 +5287,7 @@ body.dark-mode .wishlist-item {
         <li><a href="#">TEMPLATE 5</a></li>
         <li><a href="#">TEMPLATE 6</a></li>
         <li><a href="#">TEMPLATE 7</a></li>
-        <li><a href="#">TEMPLATE 8</a></li>
+        <li id="orderManagementMenuItem" style="display:none;"><a href="https://jhaydiazu113-sudo.github.io/OrderManagement/" target="_blank" rel="noopener">ORDER MANAGEMENT</a></li>
         <li id="promoManagerMenuItem" style="display:none;"><a href="#" onclick="closeSideMenu(); openPromoManager(); return false;">Promo Codes</a></li>
     </ul>
 
@@ -7343,6 +7343,9 @@ body.dark-mode .wishlist-item {
 
         var promoItem = document.getElementById("promoManagerMenuItem");
         if (promoItem) promoItem.style.display = isOwnerLoggedIn() ? "block" : "none";
+
+        var orderMgmtItem = document.getElementById("orderManagementMenuItem");
+        if (orderMgmtItem) orderMgmtItem.style.display = isOwnerLoggedIn() ? "block" : "none";
 
         renderProductGrid();
     }
