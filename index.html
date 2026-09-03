@@ -28,6 +28,14 @@
     box-sizing: border-box;
 }
 
+/* Hide the browser's own built-in "reveal password" icon (Edge/IE show
+   one natively via ::-ms-reveal) so it never overlaps or doubles up with
+   any password-visibility control this site adds later. */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -4513,7 +4521,7 @@ body.dark-mode .wishlist-item {
         <div class="auth-divider" id="authDivider"><span>or use your email</span></div>
 
         <form id="signinForm" class="auth-form active" onsubmit="return handleSignIn(event)">
-            <input type="email" id="signinEmail" placeholder="Email" required>
+            <input type="text" id="signinEmail" placeholder="Username or Email" autocomplete="username" required>
             <input type="password" id="signinPassword" placeholder="Password" required>
             <a href="#" class="auth-link" onclick="switchAuthTab('forgotEmail'); return false;">Forgot password?</a>
             <p class="auth-error" id="signinError"></p>
@@ -6708,19 +6716,25 @@ body.dark-mode .wishlist-item {
     function handleSignIn(e) {
         e.preventDefault();
 
-        var email = document.getElementById("signinEmail").value.trim().toLowerCase();
+        var input = document.getElementById("signinEmail").value.trim().toLowerCase();
         var password = document.getElementById("signinPassword").value;
         var errorEl = document.getElementById("signinError");
 
         var users = getUsers();
         var found = null;
+        var strippedInput = input.charAt(0) === "@" ? input : "@" + input;
 
         for (var i = 0; i < users.length; i++) {
-            if (users[i].email === email) { found = users[i]; break; }
+            var uEmail = (users[i].email || "").toLowerCase();
+            var uUsername = (users[i].username || "").toLowerCase();
+            if (uEmail === input || uUsername === input || uUsername === strippedInput) {
+                found = users[i];
+                break;
+            }
         }
 
         if (!found) {
-            errorEl.textContent = "No account found with this email. Try signing up.";
+            errorEl.textContent = "No account found with this username or email. Try signing up.";
             return false;
         }
 
@@ -6729,7 +6743,7 @@ body.dark-mode .wishlist-item {
             return false;
         }
 
-        setCurrentUser(email);
+        setCurrentUser(found.email);
         errorEl.textContent = "";
         closeAuthModal();
         renderAccount();
